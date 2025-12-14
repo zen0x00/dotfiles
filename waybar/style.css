@@ -1,11 +1,11 @@
 * {
-  font-family: 'JetBrainsMono Nerd Font Propo';
-  font-size: 98%;
+  font-family: 'CaskaydiaMono Nerd Font Propo';
+  font-size: 100%;
 }
 
 window#waybar {
-    background-color: rgba(20, 20, 20, 0.3);
-    border-bottom: 1px solid rgba(255,215,255,1);
+    background-color: #2d353b;
+    border-bottom: 1px solid #d3c6aa;
     color: #ffffff;
     transition-property: background-color;
     transition-duration: .5s;

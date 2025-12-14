@@ -22,9 +22,9 @@ check_yay() {
     if ! command -v yay >/dev/null 2>&1; then
         warn "yay not found — installing..."
         sudo pacman -S --needed --noconfirm git base-devel
-        git clone https://aur.archlinux.org/yay-bin.git /tmp/yay-bin
-        (cd /tmp/yay-bin && makepkg -si --noconfirm)
-        rm -rf /tmp/yay-bin
+        git clone https://aur.archlinux.org/yay.git /tmp/yay
+        (cd /tmp/yay && makepkg -si --noconfirm)
+        rm -rf /tmp/yay
         ok "yay installed!"
     else
         ok "yay already installed."

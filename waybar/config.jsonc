@@ -74,7 +74,7 @@
         "format-disabled": "󰂲",
         "format-connected": "",
         "tooltip-format": "Devices connected: {num_connections}",
-        "on-click": "kitty --class tui -- bash -c \"bluetui\""
+        "on-click": "blueman"
       },
       "custom/swaync": {
         "tooltip": true,

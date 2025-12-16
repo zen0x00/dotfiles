@@ -14,13 +14,6 @@ zinit light Aloxaf/fzf-tab
 #Load Completions
 autoload -U compinit && compinit
 
-# Load powerlevel10k theme
-zinit ice depth"1" # git clone depth
-zinit light romkatv/powerlevel10k
-
-# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
 #History
 HISTSIZE=50000
 HISTFILE=~/.zsh_history
@@ -50,3 +43,4 @@ alias clock='tty-clock -C 7 -c'
 # Shell integrations
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
+eval "$(starship init zsh)"

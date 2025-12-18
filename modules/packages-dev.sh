@@ -3,7 +3,7 @@
 install_dev_packages() {
     local packages=(
         python python-pip go dotnet-sdk gcc clang cmake make ninja gdb lldb perf docker docker-compose
-        git-lfs github-cli mono unityhub visual-studio-code-insiders-bin
+        git-lfs github-cli mono unityhub-bin visual-studio-code-insiders-bin
     )
 
     local to_install=()

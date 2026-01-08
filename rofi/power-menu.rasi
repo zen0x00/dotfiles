@@ -1,0 +1,62 @@
+@import "~/.config/rofi/colors.rasi"
+
+configuration {
+    show-icons: false;
+    font: "JetBrainsMono Nerd Font Mono 30";
+}
+
+/* Global */
+* {
+    background-color: transparent;
+    text-color: @foreground;
+}
+
+/* Window */
+window {
+    transparency: "real";
+    location: center;
+
+    width: 360px;
+    border-radius: 18px;
+
+    background-color: @background;
+}
+
+/* Main container */
+mainbox {
+    padding: 20px;
+    children: [ listview ];
+}
+
+/* Horizontal icon row (grid trick) */
+listview {
+    layout: vertical;
+    columns: 4;
+    fixed-columns: true;
+    lines: 1;
+
+    spacing: 16px;
+    background-color: transparent;
+}
+
+/* Icon tiles */
+element {
+    padding: 20px;          /* single-value padding (safe) */
+    min-width: 64px;        /* prevents glyph clipping */
+    border-radius: 14px;
+
+    background-color: @background-alt;
+    text-color: @foreground;
+}
+
+/* Hover / selected */
+element selected {
+    background-color: @selected;
+    text-color: @background;
+}
+
+/* Icon alignment */
+element-text {
+    horizontal-align: 0.48; /* avoids right-side cut-off */
+    vertical-align: 0.5;
+}

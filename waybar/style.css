@@ -27,6 +27,7 @@
   opacity: 0.5;
 }
 
+#mpris,
 #clock {
   background-color: transparent;
 }
@@ -35,12 +36,7 @@
   margin-right: 18px;
 }
 
-#tray menu {
-  background-color: @surface;
-}
-
 #custom-seperator {
   margin: 0 -4px;
   opacity: 0.4;
-  color: @outline;
 }

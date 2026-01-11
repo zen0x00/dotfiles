@@ -16,7 +16,10 @@ window#waybar {
   border-radius: 12px;
 }
 
-
+#custom-cava {
+    font-size: 17px;
+    margin-right: 10px;
+}
 
 .modules-left {
   margin-left: 16px;

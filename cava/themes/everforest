@@ -1,0 +1,15 @@
+[color]
+background = '#1F262B'
+foreground = '#E6E3DE'
+
+gradient = 1
+gradient_color_1 = '#2A3136'   # bg_secondary
+gradient_color_2 = '#B07A78'   # active (muted rose)
+gradient_color_3 = '#CFA3A0'   # selected (blossom)
+
+horizontal_gradient = 1
+horizontal_gradient_color_1 = '#2A3136'  # bg_secondary
+horizontal_gradient_color_2 = '#3A2F2B'  # urgent (ink brown)
+horizontal_gradient_color_3 = '#E6E3DE'  # foreground
+
+blend_direction = 'up'

@@ -3,11 +3,10 @@
   "spacing": 10,
   "layer": "top",
   "margin": "6 8 0 8",
-  "modules-left": ["custom/logo", "custom/seperator", "hyprland/workspaces"],
+  "modules-left": ["custom/logo", "custom/seperator", "hyprland/workspaces", "custom/seperator", "mpris"],
   "modules-center": ["hyprland/window"],
   "modules-right": [
-    "cava",
-    "mpris",
+    "custom/cava",
     "group/tray-expander",
     "custom/seperator",
     "pulseaudio",
@@ -121,29 +120,9 @@
         "on-click-right": "swaync-client -d -sw",
         "escape": true
       },
-  "cava": {
-        // "cava_config": "$XDG_CONFIG_HOME/cava/cava.conf",
-        "framerate": 30,
-        "autosens": 1,
-        "sensitivity": 100,
-        "bars": 14,
-        "lower_cutoff_freq": 50,
-        "higher_cutoff_freq": 10000,
-        "hide_on_silence": false,
-        // "format_silent": "quiet",
-        "method": "pulse",
-        "source": "auto",
-        "stereo": true,
-        "reverse": false,
-        "bar_delimiter": 0,
-        "monstercat": false,
-        "waves": false,
-        "noise_reduction": 0.77,
-        "input_delay": 2,
-        "format-icons": ["▁", "▂", "▃", "▄", "▅", "▆", "▇", "█" ],
-        "actions": {
-                  "on-click-right": "mode"
-                  }
+  "custom/cava": {
+        "format": "{}",
+        "exec": "~/.config/waybar/Modules/cava.sh"
     },
   "mpris": {
     "interval": 1,
@@ -173,5 +152,5 @@
     },
     // "ignored-players": ["firefox"]
     "max-length": 20,
-  },
+  }
 }

@@ -1,4 +1,9 @@
-/* Global */
+@import "colors.css";
+
+/* =============================
+   GLOBAL
+   ============================= */
+
 * {
     font-family: "JetBrainsMono Nerd Font Propo";
     transition: 100ms;
@@ -11,45 +16,45 @@
 
 .notification-background .notification .notification-content {
     padding: 0.818rem;
-    background-color: rgba(31, 38, 43, 0.75); /* charcoal glass */
+    background-color: alpha(@background, 0.85);
 }
 
-/* Normal + Low notifications */
+/* Low + Normal */
 .notification-background .notification.low .notification-content label,
 .notification-background .notification.normal .notification-content label {
-    color: #E6E3DE; /* petal white */
+    color: @foreground;
 }
 
 .notification-background .notification.low .notification-content image,
 .notification-background .notification.normal .notification-content image {
-    color: #D8D4CC;
+    color: mix(@foreground, @background, 0.15);
 }
 
 .notification-background .notification.low .notification-content .body,
 .notification-background .notification.normal .notification-content .body {
-    color: #6A6F72; /* mist gray */
+    color: mix(@foreground, @background, 0.6);
 }
 
 /* Critical */
 .notification-background .notification.critical .notification-content {
-    background-color: #8E3B3A; /* muted critical red */
+    background-color: @urgent;
 }
 
 .notification-background .notification.critical .notification-content image {
-    color: #E6E3DE;
+    color: @foreground;
 }
 
 .notification-background .notification.critical .notification-content label {
-    color: #1F262B;
+    color: @foreground;
 }
 
-/* Summary + time */
+/* Summary + Time */
 .notification-background .notification .notification-content .summary {
-    color: #E6E3DE;
+    color: @foreground;
 }
 
 .notification-background .notification .notification-content .time {
-    color: #6A6F72;
+    color: mix(@foreground, @background, 0.6);
 }
 
 /* =============================
@@ -57,7 +62,7 @@
    ============================= */
 
 .close-button:hover {
-    background-color: rgba(230, 227, 222, 0.12);
+    background-color: alpha(@selected, 0.25);
 }
 
 /* =============================
@@ -65,20 +70,21 @@
    ============================= */
 
 .control-center {
-    background-color: rgba(31, 38, 43, 0.85);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.45);
+    background-color: alpha(@background, 0.95);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.55);
 }
 
+/* Sliders */
 .control-center slider {
-    background-color: rgba(176, 122, 120, 0.35);
+    background-color: alpha(@active, 0.35);
 }
 
 .control-center slider:hover {
-    background-color: rgba(176, 122, 120, 0.55);
+    background-color: alpha(@active, 0.55);
 }
 
 .control-center slider:active {
-    background-color: #B07A78;
+    background-color: @active;
 }
 
 /* =============================
@@ -87,15 +93,15 @@
 
 .widget-title label,
 .widget-title button label {
-    color: #E6E3DE;
+    color: @foreground;
 }
 
 .widget-title button:hover {
-    background-color: rgba(230, 227, 222, 0.12);
+    background-color: alpha(@selected, 0.2);
 }
 
 .widget-title button:active {
-    background-color: rgba(230, 227, 222, 0.35);
+    background-color: alpha(@selected, 0.4);
 }
 
 /* =============================
@@ -103,20 +109,29 @@
    ============================= */
 
 .widget-buttons-grid {
-    background-color: rgba(31, 38, 43, 0.4);
+    background-color: alpha(@background-alt, 0.6);
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button label {
-    color: #E6E3DE;
+.widget-buttons-grid
+> flowbox
+> flowboxchild
+> button label {
+    color: @foreground;
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button:hover {
-    background-color: rgba(230, 227, 222, 0.12);
+.widget-buttons-grid
+> flowbox
+> flowboxchild
+> button:hover {
+    background-color: alpha(@selected, 0.2);
 }
 
-.widget-buttons-grid > flowbox > flowboxchild > button:checked {
-    background-color: #CFA3A0;
-    color: #1F262B;
+.widget-buttons-grid
+> flowbox
+> flowboxchild
+> button:checked {
+    background-color: @selected;
+    color: @background;
 }
 
 /* =============================
@@ -124,15 +139,15 @@
    ============================= */
 
 .widget-volume {
-    background-color: rgba(31, 38, 43, 0.4);
+    background-color: alpha(@background-alt, 0.6);
 }
 
 .widget-volume trough {
-    background-color: rgba(230, 227, 222, 0.2);
+    background-color: alpha(@foreground, 0.2);
 }
 
 .widget-volume trough slider {
-    background-color: #B07A78;
+    background-color: @active;
 }
 
 /* =============================
@@ -140,11 +155,11 @@
    ============================= */
 
 .widget-mpris {
-    background-color: rgba(31, 38, 43, 0.4);
+    background-color: alpha(@background-alt, 0.6);
 }
 
 .widget-mpris-player {
-    color: #B07A78;
+    color: @active;
 }
 
 /* =============================
@@ -152,19 +167,18 @@
    ============================= */
 
 .widget-dnd label {
-    color: #E6E3DE;
+    color: @foreground;
 }
 
 .widget-dnd > switch {
-    background: #1F262B;
-    border: 1px solid #2A3136;
+    background: @background;
+    border: 1px solid @background-alt;
 }
 
 .widget-dnd > switch:checked {
-    background: #CFA3A0;
+    background: @selected;
 }
 
 .widget-dnd > switch slider {
-    background: #2A3136;
+    background: @background-alt;
 }
-

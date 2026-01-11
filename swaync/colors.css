@@ -1,0 +1,21 @@
+/* =============================
+   GLOBAL COLOR VARIABLES
+   ============================= */
+
+* {
+    /* Dark cool background (roof / stone) */
+    background:     #1F262BFF; /* bg_main */
+    background-alt: #2A3136FF; /* bg_secondary */
+
+    /* Soft petal white */
+    foreground:     #E6E3DEFF; /* fg_primary */
+
+    /* Dusty blush accent */
+    selected:       #CFA3A0FF; /* blossom pink */
+
+    /* Muted rosewood (active) */
+    active:         #B07A78FF; /* muted rose */
+
+    /* Ink-brown urgency */
+    urgent:         #3A2F2BFF; /* branch brown */
+}

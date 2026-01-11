@@ -9,6 +9,7 @@
     "custom/cava",
     "group/tray-expander",
     "custom/seperator",
+    "power-profiles-daemon",
     "pulseaudio",
     "bluetooth",
     "network",
@@ -65,6 +66,19 @@
     "icon-size": 16,
     "spacing": 12,
   },
+  "power-profiles-daemon": {
+    "format": "{icon}",
+    "tooltip": true,
+    "tooltip-format": "Power Profile: {profile}",
+    "icon-size": 16,
+    "icons": {
+      "performance": "󰓅",
+      "balanced": "󰾅",
+      "power-saver": "󰌪"
+    },
+    "on-click": "powerprofilesctl cycle"
+  },
+
   "custom/seperator": {
     "format": "❘",
   },

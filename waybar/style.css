@@ -45,8 +45,19 @@ window#waybar {
   opacity: 0.4;
 }
 
+/* Expand icon */
+#custom-expand-icon {
+  padding-right: 6px;
+}
+
+/* Tray as a whole */
+#tray {
+  padding: 0 6px;
+}
+
 /* Power profiles */
 #power-profiles-daemon {
   padding-left: 6px;
 }
+
 

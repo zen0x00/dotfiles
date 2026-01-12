@@ -7,8 +7,8 @@ install_aur_packages() {
         notify-send thunar nwg-look steam neovim openrgb fzf lazygit sddm starship
         sddm-silent-theme zoxide ttf-jetbrains-mono-nerd gamemode lib32-gamemode
         ttf-ibm-plex ttf-roboto noto-fonts spotify spicetify-cli mangohud ttf-gohu-nerd
-        zen-browser-bin ttf-twemoji vesktop hyprshot
-    )
+        zen-browser-bin ttf-twemoji vesktop hyprshot obs-studio obs-vkcapture obs-pipewire-audio-capture
+        )
 
     local to_install=()
     for pkg in "${packages[@]}"; do

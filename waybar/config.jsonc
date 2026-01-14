@@ -42,12 +42,12 @@
   },
   "hyprland/window": {
     "format": "{class}",
-    "separate-outputs": true,
+    "separate-outputs": true
   },
   "clock": {
     "tooltip": true,
     "format": "{:%I:%M %p}",
-    "tooltip-format": "{:%I:%M %p}",
+    "tooltip-format": "{:%I:%M %p}"
   },
   "group/tray-expander": {
     "orientation": "inherit",
@@ -63,7 +63,7 @@
   },
   "tray": {
     "icon-size": 16,
-    "spacing": 16,
+    "spacing": 16
   },
   "custom/brightness": {
     "format": "󰃠",
@@ -90,7 +90,7 @@
   },
 
   "custom/seperator": {
-    "format": "❘",
+    "format": "❘"
   },
   "custom/logo": {
     "format": "󰣇",
@@ -130,7 +130,7 @@
         "tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
         "format": "{icon}",
         "format-icons": {
-          "notification": "<span foreground='red'><sup></sup></span>",
+          "notification": "<span foreground='red'><sup></sup></span>",
           "none": "",
           "dnd-notification": "<span foreground='red'><sup></sup></span>",
           "dnd-none": "",
@@ -169,14 +169,14 @@
       "mopidy": "",
       "mpv": "󰐹",
       "spotify": "",
-      "vlc": "󰕼",
+      "vlc": "󰕼"
     },
     "status-icons": {
       "paused": "󰐎",
       "playing": "",
-      "stopped": "",
+      "stopped": ""
     },
     // "ignored-players": ["firefox"]
-    "max-length": 20,
+    "max-length": 20
   }
 }

@@ -58,7 +58,7 @@ for map in emacs viins vicmd; do
 done
 
 # Aliases
-alias ls='ls --color'
+alias ls='colorls'
 alias vim='nvim'
 alias c='clear'
 alias clock='tty-clock -C 7 -c'
@@ -71,3 +71,4 @@ eval "$(starship init zsh)"
 export PATH="$PATH:/home/aman/.dotnet/tools"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:~/.spicetify
+export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"

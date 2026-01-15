@@ -1,19 +1,8 @@
 * {
-    /* Dark forest background (main surface) */
-    background:     #2B3339FF; /* bg0 */
-
-    /* Slightly lifted background (panels / cards) */
-    background-alt: #323C41FF; /* bg1 */
-
-    /* Warm parchment foreground (never pure white) */
-    foreground:     #D3C6AAFF; /* fg */
-
-    /* Soft floral accent (selection / focus) */
-    selected:       #D699B6FF; /* purple */
-
-    /* Natural moss green (active / success) */
-    active:         #A7C080FF; /* green */
-
-    /* Bark-shadow warning (urgent, calm but clear) */
-    urgent:         #7A8478FF; /* grey0 */
+    background:     #2B3339FF;
+    background-alt: #323C41FF;
+    foreground:     #D3C6AAFF;
+    selected:       #D699B6FF;
+    active:         #A7C080FF;
+    urgent:         #7A8478FF;
 }

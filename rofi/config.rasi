@@ -8,31 +8,30 @@ configuration {
 @import                          "fonts.rasi"
 
 * {
-    border-colour:               var(active );
-    handle-colour:               var(selected);
+    border-colour:               var(selected-background);
+    handle-colour:               var(selected-background);
     background-colour:           var(background);
     foreground-colour:           var(foreground);
     alternate-background:        var(background-alt);
     normal-background:           var(background);
     normal-foreground:           var(foreground);
-    urgent-background:           var(urgent);
-    urgent-foreground:           var(background);
-    active-background:           var(active);
-    active-foreground:           var(background);
-    selected-normal-background:  var(active);
-    selected-normal-foreground:  var(background);
-    selected-urgent-background:  var(active);
-    selected-urgent-foreground:  var(background);
-    selected-active-background:  var(urgent);
-    selected-active-foreground:  var(background);
+    urgent-background:           var(selected-background);
+    urgent-foreground:           var(selected-foreground);
+    active-background:           var(selected-background);
+    active-foreground:           var(selected-foreground);
+    selected-normal-background:  var(selected-background);
+    selected-normal-foreground:  var(selected-foreground);
+    selected-urgent-background:  var(selected-background);
+    selected-urgent-foreground:  var(selected-foreground);
+    selected-active-background:  var(selected-background);
+    selected-active-foreground:  var(selected-foreground);
     alternate-normal-background: var(background);
     alternate-normal-foreground: var(foreground);
-    alternate-urgent-background: var(urgent);
-    alternate-urgent-foreground: var(background);
-    alternate-active-background: var(active);
-    alternate-active-foreground: var(background);
+    alternate-urgent-background: var(selected-background);
+    alternate-urgent-foreground: var(selected-foreground);
+    alternate-active-background: var(selected-background);
+    alternate-active-foreground: var(selected-foreground);
 }
-
 window {
     transparency:                "real";
     location:                    center;
@@ -50,7 +49,6 @@ window {
     cursor:                      "default";
     background-color:            @background-colour;
 }
-
 mainbox {
     enabled:                     true;
     spacing:                     10px;
@@ -62,7 +60,6 @@ mainbox {
     background-color:            transparent;
     children:                    [ "inputbar", "message", "listview" ];
 }
-
 inputbar {
     enabled:                     true;
     spacing:                     10px;
@@ -75,13 +72,11 @@ inputbar {
     text-color:                  @foreground-colour;
     children:                    [ "entry" ];
 }
-
 prompt {
     enabled:                     true;
     background-color:            inherit;
     text-color:                  inherit;
 }
-
 textbox-prompt-colon {
     enabled:                     true;
     expand:                      false;
@@ -89,7 +84,6 @@ textbox-prompt-colon {
     background-color:            inherit;
     text-color:                  inherit;
 }
-
 entry {
     enabled:                     true;
     background-color:            inherit;
@@ -98,14 +92,12 @@ entry {
     placeholder:                 "Search...";
     placeholder-color:           inherit;
 }
-
 num-filtered-rows {
     enabled:                     true;
     expand:                      false;
     background-color:            inherit;
     text-color:                  inherit;
 }
-
 textbox-num-sep {
     enabled:                     true;
     expand:                      false;
@@ -113,20 +105,17 @@ textbox-num-sep {
     background-color:            inherit;
     text-color:                  inherit;
 }
-
 num-rows {
     enabled:                     true;
     expand:                      false;
     background-color:            inherit;
     text-color:                  inherit;
 }
-
 case-indicator {
     enabled:                     true;
     background-color:            inherit;
     text-color:                  inherit;
 }
-
 listview {
     enabled:                     true;
     columns:                     1;
@@ -138,7 +127,6 @@ listview {
     reverse:                     false;
     fixed-height:                true;
     fixed-columns:               true;
-    
     spacing:                     10px;
     margin:                      0px;
     padding:                     0px;
@@ -155,7 +143,6 @@ scrollbar {
     border-radius:               0px;
     background-color:            @alternate-background;
 }
-
 element {
     enabled:                     true;
     spacing:                     10px;
@@ -218,7 +205,6 @@ element-text {
     vertical-align:              0.5;
     horizontal-align:            0.0;
 }
-
 mode-switcher{
     enabled:                     true;
     spacing:                     10px;
@@ -243,7 +229,6 @@ button selected {
     background-color:            var(selected-normal-background);
     text-color:                  var(selected-normal-foreground);
 }
-
 message {
     enabled:                     true;
     margin:                      0px;

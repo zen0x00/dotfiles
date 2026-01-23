@@ -1,7 +1,7 @@
 @import "colors.css";
 
 * {
-  font-family: "JetBrainsMono Nerd Font Propo", "Symbols Nerd Font";
+  font-family: "CaskaydiaMono Nerd Font Propo";
   font-weight: 600;
   font-size: 14px;
   color: @fg;
@@ -9,12 +9,12 @@
 
 #waybar {
   background-color: alpha(@bg, 0.85);
-  border-bottom: 2px solid alpha(@fg_muted, 1);
+  border-bottom: 2px solid alpha(@fg_muted, 0.6);
   transition: background-color 0.4s ease;
 }
 
 #waybar button:hover {
-  background-color: alpha(@fg, 0.035);
+  background-color: alpha(@fg, 0.04);
   border-radius: 8px;
 }
 
@@ -53,7 +53,7 @@
 }
 
 #workspaces button:hover {
-  color: @teal;
+  color: @blue;
 }
 
 #workspaces button.urgent {
@@ -74,7 +74,7 @@
 
 #custom-cava {
   color: @purple;
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 #window {
@@ -84,25 +84,29 @@
 
 #clock {
   padding-left: 6px;
-  color: @fg;
-  opacity: 0.9;
+  color: @yellow;
+  opacity: 0.95;
 }
 
 #custom-seperator {
   margin: 0 -4px;
   color: @fg_muted;
-  opacity: 0.35;
+  opacity: 0.3;
 }
 
 #custom-expand-icon {
   padding-right: 6px;
-  color: @blue;
+  color: @nord_blue;
 }
 
-#custom-brightness,
-#custom-nightlight {
+#custom-brightness {
   padding: 0 6px;
   color: @yellow;
+}
+
+#custom-nightlight {
+  padding: 0 6px;
+  color: @orange;
 }
 
 #power-profiles-daemon {
@@ -147,7 +151,7 @@
 
 #custom-swaync {
   padding-left: 6px;
-  color: @blue;
+  color: @nord_blue;
 }
 
 #custom-swaync.dnd {

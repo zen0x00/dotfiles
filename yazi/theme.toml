@@ -1,0 +1,91 @@
+"$schema" = "https://yazi-rs.github.io/schemas/theme.json"
+
+[flavor]
+dark = ""
+light = ""
+
+[app]
+overall = { bg = "#040b0f", fg = "#dde5e2" }
+
+[mgr]
+cwd = { fg = "#6791C9" }
+
+find_keyword  = { fg = "#ECD28B", bold = true, italic = true, underline = true }
+find_position = { fg = "#DF5B61", bold = true }
+
+symlink_target = { fg = "#7c8a8d", italic = true }
+
+marker_copied   = { fg = "#040b0f", bg = "#5fb3a2" }
+marker_cut      = { fg = "#040b0f", bg = "#DF5B61" }
+marker_marked   = { fg = "#040b0f", bg = "#6791C9" }
+marker_selected = { fg = "#040b0f", bg = "#ECD28B" }
+
+count_copied   = { fg = "#040b0f", bg = "#5fb3a2" }
+count_cut      = { fg = "#040b0f", bg = "#DF5B61" }
+count_selected = { fg = "#040b0f", bg = "#ECD28B" }
+
+border_symbol = "│"
+border_style  = { fg = "#1c272b" }
+
+[tabs]
+active   = { fg = "#040b0f", bg = "#6791C9", bold = true }
+inactive = { fg = "#7c8a8d", bg = "#0c171b" }
+
+sep_inner = { open = "", close = "" }
+sep_outer = { open = "", close = "" }
+
+[mode]
+normal_main = { fg = "#040b0f", bg = "#6791C9", bold = true }
+normal_alt  = { fg = "#6791C9", bg = "#0c171b" }
+
+select_main = { fg = "#040b0f", bg = "#DF5B61", bold = true }
+select_alt  = { fg = "#DF5B61", bg = "#0c171b" }
+
+unset_main = { fg = "#040b0f", bg = "#DF5B61", bold = true }
+unset_alt  = { fg = "#DF5B61", bg = "#0c171b" }
+
+[indicator]
+parent  = { reversed = true }
+current = { reversed = true }
+preview = { underline = true }
+padding = { open = "", close = "" }
+
+[status]
+overall = {}
+sep_left  = { open = "", close = "" }
+sep_right = { open = "", close = "" }
+
+perm_sep   = { fg = "#566466" }
+perm_type  = { fg = "#5fb3a2" }
+perm_read  = { fg = "#ECD28B" }
+perm_write = { fg = "#DF5B61" }
+perm_exec  = { fg = "#6791C9" }
+
+progress_label  = { bold = true }
+progress_normal = { fg = "#5fb3a2", bg = "#040b0f" }
+progress_error  = { fg = "#ECD28B", bg = "#DF5B61" }
+
+[which]
+cols      = 3
+mask      = { bg = "#040b0f" }
+cand      = { fg = "#6791C9" }
+rest      = { fg = "#566466" }
+desc      = { fg = "#ECD28B" }
+separator = "  "
+separator_style = { fg = "#566466" }
+
+[confirm]
+border  = { fg = "#6791C9" }
+title   = { fg = "#6791C9" }
+btn_yes = { reversed = true }
+btn_no  = {}
+btn_labels = ["  [Y]es  ", "  (N)o  "]
+
+[notify]
+title_info  = { fg = "#5fb3a2" }
+title_warn  = { fg = "#ECD28B" }
+title_error = { fg = "#DF5B61" }
+
+icon_info  = ""
+icon_warn  = ""
+icon_error = ""

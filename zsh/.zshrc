@@ -60,6 +60,7 @@ done
 # Aliases
 alias i='yay -S'
 alias ls='colorls'
+alias s='yay -Ss'
 alias vim='nvim'
 alias c='clear'
 alias clock='tty-clock -C 7 -c'
@@ -70,7 +71,19 @@ eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(starship init zsh)"
 
+export EDITOR=nvim
+
 export PATH="$PATH:/home/aman/.dotnet/tools"
 export PATH="$HOME/.local/bin:$PATH"
 export PATH=$PATH:~/.spicetify
 export PATH="$HOME/.local/share/gem/ruby/3.4.0/bin:$PATH"
+
+#Yazi
+
+function y() {
+	local tmp="$(mktemp -t "yazi-cwd.XXXXXX")" cwd
+	command yazi "$@" --cwd-file="$tmp"
+	IFS= read -r -d '' cwd < "$tmp"
+	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
+	rm -f -- "$tmp"
+}

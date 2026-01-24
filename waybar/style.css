@@ -1,15 +1,15 @@
 @import "colors.css";
 
 * {
-  font-family: "CaskaydiaMono Nerd Font Propo";
+  font-family: "JetBrainsMono Nerd Font Propo";
   font-weight: 600;
-  font-size: 14px;
+  font-size: 15px;
   color: @fg;
 }
 
 #waybar {
   background-color: alpha(@bg, 0.85);
-  border: 2px solid alpha(@fg_muted, 0.6);
+  border-bottom: 2px solid alpha(@fg_muted, 0.6);
   transition: background-color 0.4s ease;
 }
 
@@ -79,14 +79,11 @@
 
 #window {
   color: @fg;
-  opacity: 0.85;
 }
 
 #clock {
-  padding-top: 2px;
   padding-left: 6px;
   color: @yellow;
-  opacity: 0.95;
 }
 
 #custom-seperator {

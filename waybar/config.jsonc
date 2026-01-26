@@ -5,11 +5,18 @@
   "spacing": 10,
   "height": 32,
   "modules-left": [
-    "hyprland/workspaces"
+    "hyprland/workspaces",
+    "custom/seperator",
+    "mpris"
   ],
   "modules-center": ["hyprland/window"],
   "modules-right": [
     "group/tray-expander",
+    "custom/volume",
+    "network",
+    "custom/brightness",
+    "custom/nightlight",
+    "power-profiles-daemon",
     "clock"
   ],
   "hyprland/workspaces": {
@@ -54,13 +61,8 @@
     },
     "modules": [
       "custom/expand-icon",
-      "tray",
-      "custom/volume",
-      "network",
-      "custom/brightness",
-      "custom/nightlight",
-      "power-profiles-daemon",
-    ],
+      "tray"
+    ]
   },
   "custom/expand-icon": {
     "format": "",

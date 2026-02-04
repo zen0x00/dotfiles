@@ -19,6 +19,7 @@
 }
 
 .tray-group-item {
+  padding: 0 6px;
   color: @fg_dim;
 }
 

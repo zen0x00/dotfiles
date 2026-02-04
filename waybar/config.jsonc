@@ -3,7 +3,7 @@
   "layer": "top",
   "position": "top",
   "spacing": 10,
-  "height": 32,
+  "height": 34,
   "modules-left": [
     "hyprland/workspaces",
     "custom/seperator",
@@ -14,9 +14,6 @@
     "group/tray-expander",
     "custom/volume",
     "network",
-    "custom/brightness",
-    "custom/nightlight",
-    "power-profiles-daemon",
     "clock"
   ],
   "hyprland/workspaces": {
@@ -57,55 +54,55 @@
     "orientation": "inherit",
     "drawer": {
       "transition-duration": 600,
-      "children-class": "tray-group-item",
+      "children-class": "tray-group-item"
     },
     "modules": [
       "custom/expand-icon",
       "tray"
     ]
   },
-  "custom/expand-icon": {
-    "format": "",
+  "custom/expand-icon": {    "icon-size": 16,    "format": "",
     "tooltip": false,
     "on-scroll-up": "",
     "on-scroll-down": "",
     "on-scroll-left": "",
-    "on-scroll-right": "",
+    "on-scroll-right": ""
   },
   "tray": {
     "icon-size": 16,
-    "spacing": 16,
+    "spacing": 16
   },
   "custom/brightness": {
+    "icon-size": 16,
     "format": "󰃠",
     "tooltip": false,
 
     "on-scroll-up": "swayosd-client --brightness raise",
-    "on-scroll-down": "swayosd-client --brightness lower",
+    "on-scroll-down": "swayosd-client --brightness lower"
   },
   "custom/nightlight": {
+    "icon-size": 16,
     "format": "󰌵",
     "tooltip": "Night Light",
-    "on-click": "nightlight",
+    "on-click": "nightlight"
   },
 
-  "power-profiles-daemon": {
-    "format": "{icon}",
+  "power-profiles-daemon": {    "icon-size": 16,    "format": "{icon}",
     "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
     "tooltip": true,
     "format-icons": {
       "performance": "",
       "balanced": "",
-      "power-saver": "",
-    },
+      "power-saver": ""
+    }
   },
 
   "custom/seperator": {
-    "format": "❘",
+    "format": "❘"
   },
   "custom/logo": {
     "format": "󰣇",
-    "on-click": "power-menu",
+    "on-click": "power-menu"
   },
   "custom/volume": {
     "format": "",
@@ -113,7 +110,7 @@
     "on-scroll-up": "swayosd-client --output-volume raise",
     "on-scroll-down": "swayosd-client --output-volume lower",
     "on-click-middle": "swayosd-client --output-volume mute",
-    "on-click": "kitty --class wiremix --title wiremix -e wiremix",
+    "on-click": "kitty --class wiremix --title wiremix -e wiremix"
   },
 
   "bluetooth": {
@@ -121,7 +118,7 @@
     "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "kitty --class bluetui --title bluetui -e bluetui",
+    "on-click": "kitty --class bluetui --title bluetui -e bluetui"
   },
   "network": {
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
@@ -134,7 +131,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "kitty --class impala --title impala -e impala",
+    "on-click": "kitty --class impala --title impala -e impala"
   },
   "custom/swaync": {
     "tooltip": true,

@@ -3,10 +3,14 @@
   "layer": "top",
   "position": "top",
   "spacing": 10,
+  "margin-top": 10,
+  "margin-bottom": 0,
+  "margin-left": 6,
+  "margin-right": 6,
   "height": 34,
   "modules-left": [
+    "custom/logo",
     "hyprland/workspaces",
-    "custom/seperator",
     "mpris"
   ],
   "modules-center": ["hyprland/window"],
@@ -103,7 +107,7 @@
   },
   "custom/logo": {
     "format": "󰣇",
-    "on-click": "power-menu"
+    "on-click": "rofi -show run"
   },
   "custom/volume": {
     "format": "",

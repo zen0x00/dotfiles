@@ -25,18 +25,8 @@
     "on-click": "activate",
     "format": "{icon}",
     "format-icons": {
-      "default": "",
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "10": "0",
-      "active": "󱓻",
+      "default": "<span font='8'></span>",
+      "active": "<span font='12'>󰮯</span>"
     },
     "persistent-workspaces": {
       "1": [],
@@ -54,6 +44,12 @@
     "tooltip": true,
     "format": "{:%I:%M %p}",
     "tooltip-format": "{:%I:%M %p}",
+  },
+  "cpu": {
+    "interval": 5,
+    "format": "󰍛",
+    "on-click": "omarchy-launch-or-focus-tui btop",
+    "on-click-right": "alacritty"
   },
   "group/tray-expander": {
     "orientation": "inherit",

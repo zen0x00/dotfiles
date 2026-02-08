@@ -1,2 +1,0 @@
-#!/usr/bin/env bash
-curl -s https://wttr.in/jangareddigudem?format="%t+%c\n" | xargs

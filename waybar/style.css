@@ -43,9 +43,15 @@
   border-radius: 12px;
 }
 
-#mpris,
-#custom-logo,
-#window,
+#window {
+  color: @bisque;
+  background-color: alpha(@bg, 0.75);
+  border: 2px solid alpha(@fg_muted, 0.6);
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: 12px;
+}
+
 #workspaces {
   background-color: alpha(@bg, 0.75);
   border: 2px solid alpha(@fg_muted, 0.6);
@@ -59,12 +65,23 @@
   padding: 0 6px;
   margin: 0 2px;
   min-width: 9px;
-  color: @fg_dim;
+  color: @fg;
   transition: color 0.25s ease;
 }
 
+#workspaces button:nth-child(1) { color: @red; }
+#workspaces button:nth-child(2) { color: @green; }
+#workspaces button:nth-child(3) { color: @blue; }
+#workspaces button:nth-child(4) { color: @nord_blue; }
+#workspaces button:nth-child(5) { color: @teal; }
+#workspaces button:nth-child(6) { color: @yellow; }
+#workspaces button:nth-child(7) { color: @orange; }
+#workspaces button:nth-child(8) { color: @purple; }
+#workspaces button:nth-child(9) { color: @bisque; }
+
+
 #workspaces button.active {
-  color: @nord_blue;
+  color: @yellow;
 }
 
 #workspaces button:hover {
@@ -79,8 +96,26 @@ color: @blue;
   opacity: 0.45;
 }
 
+#mpris {
+  color: @purple;
+  background-color: alpha(@bg, 0.75);
+  border: 2px solid alpha(@fg_muted, 0.6);
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: 12px;
+}
+
 #mpris.paused {
   color: @fg_dim;
+}
+
+#custom-logo {
+  color: @teal;
+  background-color: alpha(@bg, 0.75);
+  border: 2px solid alpha(@fg_muted, 0.6);
+  padding-left: 14px;
+  padding-right: 14px;
+  border-radius: 12px;
 }
 
 #custom-cava {

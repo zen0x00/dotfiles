@@ -14,8 +14,9 @@
   "modules-center": ["hyprland/window"],
   "modules-right": [
     "group/tray-expander",
-    "custom/volume",
+    "bluetooth",
     "network",
+    "custom/volume",
     "clock",
     "custom/swaync"
   ],

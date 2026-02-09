@@ -1,0 +1,19 @@
+@define-color bg        #323d43;  /* bg0 */
+@define-color bg_alt    #3a464c;  /* bg1 */
+@define-color bg_module #434f55;  /* bg2 */
+@define-color bg_hover  #4d5960;  /* bg3 */
+@define-color bg_active #555f66;  /* bg4 */
+
+@define-color fg        #d3c6aa;  /* foreground */
+@define-color fg_dim    #859289;  /* grey1 */
+@define-color fg_muted  #7a8478;  /* desaturated grey/green */
+
+@define-color red       #DF5B61;
+@define-color green     #7FA38A;
+@define-color blue      #6F86A3;
+@define-color nord_blue #81A1C1;
+@define-color bisque    #D2B9A3;
+@define-color teal      #6FA3A1;
+@define-color yellow    #C4B37A;
+@define-color orange    #C28A63;
+@define-color purple    #9A8FB5;

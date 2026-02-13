@@ -4,7 +4,6 @@ install_core_packages() {
 
     local packages=(
         bat
-        bleachbit
         bluez
         bluez-utils
         btop
@@ -19,6 +18,7 @@ install_core_packages() {
         gvfs
         gvfs-mtp
         gzip
+        kvantum
         lib32-vulkan-icd-loader
         libsecret
         lxappearance
@@ -40,6 +40,7 @@ install_core_packages() {
         qt5ct
         qt6-base
         qt6-wayland
+        qt6ct
         ripgrep
         rsync
         sassc

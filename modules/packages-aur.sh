@@ -8,7 +8,6 @@ install_aur_packages() {
         bc
         bluetui
         cpupower
-        discord
         ffmpeg
         fastfetch
         fzf
@@ -19,7 +18,6 @@ install_aur_packages() {
         hyprlock
         hyprshot
         hyprsunset
-        idescriptor-git
         impala
         imagemagick
         irqbalance
@@ -29,6 +27,7 @@ install_aur_packages() {
         lib32-gamemode
         localsend
         mangohud
+        mesa-git
         nautilus
         neovim
         notify-send
@@ -39,7 +38,6 @@ install_aur_packages() {
         obs-vkcapture
         openrgb
         preload
-        quickshell
         rofi-wayland
         scx-scheds
         sddm
@@ -60,6 +58,7 @@ install_aur_packages() {
         ttf-twemoji
         tuned
         tuned-ppd
+        vesktop
         waybar
         wiremix
         wlogout

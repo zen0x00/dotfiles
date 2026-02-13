@@ -6,7 +6,7 @@ THEME=$(ls "$THEMES" | grep -v current | rofi -dmenu -p "Theme")
 
 ln -sfn "$THEMES/$THEME" "$CURRENT"
 
-awww img "$CURRENT/wallpaper.jpg" --transition-type grow --transition-duration 1 --transition-fps 60
+awww img "$CURRENT/wallpapers/wallpaper.jpg" --transition-type grow --transition-duration 1 --transition-fps 60
 
 pkill waybar
 pkill swaync

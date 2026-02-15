@@ -1,0 +1,41 @@
+#!/bin/bash
+
+BASE="$HOME/.config"
+CURRENT="$BASE/themes/current"
+
+fail() {
+    echo "❌ $1"
+    exit 1
+}
+
+ok() {
+    echo "✔ $1"
+}
+
+link_file() {
+    SRC="$1"
+    DEST="$2"
+
+    mkdir -p "$(dirname "$DEST")"
+
+    if [[ -L "$DEST" ]]; then
+        TARGET="$(readlink -f "$DEST")"
+        EXPECTED="$(readlink -f "$SRC")"
+        [[ "$TARGET" == "$EXPECTED" ]] && { ok "$DEST already correct"; return; }
+    fi
+
+    rm -f "$DEST"
+    ln -s "$SRC" "$DEST"
+    ok "Linked $DEST"
+}
+
+[[ -L "$CURRENT" ]] || fail "themes/current is missing or not a symlink"
+
+[[ -f "$CURRENT/fastfetch/config.jsonc" ]] || fail "Missing fastfetch config in current theme"
+[[ -f "$CURRENT/gtk-3.0/settings.ini" ]] || fail "Missing GTK settings.ini in current theme"
+
+link_file "$CURRENT/fastfetch/config.jsonc" "$BASE/fastfetch/config.jsonc"
+link_file "$CURRENT/gtk-3.0/settings.ini" "$BASE/gtk-3.0/settings.ini"
+link_file "$CURRENT/gtk-4.0/settings.ini" "$BASE/gtk-4.0/settings.ini"
+
+echo "🎉 Theme Doctor finished successfully."

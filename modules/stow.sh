@@ -25,4 +25,6 @@ run_stow() {
     mkdir -p "$HOME/Pictures"
     stow --target="$HOME/Pictures" Pictures
     ok "starship stowed successfully."
+
+    theme-doctor
 }

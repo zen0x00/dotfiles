@@ -119,6 +119,13 @@ if [[ "$INSTALL_MODE" != "minimal" ]]; then
     setup_zsh
 fi
 
+
+# -----------------------------------------------
+# LOCAL BIN
+# -----------------------------------------------
+info "Linking dotfiles executables..."
+install_local_bin
+
 # -----------------------------------------------
 # DOTFILES (STOW)
 # -----------------------------------------------
@@ -130,12 +137,6 @@ run_stow
 # -----------------------------------------------
 info "Generating Hyprland monitor configuration..."
 generate_monitors_conf
-
-# -----------------------------------------------
-# LOCAL BIN
-# -----------------------------------------------
-info "Linking dotfiles executables..."
-install_local_bin
 
 # -----------------------------------------------
 # ASCII ART FINISH

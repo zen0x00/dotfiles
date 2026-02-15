@@ -1,4 +1,4 @@
-@import "colors.css";
+@import "../themes/current/swayosd/colors.css";
 
 window {
   border-radius: 0;

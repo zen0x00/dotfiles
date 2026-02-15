@@ -1,4 +1,4 @@
-@import 'colors.css';
+@import "../themes/current/wlogout/colors.css";
 
 window {
     font-family: Fira Code Medium;

@@ -1,0 +1,17 @@
+@define-color foreground        #4c4f69;
+@define-color background        #eff1f5;
+
+@define-color color0            #eff1f5;
+@define-color color1            #e6e9ef;
+@define-color color2            #ccd0da;
+@define-color color3            #bcc0cc;
+@define-color color4            #1e66f5;
+
+@define-color color5            #9ca0b0;
+@define-color color6            #1e66f5;
+@define-color color7            #8839ef;
+@define-color color8            #8c8fa1;
+
+@define-color accent             #1e66f5;
+@define-color accent_active      #8839ef;
+@define-color urgent             #d20f39;

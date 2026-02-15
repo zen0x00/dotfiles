@@ -1,3 +1,3 @@
-@import 'colors.css';
+@import "../themes/current/swaync/colors.css";
 @import 'themes/nova-dark/notifications.css';
 @import 'themes/nova-dark/central_control.css';

@@ -5,9 +5,25 @@ THEME=$(ls "$THEMES" | grep -v current | rofi -dmenu -p "Theme")
 [ -z "$THEME" ] && exit
 
 ln -sfn "$THEMES/$THEME" "$CURRENT"
+GTK_SRC="$CURRENT/gtk/settings.ini"
+
+if [[ -f "$GTK_SRC" ]]; then
+  rm -f "$HOME/.config/gtk-3.0/settings.ini"
+  rm -f "$HOME/.config/gtk-4.0/settings.ini"
+  ln -s "$GTK_SRC" "$HOME/.config/gtk-3.0/settings.ini"
+  ln -s "$GTK_SRC" "$HOME/.config/gtk-4.0/settings.ini"
+fi
+
+VSCODE_THEME_FILE="$CURRENT/vscode.json"
+VSCODE_SETTINGS="$HOME/.config/Code/User/settings.json"
+
+if [[ -f "$VSCODE_THEME_FILE" ]]; then
+  jq -s '.[0] * .[1]' "$VSCODE_SETTINGS" "$VSCODE_THEME_FILE" > "$VSCODE_SETTINGS.tmp" \
+  && mv "$VSCODE_SETTINGS.tmp" "$VSCODE_SETTINGS"
+fi
 
 CACHE="$HOME/.cache/wallpaper_thumbs/$THEME"
-WALLDIR="$CURRENT/wallpapers"
+WALLDIR="$THEMES/$THEME/wallpapers"
 
 mkdir -p "$CACHE"
 

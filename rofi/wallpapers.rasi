@@ -1,4 +1,4 @@
-@import "colors.rasi"
+@import                          "~/.config/themes/current/rofi/colors.rasi"
 
 * {
     border-colour:               var(selected);

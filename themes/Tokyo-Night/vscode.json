@@ -1,4 +1,4 @@
 {
-  "workbench.colorTheme": "Tokyo Night",
-  "workbench.iconTheme": "material-icon-theme"
+  "name": "Tokyo Night",
+  "extension": "enkia.tokyo-night"
 }

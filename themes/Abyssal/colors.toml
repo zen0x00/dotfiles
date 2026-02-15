@@ -1,0 +1,28 @@
+# Core UI
+accent = "#4da6ff"
+cursor = "#e6edf3"
+foreground = "#c9d1d9"
+background = "#0f1419"
+
+selection_foreground = "#0f1419"
+selection_background = "#4da6ff"
+
+# ANSI Base (0–7)
+color0 = "#161b22"
+color1 = "#ff6b6b"
+color2 = "#3fb950"
+color3 = "#d29922"
+color4 = "#4da6ff"
+color5 = "#bc8cff"
+color6 = "#39c5cf"
+color7 = "#c9d1d9"
+
+# ANSI Bright (8–15)
+color8 = "#30363d"
+color9 = "#ff7b72"
+color10 = "#56d364"
+color11 = "#e3b341"
+color12 = "#79c0ff"
+color13 = "#d2a8ff"
+color14 = "#56d4dd"
+color15 = "#f0f6fc"

@@ -1,4 +1,4 @@
 {
-  "workbench.colorTheme": "Dracula Theme",
-  "workbench.iconTheme": "material-icon-theme"
+  "name": "Dracula Theme",
+  "extension": "dracula-theme.theme-dracula"
 }

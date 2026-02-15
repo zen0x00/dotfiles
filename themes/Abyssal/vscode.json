@@ -1,4 +1,4 @@
 {
-  "workbench.colorTheme": "Abyssal",
-  "workbench.iconTheme": "material-icon-theme"
+  "name": "Abyssal",
+  "extension": "zen0x.abyssal"
 }

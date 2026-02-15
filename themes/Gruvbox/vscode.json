@@ -1,4 +1,4 @@
 {
-  "workbench.colorTheme": "Gruvbox Dark Soft",
-  "workbench.iconTheme": "material-icon-theme"
+  "name": "Gruvbox Dark Soft",
+  "extension": "jdinhlife.gruvbox"
 }

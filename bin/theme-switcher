@@ -14,13 +14,7 @@ if [[ -f "$GTK_SRC" ]]; then
   ln -s "$GTK_SRC" "$HOME/.config/gtk-4.0/settings.ini"
 fi
 
-VSCODE_THEME_FILE="$CURRENT/vscode.json"
-VSCODE_SETTINGS="$HOME/.config/Code/User/settings.json"
-
-if [[ -f "$VSCODE_THEME_FILE" ]]; then
-  jq -s '.[0] * .[1]' "$VSCODE_SETTINGS" "$VSCODE_THEME_FILE" > "$VSCODE_SETTINGS.tmp" \
-  && mv "$VSCODE_SETTINGS.tmp" "$VSCODE_SETTINGS"
-fi
+zen0x-theme-set-vscode
 
 CACHE="$HOME/.cache/wallpaper_thumbs/$THEME"
 WALLDIR="$THEMES/$THEME/wallpapers"

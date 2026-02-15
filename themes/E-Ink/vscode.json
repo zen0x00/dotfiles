@@ -1,4 +1,4 @@
 {
-  "workbench.colorTheme": "e-ink",
-  "workbench.iconTheme": "material-icon-theme"
+  "name": "e-ink",
+  "extension": "eddjrn.e-ink"
 }

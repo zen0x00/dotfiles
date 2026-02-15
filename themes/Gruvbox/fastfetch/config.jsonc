@@ -1,0 +1,45 @@
+{
+  "$schema": "https://github.com/fastfetch-cli/fastfetch/raw/dev/doc/json_schema.json",
+
+  "logo": {
+    "source": "~/.config/fastfetch/arch.txt",
+    "height": 5,
+    "width": 10,
+    "color": {
+      "1": "#83a598",
+      "2": "#8ec07c",
+      "3": "#b8bb26",
+      "4": "#d3869b"
+    }
+  },
+
+  "display": { "separator": " ›  " },
+
+  "modules": [
+    { "type": "custom", "format": "" },
+
+    { "type": "title", "key": "   Host", "keyColor": "#ebdbb2" },
+
+    { "type": "custom", "format": "" },
+
+    { "type": "os",       "key": "   OS         ", "keyColor": "#83a598" },
+    { "type": "kernel",   "key": "   Kernel     ", "keyColor": "#83a598" },
+    { "type": "cpu",      "format": "{1}", "key": "   CPU        ", "keyColor": "#b8bb26" },
+    { "type": "gpu",      "format": "{2}", "key": "   GPU        ", "keyColor": "#8ec07c" },
+    { "type": "memory",   "key": "   Memory     ", "keyColor": "#d3869b" },
+    { "type": "packages", "key": "  󰏗 Packages   ", "keyColor": "#83a598" },
+    { "type": "wm",       "key": "   WM         ", "keyColor": "#83a598" },
+    { "type": "terminal", "key": "   Terminal   ", "keyColor": "#928374" },
+    { "type": "uptime",   "key": "   Uptime     ", "keyColor": "#fabd2f" },
+    { "type": "battery",  "key": "   Battery    ", "keyColor": "#fe8019" },
+
+    {
+      "type": "command",
+      "key": "  󰔟 OS Age     ",
+      "keyColor": "#fb4934",
+      "text": "birth_install=$(stat -c %W /); current=$(date +%s); days_difference=$(( (current - birth_install) / 86400 )); echo $days_difference days"
+    },
+
+    "break"
+  ]
+}

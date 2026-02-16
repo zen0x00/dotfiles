@@ -1,0 +1,55 @@
+@import "../themes/current/waybar/colors.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-weight: 700;
+  font-size: 15px;
+}
+
+#waybar {
+  background: transparent;
+}
+
+.modules-center {
+  margin: 0;
+}
+
+.modules-center > widget {
+  margin: 0;
+}
+
+.modules-center {
+  background: alpha(@bg_alt, 0.9);
+  border-radius: 9999px;
+  padding: 6px 18px;
+  transition: all 0.2s ease;
+}
+
+#clock,
+#workspaces,
+#bluetooth,
+#network,
+#custom-volume {
+  padding: 4px 14px;
+}
+
+#workspaces button {
+  all: initial;
+  padding: 4px 10px;
+  transition: color 0.25s ease;
+}
+
+#workspaces button.inactive { color: @fg_dim; }
+#workspaces button.active { color: @green; }
+#workspaces button.urgent { color: @red; }
+
+#clock { color: @yellow; }
+
+#bluetooth { color: @teal; }
+#bluetooth.disabled { color: @fg_dim; }
+
+#network { color: @green; }
+#network.disconnected { color: @red; }
+
+#custom-volume { color: @teal; }
+#custom-volume.muted { color: @fg_muted; }

@@ -1,0 +1,80 @@
+@import "../themes/current/waybar/colors.css";
+
+* {
+  font-family: "JetBrainsMono Nerd Font Propo";
+  font-weight: 600;
+  font-size: 15px;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+#waybar {
+  background-color: transparent;
+}
+
+.modules-left,
+.modules-center,
+.modules-right {
+  margin: 0 16px;
+}
+
+/* Universal module style */
+#workspaces,
+#window,
+#custom-logo,
+#mpris,
+#bluetooth,
+#custom-cava,
+#clock,
+#custom-expand-icon,
+#custom-brightness,
+#custom-nightlight,
+#power-profiles-daemon,
+#network,
+#custom-volume,
+#custom-swaync {
+  background: alpha(@bg_alt, 0.85);
+  border-radius: 12px;
+  padding: 4px 12px;
+  margin: 0 6px;
+}
+
+/* Workspaces buttons */
+#workspaces button {
+  all: initial;
+  padding: 4px 10px;
+  transition: color 0.25s ease;
+}
+
+#workspaces button.inactive { color: @fg_dim; }
+#workspaces button.active { color: @green; }
+#workspaces button.urgent { color: @red; }
+#workspaces button.empty { opacity: 0.45; }
+
+/* States */
+#mpris { color: @purple; }
+#mpris.paused { color: @nord_blue; }
+
+#custom-logo { color: @teal; }
+#custom-cava { color: @purple; opacity: 0.75; }
+#clock { color: @yellow; }
+
+#custom-expand-icon { color: @nord_blue; }
+#custom-brightness { color: @yellow; }
+#custom-nightlight { color: @orange; }
+
+#power-profiles-daemon { color: @green; }
+#power-profiles-daemon.performance { color: @red; }
+#power-profiles-daemon.power-saver { color: @teal; }
+
+#network { color: @green; }
+#network.disconnected { color: @red; }
+
+#bluetooth { color: @teal; }
+#bluetooth.disabled { color: @fg_dim; }
+
+#custom-volume { color: @teal; }
+#custom-volume.muted { color: @fg_muted; }
+
+#custom-swaync { color: @nord_blue; }
+#custom-swaync.dnd { color: @purple; }

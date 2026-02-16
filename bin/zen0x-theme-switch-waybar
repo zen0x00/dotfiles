@@ -37,8 +37,6 @@ wait
 
 awww img "$CURRENT/wallpapers/wallpaper.jpg" --transition-type grow --transition-duration 1 --transition-fps 60
 
-ln -sf "$CURRENT/wallpapers/wallpaper.jpg" "$HOME/.current_wallpaper"
-
 pkill waybar
 pkill swaync
 waybar &

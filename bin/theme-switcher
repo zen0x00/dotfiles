@@ -5,13 +5,40 @@ THEME=$(ls "$THEMES" | grep -v current | rofi -dmenu -p "Theme")
 [ -z "$THEME" ] && exit
 
 ln -sfn "$THEMES/$THEME" "$CURRENT"
+
 GTK_SRC="$CURRENT/gtk/settings.ini"
 
 if [[ -f "$GTK_SRC" ]]; then
-  rm -f "$HOME/.config/gtk-3.0/settings.ini"
-  rm -f "$HOME/.config/gtk-4.0/settings.ini"
-  ln -s "$GTK_SRC" "$HOME/.config/gtk-3.0/settings.ini"
-  ln -s "$GTK_SRC" "$HOME/.config/gtk-4.0/settings.ini"
+  GTK_THEME=$(awk -F= '/gtk-theme-name/ {gsub(/[[:space:]]*/, "", $2); print $2}' "$GTK_SRC")
+  GTK_ICON=$(awk -F= '/gtk-icon-theme-name/ {gsub(/[[:space:]]*/, "", $2); print $2}' "$GTK_SRC")
+
+  for DIR in "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"; do
+    SETTINGS="$DIR/settings.ini"
+    mkdir -p "$DIR"
+    [[ -f "$SETTINGS" ]] || echo -e "[Settings]\n" > "$SETTINGS"
+
+    if ! grep -q '^\[Settings\]' "$SETTINGS"; then
+      echo "[Settings]" >> "$SETTINGS"
+    fi
+
+    if [[ -n "$GTK_THEME" ]]; then
+      if grep -q '^gtk-theme-name' "$SETTINGS"; then
+        sed -i -E "s/^gtk-theme-name=.*/gtk-theme-name=$GTK_THEME/" "$SETTINGS"
+      else
+        echo "gtk-theme-name=$GTK_THEME" >> "$SETTINGS"
+      fi
+      gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
+    fi
+
+    if [[ -n "$GTK_ICON" ]]; then
+      if grep -q '^gtk-icon-theme-name' "$SETTINGS"; then
+        sed -i -E "s/^gtk-icon-theme-name=.*/gtk-icon-theme-name=$GTK_ICON/" "$SETTINGS"
+      else
+        echo "gtk-icon-theme-name=$GTK_ICON" >> "$SETTINGS"
+      fi
+      gsettings set org.gnome.desktop.interface icon-theme "$GTK_ICON"
+    fi
+  done
 fi
 
 zen0x-theme-set-vscode

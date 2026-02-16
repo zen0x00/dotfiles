@@ -1,4 +1,4 @@
 {
-  "workbench.colorTheme": "Nord",
-  "workbench.iconTheme": "arcticicestudio.nord-visual-studio-code"
+  "name": "Nord",
+  "extension": "arcticicestudio.nord-visual-studio-code"
 }

@@ -19,7 +19,7 @@
 }
 
 .modules-center {
-  background: alpha(@bg_alt, 0.9);
+  background: alpha(@bg_module, 0.9);
   border-radius: 9999px;
   padding: 6px 18px;
   transition: all 0.2s ease;
@@ -34,6 +34,7 @@
 }
 
 #workspaces button {
+  color: @fg;
   all: initial;
   padding: 4px 10px;
   transition: color 0.25s ease;

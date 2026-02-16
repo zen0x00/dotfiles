@@ -27,8 +27,15 @@ if [[ -f "$GTK_SRC" ]]; then
       else
         echo "gtk-theme-name=$GTK_THEME" >> "$SETTINGS"
       fi
+      if [[ "$GTK_THEME" == *"latte"* ]]; then
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+      else
+        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+      fi
       gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
     fi
+    
+
 
     if [[ -n "$GTK_ICON" ]]; then
       if grep -q '^gtk-icon-theme-name' "$SETTINGS"; then
@@ -39,6 +46,14 @@ if [[ -f "$GTK_SRC" ]]; then
       gsettings set org.gnome.desktop.interface icon-theme "$GTK_ICON"
     fi
   done
+fi
+
+LIBADWAITA_SRC="$HOME/.local/share/themes/$GTK_THEME/gtk-4.0/gtk.css"
+
+if [[ -f "$LIBADWAITA_SRC" ]]; then
+  mkdir -p "$HOME/.config/gtk-4.0"
+  ln -sf "$LIBADWAITA_SRC" "$HOME/.config/gtk-4.0/gtk.css"
+  ln -sf "$LIBADWAITA_SRC" "$HOME/.config/gtk-4.0/gtk-dark.css"
 fi
 
 zen0x-theme-set-vscode

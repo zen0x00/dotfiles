@@ -14,8 +14,6 @@ install_aur_packages() {
         gamemode
         gtk-engine-murrine
         hyprland
-        hypridle
-        hyprlock
         hyprshot
         hyprsunset
         impala

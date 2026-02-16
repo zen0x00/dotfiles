@@ -39,6 +39,10 @@
   margin: 0 6px;
 }
 
+#window.empty {
+  background-color: transparent;
+}
+
 /* Workspaces buttons */
 #workspaces button {
   all: initial;

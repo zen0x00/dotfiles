@@ -1,44 +1,17 @@
 #!/bin/bash
-THEMES="$HOME/.config/themes"
-CURRENT="$THEMES/current"
-THEME=$(ls "$THEMES" | grep -v current | rofi -dmenu -p "Theme")
+
+THEMES="$HOME/.config/themes/waybar"
+CONFIG="$HOME/.config/waybar"
+
+THEME=$(find "$THEMES" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort | rofi -dmenu -p "Waybar Theme")
 [ -z "$THEME" ] && exit
 
-ln -sfn "$THEMES/$THEME" "$CURRENT"
-GTK_SRC="$CURRENT/gtk/settings.ini"
-
-if [[ -f "$GTK_SRC" ]]; then
-  rm -f "$HOME/.config/gtk-3.0/settings.ini"
-  rm -f "$HOME/.config/gtk-4.0/settings.ini"
-  ln -s "$GTK_SRC" "$HOME/.config/gtk-3.0/settings.ini"
-  ln -s "$GTK_SRC" "$HOME/.config/gtk-4.0/settings.ini"
+if [ -L "$CONFIG" ]; then
+  rm "$CONFIG"
+elif [ -d "$CONFIG" ]; then
+  mv "$CONFIG" "${CONFIG}.backup.$(date +%s)"
 fi
 
-zen0x-theme-set-vscode
+ln -s "$THEMES/$THEME" "$CONFIG"
 
-CACHE="$HOME/.cache/wallpaper_thumbs/$THEME"
-WALLDIR="$THEMES/$THEME/wallpapers"
-
-mkdir -p "$CACHE"
-
-find -L "$WALLDIR" -type f \( \
-  -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \
-\) | while read -r img; do
-  thumb="$CACHE/$(echo "$img" | md5sum | cut -d' ' -f1).png"
-  [[ -f "$thumb" ]] && continue
-  magick "$img" \
-    -resize 440x225^ \
-    -gravity center \
-    -extent 440x225 \
-    "$thumb" &
-done
-
-wait
-
-awww img "$CURRENT/wallpapers/wallpaper.jpg" --transition-type grow --transition-duration 1 --transition-fps 60
-
-pkill waybar
-pkill swaync
-waybar &
-swaync &
-hyprctl reload
+killall -SIGUSR2 waybar 2>/dev/null || waybar &

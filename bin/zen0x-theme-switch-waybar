@@ -1,7 +1,8 @@
 #!/bin/bash
 
-THEMES="$HOME/.config/themes/waybar/"
+THEMES="$HOME/.config/themes-waybar/"
 CONFIG="$HOME/.config/waybar"
+
 
 THEME=$(find "$THEMES" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort | rofi -dmenu -p "Waybar Theme")
 [ -z "$THEME" ] && exit

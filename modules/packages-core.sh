@@ -33,6 +33,13 @@ install_core_packages() {
         qt5-wayland
         qt5ct
         qt6-base
+        qt6-declarative
+        qt6-wayland
+        qt6-5compat
+        qt6-multimedia
+        qt6-shadertools
+        qt6-svg
+        qt6-quicktimeline
         qt6-wayland
         qt6ct
         ripgrep

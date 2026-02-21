@@ -3,6 +3,7 @@
 install_aur_packages() {
     local packages=(
         abyssal-gtk-theme
+        aylurs-gtk-shell-git
         ani-cli
         awww-git
         bc

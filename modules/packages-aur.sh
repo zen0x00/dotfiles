@@ -26,8 +26,6 @@ install_aur_packages() {
         localsend
         mangohud
         mangojuice
-        mesa-git
-        nautilus
         neovim
         notify-send
         noto-fonts
@@ -35,6 +33,7 @@ install_aur_packages() {
         obs-pipewire-audio-capture
         obs-studio
         obs-vkcapture
+	      oh-my-posh
         openrgb
         preload
         rofi-wayland

@@ -15,7 +15,6 @@ install_dev_packages() {
         mono
         ninja
         ruby
-        rust
         unityhub
         visual-studio-code-bin
     )

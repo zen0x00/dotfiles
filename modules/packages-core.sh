@@ -10,9 +10,6 @@ install_core_packages() {
         brightnessctl
         cliphist
         curl
-        duf
-        dust
-        efibootmgr
         fd
         gnome-keyring
         gvfs
@@ -21,9 +18,6 @@ install_core_packages() {
         kvantum
         lib32-vulkan-icd-loader
         libsecret
-        lxappearance
-        ncdu
-        network-manager-applet
         networkmanager
         noto-fonts
         noto-fonts-cjk

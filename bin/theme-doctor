@@ -32,10 +32,10 @@ link_file() {
 [[ -L "$CURRENT" ]] || fail "themes/current is missing or not a symlink"
 
 [[ -f "$CURRENT/fastfetch/config.jsonc" ]] || fail "Missing fastfetch config in current theme"
-[[ -f "$CURRENT/gtk-3.0/settings.ini" ]] || fail "Missing GTK settings.ini in current theme"
+[[ -f "$CURRENT/gtk/settings.ini" ]] || fail "Missing GTK settings.ini in current theme"
 
 link_file "$CURRENT/fastfetch/config.jsonc" "$BASE/fastfetch/config.jsonc"
-link_file "$CURRENT/gtk-3.0/settings.ini" "$BASE/gtk-3.0/settings.ini"
-link_file "$CURRENT/gtk-4.0/settings.ini" "$BASE/gtk-4.0/settings.ini"
+link_file "$CURRENT/gtk/settings.ini" "$BASE/gtk-3.0/settings.ini"
+link_file "$CURRENT/gtk/settings.ini" "$BASE/gtk-4.0/settings.ini"
 
 echo "🎉 Theme Doctor finished successfully."

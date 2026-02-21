@@ -40,7 +40,7 @@
 }
 
 #window.empty {
-  background-color: transparent;
+  background: transparent;
 }
 
 /* Workspaces buttons */

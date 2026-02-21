@@ -7,18 +7,11 @@ install_aur_packages() {
         awww-git
         bc
         bluetui
-        catppuccin-gtk-theme-frappe
-        catppuccin-gtk-theme-latte
-        catppuccin-gtk-theme-machiato
-        catppuccin-gtk-theme-mocha
         cpupower
-        dracula-gtk-theme
-        everforest-gtk-theme-git
         ffmpeg
         fastfetch
         fzf
         gamemode
-        gruvbox-dark-gtk
         gtk-engine-murrine
         hyprland
         hyprshot
@@ -35,7 +28,6 @@ install_aur_packages() {
         mesa-git
         nautilus
         neovim
-        nordic-theme
         notify-send
         noto-fonts
         nwg-look
@@ -47,7 +39,6 @@ install_aur_packages() {
         rofi-wayland
         scx-scheds
         sddm
-        sddm-silent-theme
         spicetify-cli
         spotify
         starship
@@ -56,8 +47,6 @@ install_aur_packages() {
         sunset-cursors-git
         swaync
         swayosd
-        tokyonight-gtk-theme-git
-        treesitter-cli
         ttf-gohu-nerd
         ttf-ibm-plex
         ttf-jetbrains-mono-nerd

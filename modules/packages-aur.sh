@@ -25,6 +25,7 @@ install_aur_packages() {
         lib32-gamemode
         localsend
         mangohud
+        mangojuice
         mesa-git
         nautilus
         neovim

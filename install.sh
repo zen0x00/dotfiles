@@ -45,7 +45,13 @@ btrfs subvolume create /mnt/@log
 umount /mnt
 
 mount -o subvol=@root,compress=zstd,noatime LABEL=archpool /mnt
-mkdir -p /mnt/{home,.snapshots,var,var/log,boot}
+
+mkdir -p /mnt/home
+mkdir -p /mnt/.snapshots
+mkdir -p /mnt/var
+mkdir -p /mnt/var/log
+mkdir -p /mnt/boot
+
 mount -o subvol=@home,compress=zstd,noatime LABEL=archpool /mnt/home
 mount -o subvol=@snapshots,compress=zstd,noatime LABEL=archpool /mnt/.snapshots
 mount -o subvol=@var,compress=zstd,noatime LABEL=archpool /mnt/var

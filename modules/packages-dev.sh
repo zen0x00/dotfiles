@@ -4,8 +4,6 @@ install_dev_packages() {
     local packages=(
         clang
         cmake
-        docker
-        docker-compose
         dotnet-sdk
         gdb
         gcc
@@ -16,10 +14,8 @@ install_dev_packages() {
         make
         mono
         ninja
-        perf
-        python
-        python-pip
         ruby
+        rust
         unityhub
         visual-studio-code-bin
     )

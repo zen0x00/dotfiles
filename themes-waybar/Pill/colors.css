@@ -1,1 +1,29 @@
-/home/aman/.config/zen0x/generated/waybar-colors.css
+/* =========================
+   Background scale
+   ========================= */
+
+@define-color bg        #0d0d0d;
+@define-color bg_alt    #151515;
+@define-color bg_module #1d1d1d;
+@define-color bg_hover  #242424;
+@define-color bg_active #2c2c2c;
+
+/* =========================
+   Foreground scale
+   ========================= */
+
+@define-color fg        #ffffff;
+@define-color fg_dim    #b6b6b6;
+@define-color fg_muted  #8d8d8d;
+
+/* =========================
+   Semantic colors
+   ========================= */
+
+@define-color accent    #8d8d8d;
+@define-color red       #a4a4a4;
+@define-color green     #b6b6b6;
+@define-color blue      #8d8d8d;
+@define-color teal      #b0b0b0;
+@define-color purple    #9b9b9b;
+@define-color yellow    #cecece;

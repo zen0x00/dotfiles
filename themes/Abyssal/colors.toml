@@ -2,19 +2,19 @@
 # Background scale
 # =========================
 
-bg0 = "#0f1419"  # base background
-bg1 = "#161b22"  # slightly raised
-bg2 = "#30363d"  # subtle border layer
-bg3 = "#1c2128"  # hover (derived midpoint)
-bg4 = "#21262d"  # active (derived midpoint)
+bg0 = "#0f1419"
+bg1 = "#161b22"
+bg2 = "#30363d"
+bg3 = "#1c2128"
+bg4 = "#21262d"
 
 # =========================
 # Foreground scale
 # =========================
 
-fg0 = "#c9d1d9"  # primary text
-fg1 = "#8b949e"  # dim text (derived)
-fg2 = "#6e7681"  # muted text (derived)
+fg0 = "#c9d1d9"
+fg1 = "#8b949e"
+fg2 = "#6e7681"
 
 # =========================
 # Semantic

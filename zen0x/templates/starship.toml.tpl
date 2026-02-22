@@ -102,3 +102,18 @@ show_milliseconds = true
 format = " in $duration "
 style = "bg:zen0x_lavender"
 disabled = false
+
+[palettes.zen0x]
+
+zen_red        = "{{ red }}"
+zen_orange     = "{{ yellow }}"
+zen_yellow     = "{{ yellow }}"
+zen_teal       = "{{ cyan }}"
+zen_blue       = "{{ blue }}"
+zen_lavender   = "{{ purple }}"
+
+zen_text       = "{{ fg0 }}"
+zen_subtext    = "{{ fg2 }}"
+zen_surface    = "{{ bg2 }}"
+zen_bg         = "{{ bg1 }}"
+zen_bg_dark    = "{{ bg0 }}"

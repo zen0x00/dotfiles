@@ -6,93 +6,87 @@
     "height": 5,
     "width": 10,
     "color": {
-      "1": "#5A84BC",
-      "2": "#7ACFE4",
-      "3": "#78B892",
-      "4": "#C488EC"
+      "1": "{{ accent }}",
+      "2": "{{ cyan }}",
+      "3": "{{ green }}",
+      "4": "{{ purple }}"
     }
   },
 
   "display": {
-    "separator": " ›  ",
+    "separator": " ›  "
   },
 
   "modules": [
-    {
-      "type": "custom",
-      "format": "",
-    },
+    { "type": "custom", "format": "" },
 
     {
       "type": "title",
       "key": "   Host",
-      "keyColor": "#D9D7D6",
+      "keyColor": "{{ fg0 }}"
     },
 
-    {
-      "type": "custom",
-      "format": "",
-    },
+    { "type": "custom", "format": "" },
 
     {
       "type": "os",
       "key": "   OS         ",
-      "keyColor": "#5A84BC",
+      "keyColor": "{{ accent }}"
     },
     {
       "type": "kernel",
       "key": "   Kernel     ",
-      "keyColor": "#5A84BC",
+      "keyColor": "{{ accent }}"
     },
     {
       "type": "cpu",
       "format": "{1}",
       "key": "   CPU        ",
-      "keyColor": "#78B892",
+      "keyColor": "{{ green }}"
     },
     {
       "type": "gpu",
       "format": "{2}",
       "key": "   GPU        ",
-      "keyColor": "#7ACFE4",
+      "keyColor": "{{ cyan }}"
     },
     {
       "type": "memory",
       "key": "   Memory     ",
-      "keyColor": "#C488EC",
+      "keyColor": "{{ purple }}"
     },
     {
       "type": "packages",
       "key": "  󰏗 Packages   ",
-      "keyColor": "#6791C9",
+      "keyColor": "{{ blue }}"
     },
     {
       "type": "wm",
       "key": "   WM         ",
-      "keyColor": "#5A84BC",
+      "keyColor": "{{ accent }}"
     },
     {
       "type": "terminal",
       "key": "   Terminal   ",
-      "keyColor": "#b4b4b4",
+      "keyColor": "{{ fg1 }}"
     },
     {
       "type": "uptime",
       "key": "   Uptime     ",
-      "keyColor": "#ecd28b",
+      "keyColor": "{{ yellow }}"
     },
     {
       "type": "battery",
       "key": "   Battery    ",
-      "keyColor": "#E89982",
+      "keyColor": "{{ red }}"
     },
     {
-    "type": "command",
-    "key": "  󰔟 OS Age     ",
-    "keyColor": "31",
-    "text": "birth_install=$(stat -c %W /); current=$(date +%s); days_difference=$(( (current - birth_install) / 86400 )); echo $days_difference days"
-     },
+      "type": "command",
+      "key": "  󰔟 OS Age     ",
+      "keyColor": "{{ red }}",
+      "text": "birth_install=$(stat -c %W /); current=$(date +%s); days_difference=$(( (current - birth_install) / 86400 )); echo $days_difference days"
+    },
 
-    "break",
-  ],
+    "break"
+  ]
 }

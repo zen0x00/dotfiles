@@ -2,10 +2,14 @@
 
 GEN="$HOME/.config/zen0x/generated"
 
-ln -sf "$GEN/waybar-colors.css" ~/.config/waybar/colors.css
-ln -sf "$GEN/kitty.conf" ~/.config/kitty/colors.conf
-ln -sf "$GEN/hypr.conf" ~/.config/hypr/configs/colors.conf
-ln -sf "$GEN/rofi.rasi" ~/.config/rofi/colors.rasi
-ln -sf "$GEN/swaync.css" ~/.config/swaync/colors.css
-ln -sf "$GEN/swayosd.css" ~/.config/swayosd/colors.css
-ln -sf "$GEN/wlogout.css" ~/.config/wlogout/colors.css
+install -Dm644 "$GEN/waybar-colors.css" ~/.config/waybar/colors.css
+install -Dm644 "$GEN/kitty.conf" ~/.config/kitty/colors.conf
+install -Dm644 "$GEN/hypr.conf" ~/.config/hypr/configs/colors.conf
+install -Dm644 "$GEN/rofi.rasi" ~/.config/rofi/colors.rasi
+install -Dm644 "$GEN/swaync.css" ~/.config/swaync/colors.css
+install -Dm644 "$GEN/swayosd.css" ~/.config/swayosd/colors.css
+install -Dm644 "$GEN/wlogout.css" ~/.config/wlogout/colors.css
+install -Dm644 "$GEN/fastfetch.jsonc" ~/.config/fastfetch/config.jsonc
+install -Dm644 "$GEN/starship.toml" ~/.config/starship.toml
+install -Dm644 "$GEN/ohmyposh.omp.json" ~/dotfiles/oh-my-posh/abyssal.omp.json
+install -Dm644 "$GEN/btop.theme" ~/.config/btop/themes/current.theme

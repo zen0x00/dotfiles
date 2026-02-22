@@ -1,11 +1,11 @@
 #!/bin/bash
 
-THEME="$1"
 THEMES="$HOME/.config/themes"
+CURRENT="$THEMES/current"
 TEMPLATES="$HOME/.config/zen0x/templates"
 OUT="$HOME/.config/zen0x/generated"
 
-COLORS="$THEMES/$THEME/colors.toml"
+COLORS="$CURRENT/colors.toml"
 
 rm -rf "$OUT"
 mkdir -p "$OUT"

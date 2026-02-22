@@ -69,7 +69,7 @@ alias clock='tty-clock -C 7 -c'
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 #eval "$(starship init zsh)"
-eval "$(oh-my-posh init zsh --config ~/dotfiles/oh-my-posh/abyssal.omp.json)"
+eval "$(oh-my-posh init zsh --config ~/.config/oh-my-posh/current.omp.json)"
 
 export EDITOR=nvim
 

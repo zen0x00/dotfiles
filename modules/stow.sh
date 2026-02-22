@@ -16,7 +16,7 @@ run_stow() {
 
         ok "$folder stowed successfully."
     done
-
+    mkdir -p "$HOME/.config/oh-my-posh"
     mkdir -p "$HOME/Pictures"
     stow --target="$HOME/Pictures" Pictures
     ok "starship stowed successfully."

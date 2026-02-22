@@ -7,13 +7,15 @@ GEN="$HOME/.config/zen0x/generated"
 THEME=$(find -L "$THEMES" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort | rofi -dmenu -p "Waybar Theme")
 [ -z "$THEME" ] && exit
 
+# Ensure CONFIG is NOT a symlink
+if [ -L "$CONFIG" ]; then
+  rm "$CONFIG"
+fi
+
 mkdir -p "$CONFIG"
 
-# Link layout files
 ln -sfn "$THEMES/$THEME/config.jsonc" "$CONFIG/config.jsonc"
 ln -sfn "$THEMES/$THEME/style.css" "$CONFIG/style.css"
-
-# Always link generated colors
 ln -sfn "$GEN/waybar-colors.css" "$CONFIG/colors.css"
 
 pkill -SIGUSR2 waybar 2>/dev/null || waybar &

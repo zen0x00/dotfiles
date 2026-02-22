@@ -81,6 +81,7 @@ source "$BASE_DIR/modules/packages-aur.sh"
 source "$BASE_DIR/modules/packages-dev.sh"
 source "$BASE_DIR/modules/zsh.sh"
 source "$BASE_DIR/modules/stow.sh"
+source "$BASE_DIR/modules/default-theme.sh"
 source "$BASE_DIR/modules/monitors.sh"
 source "$BASE_DIR/modules/bin.sh"
 source "$BASE_DIR/modules/ascii.sh"
@@ -131,6 +132,12 @@ install_local_bin
 # -----------------------------------------------
 info "Applying dotfiles using stow..."
 run_stow
+
+# -----------------------------------------------
+# APPLY DEFAULT THEME
+# -----------------------------------------------
+info "Setting default theme..."
+apply_default_theme
 
 # -----------------------------------------------
 # HYPRLAND MONITOR CONFIG

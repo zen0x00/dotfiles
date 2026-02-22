@@ -1,18 +1,19 @@
 #!/bin/bash
 
-THEMES="$HOME/.config/themes-waybar/"
+THEMES="$HOME/.config/themes-waybar"
 CONFIG="$HOME/.config/waybar"
+GEN="$HOME/.config/zen0x/generated"
 
-
-THEME=$(find "$THEMES" -mindepth 1 -maxdepth 1 \( -type d -o -type l \) -printf "%f\n" | sort | rofi -dmenu -p "Waybar Theme")
+THEME=$(find -L "$THEMES" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort | rofi -dmenu -p "Waybar Theme")
 [ -z "$THEME" ] && exit
 
-if [ -L "$CONFIG" ]; then
-  rm "$CONFIG"
-elif [ -d "$CONFIG" ]; then
-  mv "$CONFIG" "${CONFIG}.backup.$(date +%s)"
-fi
+mkdir -p "$CONFIG"
 
-ln -s "$THEMES/$THEME" "$CONFIG"
+# Link layout files
+ln -sfn "$THEMES/$THEME/config.jsonc" "$CONFIG/config.jsonc"
+ln -sfn "$THEMES/$THEME/style.css" "$CONFIG/style.css"
 
-killall -SIGUSR2 waybar 2>/dev/null || waybar &
+# Always link generated colors
+ln -sfn "$GEN/waybar-colors.css" "$CONFIG/colors.css"
+
+pkill -SIGUSR2 waybar 2>/dev/null || waybar &

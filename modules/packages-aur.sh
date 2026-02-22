@@ -14,7 +14,9 @@ install_aur_packages() {
         fzf
         gamemode
         gtk-engine-murrine
+        heroic-games-launcher
         hyprland
+        hyprpolkitagent
         hyprshot
         hyprsunset
         impala
@@ -38,6 +40,7 @@ install_aur_packages() {
         openrgb
         preload
         rofi-wayland
+        satty
         scx-scheds
         sddm
         spicetify-cli
@@ -48,6 +51,7 @@ install_aur_packages() {
         sunset-cursors-git
         swaync
         swayosd
+        tor-browser-bin
         ttf-gohu-nerd
         ttf-ibm-plex
         ttf-jetbrains-mono-nerd

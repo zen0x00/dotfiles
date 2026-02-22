@@ -1,0 +1,74 @@
+#!/bin/bash
+
+MAIN=$(printf "Theme\nWaybar\nWallpaper" | rofi -dmenu -p "Zen Menu")
+[ -z "$MAIN" ] && exit
+
+THEMES="$HOME/.config/themes"
+CURRENT="$THEMES/current"
+WAYBAR_THEMES="$HOME/.config/themes-waybar"
+WAYBAR_CONFIG="$HOME/.config/waybar"
+GEN="$HOME/.config/zen0x/generated"
+
+case "$MAIN" in
+
+  Theme)
+    THEME=$(ls -1 "$THEMES" | grep -v current | rofi -dmenu -p "Theme")
+    [ -z "$THEME" ] && exit
+
+    ln -sfn "$THEMES/$THEME" "$CURRENT"
+
+    zen0x-theme-generate "$THEME"
+    zen0x-apply-generated-theme
+    zen0x-theme-gtk
+    zen0x-theme-set-vscode
+    zen0x-theme-wallpaper "$THEME"
+    zen0x-theme-reload
+    ;;
+
+  Waybar)
+    THEME=$(find -L "$WAYBAR_THEMES" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort | rofi -dmenu -p "Waybar Theme")
+    [ -z "$THEME" ] && exit
+
+    if [ -L "$WAYBAR_CONFIG" ]; then
+      rm "$WAYBAR_CONFIG"
+    fi
+
+    mkdir -p "$WAYBAR_CONFIG"
+
+    ln -sfn "$WAYBAR_THEMES/$THEME/config.jsonc" "$WAYBAR_CONFIG/config.jsonc"
+    ln -sfn "$WAYBAR_THEMES/$THEME/style.css" "$WAYBAR_CONFIG/style.css"
+    ln -sfn "$GEN/waybar-colors.css" "$WAYBAR_CONFIG/colors.css"
+
+    pkill -SIGUSR2 waybar 2>/dev/null || waybar &
+    ;;
+
+  Wallpaper)
+    THEME_NAME=$(basename "$(readlink -f "$CURRENT")")
+
+    CACHE="$HOME/.cache/wallpaper_thumbs/$THEME_NAME"
+    WALLDIR="$THEMES/$THEME_NAME/wallpapers"
+
+    mkdir -p "$CACHE"
+
+    CHOICE=$(find -L "$WALLDIR" -type f \( \
+      -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \
+    \) | while read -r img; do
+        thumb="$CACHE/$(echo "$img" | md5sum | cut -d' ' -f1).png"
+        [[ -f "$thumb" ]] || magick "$img" -resize 440x225^ -gravity center -extent 440x225 "$thumb"
+        printf "%s\x00icon\x1f%s\n" "$(basename "$img")" "$thumb"
+      done | rofi -dmenu -p -config "$HOME/.config/rofi/wallpapers.rasi" -p "Wallpaper")
+
+    [ -z "$CHOICE" ] && exit
+
+    FILE=$(find -L "$WALLDIR" -type f -iname "$CHOICE" -print -quit)
+    [ -z "$FILE" ] && exit
+
+    awww img "$FILE" \
+      --transition-type grow \
+      --transition-duration 1 \
+      --transition-fps 60
+
+    ln -sf "$FILE" "$HOME/.current_wallpaper"
+    ;;
+
+esac

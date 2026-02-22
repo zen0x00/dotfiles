@@ -134,12 +134,6 @@ info "Applying dotfiles using stow..."
 run_stow
 
 # -----------------------------------------------
-# APPLY DEFAULT THEME
-# -----------------------------------------------
-info "Setting default theme..."
-apply_default_theme
-
-# -----------------------------------------------
 # HYPRLAND MONITOR CONFIG
 # -----------------------------------------------
 info "Generating Hyprland monitor configuration..."
@@ -149,6 +143,12 @@ generate_monitors_conf
 # ASCII ART FINISH
 # -----------------------------------------------
 print_rex_os_banner
+
+# -----------------------------------------------
+# APPLY DEFAULT THEME
+# -----------------------------------------------
+info "Setting default theme..."
+apply_default_theme
 
 # -----------------------------------------------
 # REBOOT MENU

@@ -5,6 +5,8 @@ apply_default_theme() {
     local DEFAULT_THEME="Abyssal"
     local DEFAULT_WAYBAR_THEME="Default"
 
+    zen0x-apply-generated-theme "$DEFAULT_THEME"
+
     if [[ -d "$THEMES/$DEFAULT_THEME" ]]; then
         info "Applying default theme: $DEFAULT_THEME"
         info "Applying default waybar theme: $DEFAULT_WAYBAR_THEME"

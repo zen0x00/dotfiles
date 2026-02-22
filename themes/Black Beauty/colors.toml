@@ -1,0 +1,20 @@
+# Background scale
+bg0 = "#0d0d0d"
+bg1 = "#151515"
+bg2 = "#1d1d1d"
+bg3 = "#242424"
+bg4 = "#2c2c2c"
+
+# Foreground scale
+fg0 = "#ffffff"
+fg1 = "#b6b6b6"
+fg2 = "#8d8d8d"
+
+# Semantic
+accent = "#8d8d8d"
+red    = "#a4a4a4"
+green  = "#b6b6b6"
+yellow = "#cecece"
+blue   = "#8d8d8d"
+cyan   = "#b0b0b0"
+purple = "#9b9b9b"

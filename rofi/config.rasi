@@ -4,7 +4,7 @@ configuration {
 	  window-format:              "{w} · {c} · {t}";
 }
 
-@import                          "~/.config/themes/current/rofi/colors.rasi"
+@import                          "colors.rasi"
 @import                          "fonts.rasi"
 
 * {

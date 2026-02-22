@@ -1,0 +1,11 @@
+#!/bin/bash
+
+GEN="$HOME/.config/zen0x/generated"
+
+ln -sf "$GEN/waybar-colors.css" ~/.config/waybar/colors.css
+ln -sf "$GEN/kitty.conf" ~/.config/kitty/colors.conf
+ln -sf "$GEN/hypr.conf" ~/.config/hypr/configs/colors.conf
+ln -sf "$GEN/rofi.rasi" ~/.config/rofi/colors.rasi
+ln -sf "$GEN/swaync.css" ~/.config/swaync/colors.css
+ln -sf "$GEN/swayosd.css" ~/.config/swayosd/colors.css
+ln -sf "$GEN/wlogout.css" ~/.config/wlogout/colors.css

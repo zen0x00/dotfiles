@@ -1,28 +1,35 @@
-# Core UI
+# =========================
+# Background scale
+# =========================
+
+bg0 = "#0f1419"  # base background
+bg1 = "#161b22"  # slightly raised
+bg2 = "#30363d"  # subtle border layer
+bg3 = "#1c2128"  # hover (derived midpoint)
+bg4 = "#21262d"  # active (derived midpoint)
+
+# =========================
+# Foreground scale
+# =========================
+
+fg0 = "#c9d1d9"  # primary text
+fg1 = "#8b949e"  # dim text (derived)
+fg2 = "#6e7681"  # muted text (derived)
+
+# =========================
+# Semantic
+# =========================
+
 accent = "#4da6ff"
+
+red    = "#ff6b6b"
+green  = "#3fb950"
+yellow = "#d29922"
+blue   = "#4da6ff"
+cyan   = "#39c5cf"
+purple = "#bc8cff"
+
+# Optional extras (recommended for fidelity)
+
+orange = "#e3b341"
 cursor = "#e6edf3"
-foreground = "#c9d1d9"
-background = "#0f1419"
-
-selection_foreground = "#0f1419"
-selection_background = "#4da6ff"
-
-# ANSI Base (0–7)
-color0 = "#161b22"
-color1 = "#ff6b6b"
-color2 = "#3fb950"
-color3 = "#d29922"
-color4 = "#4da6ff"
-color5 = "#bc8cff"
-color6 = "#39c5cf"
-color7 = "#c9d1d9"
-
-# ANSI Bright (8–15)
-color8 = "#30363d"
-color9 = "#ff7b72"
-color10 = "#56d364"
-color11 = "#e3b341"
-color12 = "#79c0ff"
-color13 = "#d2a8ff"
-color14 = "#56d4dd"
-color15 = "#f0f6fc"

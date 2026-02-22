@@ -1,0 +1,27 @@
+#!/bin/bash
+
+THEME="$1"
+THEMES="$HOME/.config/themes"
+CURRENT="$THEMES/current"
+
+CACHE="$HOME/.cache/wallpaper_thumbs/$THEME"
+WALLDIR="$THEMES/$THEME/wallpapers"
+
+mkdir -p "$CACHE"
+
+find -L "$WALLDIR" -type f \( \
+  -iname "*.jpg" -o -iname "*.jpeg" -o -iname "*.png" -o -iname "*.webp" \
+\) | while read -r img; do
+  thumb="$CACHE/$(echo "$img" | md5sum | cut -d' ' -f1).png"
+  [[ -f "$thumb" ]] && continue
+  magick "$img" -resize 440x225^ -gravity center -extent 440x225 "$thumb" &
+done
+
+wait
+
+awww img "$CURRENT/wallpapers/wallpaper.jpg" \
+  --transition-type grow \
+  --transition-duration 1 \
+  --transition-fps 60
+
+ln -sf "$CURRENT/wallpapers/wallpaper.jpg" "$HOME/.current_wallpaper"

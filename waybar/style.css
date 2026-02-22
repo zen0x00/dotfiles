@@ -1,4 +1,4 @@
-@import "../themes/current/waybar/colors.css";
+@import "colors.css";
 
 * {
   font-family: "JetBrainsMono Nerd Font Propo";

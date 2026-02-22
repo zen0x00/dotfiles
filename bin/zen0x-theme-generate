@@ -1,0 +1,33 @@
+#!/bin/bash
+
+THEME="$1"
+THEMES="$HOME/.config/themes"
+TEMPLATES="$HOME/.config/zen0x/templates"
+OUT="$HOME/.config/zen0x/generated"
+
+COLORS="$THEMES/$THEME/colors.toml"
+
+rm -rf "$OUT"
+mkdir -p "$OUT"
+
+sed_script=$(mktemp)
+
+while IFS='=' read -r key value; do
+  [[ -z "$key" || "$key" =~ ^[[:space:]]*# ]] && continue
+
+  key="$(echo "$key" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+  value="$(echo "$value" | sed 's/^[[:space:]]*//;s/[[:space:]]*$//')"
+
+  value="${value%\"}"
+  value="${value#\"}"
+
+  printf 's|{{ %s }}|%s|g\n' "$key" "$value"
+  printf 's|{{ %s_strip }}|%s|g\n' "$key" "${value#\#}"
+done < "$COLORS" > "$sed_script"
+
+for tpl in "$TEMPLATES"/*.tpl; do
+  name=$(basename "$tpl" .tpl)
+  sed -f "$sed_script" "$tpl" > "$OUT/$name"
+done
+
+rm "$sed_script"

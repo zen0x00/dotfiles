@@ -29,6 +29,7 @@ install_aur_packages() {
         localsend
         mangohud
         mangojuice
+        nautilus
         neovim
         notify-send
         noto-fonts

@@ -1,0 +1,18 @@
+bg0 = "#1e1e2e"
+bg1 = "#45475a"
+bg2 = "#585b70"
+bg3 = "#313244"
+bg4 = "#6c7086"
+
+fg0 = "#cdd6f4"
+fg1 = "#bac2de"
+fg2 = "#a6adc8"
+
+accent = "#89b4fa"
+
+red = "#f38ba8"
+green = "#a6e3a1"
+yellow = "#f9e2af"
+blue = "#89b4fa"
+cyan = "#94e2d5"
+purple = "#f5c2e7"

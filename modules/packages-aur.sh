@@ -13,6 +13,7 @@ install_aur_packages() {
         fastfetch
         fzf
         gamemode
+        github-copilot-cli
         gtk-engine-murrine
         heroic-games-launcher
         hyprland

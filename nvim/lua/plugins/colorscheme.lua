@@ -1,13 +1,1 @@
-return {
-	{
-		"catppuccin/nvim",
-		name = "catppuccin",
-		priority = 1000,
-	},
-	{
-		"LazyVim/LazyVim",
-		opts = {
-			colorscheme = "catppuccin",
-		},
-	},
-}
+/home/aman/.config/themes/current/neovim.lua

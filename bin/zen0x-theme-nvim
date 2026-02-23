@@ -1,0 +1,5 @@
+#!/bin/bash
+
+CURRENT="$HOME/.config/themes/current"
+
+install -Dm644 "$CURRENT/neovim.lua" ~/.config/nvim/lua/plugins/colorscheme.lua

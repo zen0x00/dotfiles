@@ -10,6 +10,7 @@ ln -sfn "$THEMES/$THEME" "$CURRENT"
 
 zen0x-theme-generate "$THEME"
 zen0x-apply-generated-theme
+zen0x-theme-nvim
 zen0x-theme-gtk
 zen0x-theme-set-vscode
 zen0x-theme-wallpaper "$THEME"

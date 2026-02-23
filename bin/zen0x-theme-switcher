@@ -1,7 +1,7 @@
 #!/bin/bash
 
-THEMES="$HOME/.config/themes"
-CURRENT="$THEMES/current"
+THEMES="$HOME/.config/themes/colorschemes"
+CURRENT="$HOME/.config/themes/current"
 
 THEME=$(ls -1 "$THEMES" | grep -v current | rofi -dmenu -p "Theme")
 [ -z "$THEME" ] && exit

@@ -1,8 +1,8 @@
 #!/bin/bash
 
 THEME="$1"
-THEMES="$HOME/.config/themes"
-CURRENT="$THEMES/current"
+THEMES="$HOME/.config/themes/colorschemes"
+CURRENT="$HOME/.config/themes/current"
 
 CACHE="$HOME/.cache/wallpaper_thumbs/$THEME"
 WALLDIR="$THEMES/$THEME/wallpapers"

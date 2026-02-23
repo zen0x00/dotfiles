@@ -1,6 +1,6 @@
 #!/bin/bash
 
-THEMES="$HOME/.config/themes-waybar"
+THEMES="$HOME/.config/themes/waybar"
 CONFIG="$HOME/.config/waybar"
 GEN="$HOME/.config/zen0x/generated"
 

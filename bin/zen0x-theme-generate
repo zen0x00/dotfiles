@@ -1,7 +1,7 @@
 #!/bin/bash
 
-THEMES="$HOME/.config/themes"
-CURRENT="$THEMES/current"
+THEMES="$HOME/.config/themes/colorschemes"
+CURRENT="$HOME/.config/themes/current"
 TEMPLATES="$HOME/.config/zen0x/templates"
 OUT="$HOME/.config/zen0x/generated"
 

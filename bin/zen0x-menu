@@ -3,9 +3,9 @@
 MAIN=$(printf "Theme\nWaybar\nWallpaper" | rofi -dmenu -p "Zen Menu")
 [ -z "$MAIN" ] && exit
 
-THEMES="$HOME/.config/themes"
-CURRENT="$THEMES/current"
-WAYBAR_THEMES="$HOME/.config/themes-waybar"
+THEMES="$HOME/.config/themes/colorschemes"
+CURRENT="$HOME/.config/themes/current"
+WAYBAR_THEMES="$HOME/.config/themes/waybar"
 WAYBAR_CONFIG="$HOME/.config/waybar"
 GEN="$HOME/.config/zen0x/generated"
 
@@ -65,8 +65,8 @@ case "$MAIN" in
 
     awww img "$FILE" \
       --transition-type grow \
-      --transition-duration 1 \
-      --transition-fps 60
+      --transition-duration 2 \
+      --transition-fps 24
 
     ln -sf "$FILE" "$HOME/.current_wallpaper"
     ;;

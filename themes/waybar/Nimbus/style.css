@@ -33,7 +33,7 @@
 #network,
 #custom-volume,
 #custom-swaync {
-  background: alpha(@bg_module, 0.85);
+  background: alpha(@bg, 0.85);
   border-radius: 12px;
   padding: 4px 12px;
   margin: 0 6px;

@@ -19,7 +19,7 @@
 }
 
 .modules-center {
-  background: alpha(@bg_module, 0.9);
+  background: alpha(@bg, 0.9);
   border-radius: 9999px;
   padding: 6px 18px;
   transition: all 0.2s ease;

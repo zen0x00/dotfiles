@@ -28,6 +28,7 @@ install_aur_packages() {
         lazygit
         lib32-gamemode
         localsend
+        ly
         mangohud
         mangojuice
         nautilus
@@ -44,7 +45,6 @@ install_aur_packages() {
         rofi-wayland
         satty
         scx-scheds
-        sddm
         spicetify-cli
         spotify
         starship

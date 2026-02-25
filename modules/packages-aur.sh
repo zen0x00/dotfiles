@@ -53,6 +53,7 @@ install_aur_packages() {
         sunset-cursors-git
         swaync
         swayosd
+        tlauncher-installer
         tor-browser-bin
         ttf-gohu-nerd
         ttf-ibm-plex
@@ -67,6 +68,8 @@ install_aur_packages() {
         wlogout
         xdg-desktop-portal-hyprland
         yad
+        yaru-colors-icon-theme
+        yaru-icon-theme
         zram-generator
         zen-browser-bin
         zoxide

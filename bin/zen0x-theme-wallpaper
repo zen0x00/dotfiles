@@ -20,7 +20,7 @@ done
 wait
 
 awww img "$CURRENT/wallpapers/wallpaper.jpg" \
-  --transition-type grow \
+  --transition-type any \
   --transition-duration 1 \
   --transition-fps 60
 

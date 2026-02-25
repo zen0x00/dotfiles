@@ -1,7 +1,7 @@
 @import "../waybar/colors.css";
 
 * {
-  background-color: @bg;
+  background-color: alpha(@bg, 0.65);
   color: @fg;
   border: none;
   border-radius: 0;

@@ -4,7 +4,7 @@ run_stow() {
     local CONFIG_DIR="$HOME/.config"
     mkdir -p "$CONFIG_DIR"
 
-    local folders=(hypr btop quickshell kitty nvim fastfetch rofi swaync swayosd themes zen0x wlogout)
+    local folders=(btop fastfetch hypr kitty nvim rofi swaync swayosd themes waybar wlogout zen0x)
 
     for folder in "${folders[@]}"; do
         local target="$CONFIG_DIR/$folder"

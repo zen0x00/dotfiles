@@ -1,4 +1,7 @@
 {
+  "include": [
+  "$HOME/.config/waybar/Modules"
+  ],
   "reload_style_on_change": true,
   "layer": "top",
   "position": "top",
@@ -6,8 +9,8 @@
   "height": 36,
   "margin-top": 8,
   "margin-bottom": -6,
-  "margin-left": 6,
-  "margin-right": 6,
+  "margin-left": 12,
+  "margin-right": 12,
   "modules-left": [
     "custom/logo",
     "hyprland/workspaces",
@@ -21,182 +24,5 @@
     "custom/volume",
     "clock",
     "custom/swaync"
-  ],
-  "hyprland/workspaces": {
-    "on-click": "activate",
-    "format": "{icon}",
-    "format-icons": {
-      "default": "",
-      "1": "<span font_family='Boxicons'></span>",
-      "2": "<span font_family='Boxicons'></span>",
-      "3": "<span font_family='Boxicons'></span>",
-      "4": "<span font_family='Boxicons'></span>",
-      "5": "<span font_family='Boxicons'></span>",
-      "6": "<span font_family='Boxicons'></span>",
-      "7": "<span font_family='Boxicons'></span>",
-      "8": "<span font_family='Boxicons'></span>",
-      "9": "<span font_family='Boxicons'></span>",
-      "10": "<span font_family='Boxicons'></span>",
-      "active": "󱓻"
-    },
-    "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": []
-    }
-  },
-  "hyprland/window": {
-    "format": "{class}",
-    "separate-outputs": true
-  },
-  "clock": {
-    "tooltip": true,
-    "format": "{:%I:%M %p}",
-    "tooltip-format": "{:%I:%M %p}",
-  },
-  "cpu": {
-    "interval": 5,
-    "format": "󰍛",
-    "on-click": "omarchy-launch-or-focus-tui btop",
-    "on-click-right": "alacritty"
-  },
-  "group/tray-expander": {
-    "orientation": "inherit",
-    "drawer": {
-      "transition-duration": 600,
-      "children-class": "tray-group-item"
-    },
-    "modules": [
-      "custom/expand-icon",
-      "tray"
-    ]
-  },
-  "custom/expand-icon": {    "icon-size": 16,    "format": "",
-    "tooltip": false,
-    "on-scroll-up": "",
-    "on-scroll-down": "",
-    "on-scroll-left": "",
-    "on-scroll-right": ""
-  },
-  "tray": {
-    "icon-size": 16,
-    "spacing": 16
-  },
-  "custom/brightness": {
-    "icon-size": 16,
-    "format": "󰃠",
-    "tooltip": false,
-
-    "on-scroll-up": "swayosd-client --brightness raise",
-    "on-scroll-down": "swayosd-client --brightness lower"
-  },
-  "custom/nightlight": {
-    "icon-size": 16,
-    "format": "󰌵",
-    "tooltip": "Night Light",
-    "on-click": "nightlight"
-  },
-
-  "power-profiles-daemon": {    "icon-size": 16,    "format": "{icon}",
-    "tooltip-format": "Power profile: {profile}\nDriver: {driver}",
-    "tooltip": true,
-    "format-icons": {
-      "performance": "",
-      "balanced": "",
-      "power-saver": ""
-    }
-  },
-
-  "custom/seperator": {
-    "format": "❘"
-  },
-  "custom/logo": {
-    "format": "󰣇",
-    "on-click": "rofi -show run"
-  },
-  "custom/volume": {
-    "format": "",
-    "tooltip": false,
-    "on-scroll-up": "swayosd-client --output-volume raise",
-    "on-scroll-down": "swayosd-client --output-volume lower",
-    "on-click-middle": "swayosd-client --output-volume mute",
-    "on-click": "kitty --class wiremix --title wiremix -e wiremix"
-  },
-
-  "bluetooth": {
-    "format": "",
-    "format-disabled": "󰂲",
-    "format-connected": "",
-    "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "kitty --class bluetui --title bluetui -e bluetui"
-  },
-  "network": {
-    "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
-    "format": "{icon}",
-    "format-wifi": "{icon}",
-    "format-ethernet": "󰤨",
-    "format-disconnected": "󰤮",
-    "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
-    "tooltip-format-disconnected": "Disconnected",
-    "interval": 3,
-    "spacing": 1,
-    "on-click": "kitty --class impala --title impala -e impala"
-  },
-  "custom/swaync": {
-    "tooltip": true,
-    "tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": "",
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "sleep 0.1 && swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true,
-  },
-  "custom/cava": {
-    "format": "{}",
-    "exec": "~/.config/waybar/Modules/cava.sh",
-  },
-  "mpris": {
-    "interval": 1,
-    "format": "{player_icon} {dynamic}",
-    "format-paused": "{status_icon} <i>{dynamic}</i>",
-    "on-click-middle": "playerctl play-pause",
-    "on-click": "playerctl previous",
-    "on-click-right": "playerctl next",
-    "scroll-step": 5.0,
-    "smooth-scrolling-threshold": 1,
-    "tooltip": true,
-    "tooltip-format": "{status_icon} {dynamic}\nLeft Click: previous\nMid Click: Pause\nRight Click: Next",
-    "player-icons": {
-      "chromium": "",
-      "default": "",
-      "firefox": "",
-      "kdeconnect": "",
-      "mopidy": "",
-      "mpv": "󰐹",
-      "spotify": "",
-      "vlc": "󰕼",
-    },
-    "status-icons": {
-      "paused": "󰐎",
-      "playing": "",
-      "stopped": "",
-    },
-    // "ignored-players": ["firefox"]
-    "max-length": 20,
-  },
+  ]
 }

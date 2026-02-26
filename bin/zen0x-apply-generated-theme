@@ -14,3 +14,4 @@ install -Dm644 "$GEN/starship.toml" ~/.config/starship.toml
 install -Dm644 "$GEN/ohmyposh.omp.json" ~/.config/oh-my-posh/current.omp.json
 install -Dm644 "$GEN/btop.theme" ~/.config/btop/themes/current.theme
 install -Dm644 "$GEN/vesktop.css" ~/.config/vesktop/themes/colors.css
+install -Dm644 "$GEN/alacritty.toml" ~/.config/alacritty/colors.toml

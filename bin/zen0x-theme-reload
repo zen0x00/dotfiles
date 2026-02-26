@@ -6,4 +6,3 @@ waybar &
 swaync &
 swayosd-server &
 hyprctl reload
-kitty @ set-colors --all --configured ~/.config/kitty/colors.conf

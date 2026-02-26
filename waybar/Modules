@@ -23,7 +23,7 @@
     "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "kitty --class bluetui --title bluetui -e bluetui"
+    "on-click": "alacritty --class bluetui --title bluetui -e bluetui"
   },
   "clock": {
     "tooltip": true,
@@ -88,7 +88,7 @@
     "on-scroll-up": "swayosd-client --output-volume raise",
     "on-scroll-down": "swayosd-client --output-volume lower",
     "on-click-middle": "swayosd-client --output-volume mute",
-    "on-click": "kitty --class wiremix --title wiremix -e wiremix"
+    "on-click": "alacritty --class wiremix --title wiremix -e wiremix"
   },
   "group/notify": {
     "orientation": "inherit",
@@ -173,14 +173,14 @@
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "format": "{icon}",
     "format-wifi": "{icon}",
-    "format-ethernet": "󰤨",
+    "format-ethernet": "󰀂",
     "format-disconnected": "󰤮",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "kitty --class impala --title impala -e impala"
+    "on-click": "alacritty --class impala --title impala -e impala"
   },
   "power-profiles-daemon": {
     "icon-size": 16,
@@ -195,7 +195,7 @@
   },
   "pulseaudio": {
     "format": "{icon}",
-    "on-click": "kitty --class wiremix --title wiremix -e wiremix",
+    "on-click": "alacritty --class wiremix --title wiremix -e wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,

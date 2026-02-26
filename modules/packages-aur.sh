@@ -3,7 +3,7 @@
 install_aur_packages() {
     local packages=(
         abyssal-gtk-theme
-        aylurs-gtk-shell-git
+        alacritty
         ani-cli
         awww-git
         bc
@@ -24,7 +24,6 @@ install_aur_packages() {
         imagemagick
         irqbalance
         jq
-        kitty
         lazygit
         lib32-gamemode
         localsend

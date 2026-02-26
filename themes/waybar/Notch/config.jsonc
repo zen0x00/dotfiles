@@ -8,13 +8,13 @@
   "margin-right": 0,
   "margin-left": 0,
   "margin-top": 0,
-  "modules-left": ["custom/active_window", ],
+  "modules-left": ["custom/active_window" ],
   "modules-center": [ "group/center3-expander", "hyprland/workspaces", "group/center2-expander" ],
   "modules-right": [
     "tray",
     "custom/separator#blank",
     "custom/separator#dot",
-    "group/right1",
+    "group/right1"
   ],
 
 // GROUPS MODULE
@@ -24,7 +24,7 @@
 	"modules": [
     "clock",
     "custom/screenrecording-indicator", 
-    "custom/update", 
+    "custom/update"
 	]
 },
 
@@ -33,7 +33,7 @@
 	"modules": [
     "cpu",
     "memory",
-    "disk",
+    "disk"
 	]
 },
 
@@ -43,7 +43,7 @@
     "pulseaudio",
     "bluetooth",
     "network",
-    "battery",
+    "battery"
 	]
 },
 
@@ -54,7 +54,7 @@
     "return-type": "json",
     "markup": true,
     "on-click": "omarchy-menu",
-    "on-click-right": "xdg-terminal-exec",
+    "on-click-right": "xdg-terminal-exec"
   },
   
   "hyprland/workspaces": {
@@ -63,7 +63,7 @@
         "format-icons": {
           "default": "",
           "active": "",
-          "empty": "",
+          "empty": ""
         },
       "persistent-workspaces": {
       "1": [],
@@ -116,14 +116,14 @@
     "format-icons": ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"],
     "format": "{icon}",
     "format-wifi": "{icon}",
-    "format-ethernet": "<span size='11500'>󰌘</span>",
+    "format-ethernet": "<span size='11500'>󰀂</span>",
     "format-disconnected": "<span size='11500'>󰤮</span>",
     "tooltip-format-wifi": "{essid} ({frequency} GHz)\n⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-ethernet": "⇣{bandwidthDownBytes}  ⇡{bandwidthUpBytes}",
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "omarchy-launch-wifi"
+    "on-click": "alacritty --class impala --title impala -e impala"
   },
 
   "battery": {
@@ -152,12 +152,12 @@
     "format-connected": "<span size='11500'></span>",
     "format-no-controller": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "omarchy-launch-bluetooth"
+    "on-click": "alacritty --class bluetui --title bluetui -e bluetui"
   },
 
   "pulseaudio": {
     "format": "<span size='11500'>{icon}</span>",
-    "on-click": "omarchy-launch-or-focus-tui wiremix",
+    "on-click": "alacritty --class wiremix --title wiremix -e wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,

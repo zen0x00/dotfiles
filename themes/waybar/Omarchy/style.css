@@ -1,4 +1,4 @@
-@import "../waybar/colors.css";
+@import "colors.css";
 
 * {
   background-color: alpha(@bg, 0.65);

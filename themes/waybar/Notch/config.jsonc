@@ -8,7 +8,7 @@
   "margin-right": 0,
   "margin-left": 0,
   "margin-top": 0,
-  "modules-left": ["custom/active_window" ],
+  "modules-left": ["custom/active_window"],
   "modules-center": [ "group/center3-expander", "hyprland/workspaces", "group/center2-expander" ],
   "modules-right": [
     "tray",
@@ -23,8 +23,7 @@
 	"orientation": "inherit",
 	"modules": [
     "clock",
-    "custom/screenrecording-indicator", 
-    "custom/update"
+    "custom/screenrecording-indicator"
 	]
 },
 
@@ -50,7 +49,7 @@
 // MODULES
 
   "custom/active_window": {
-    "exec": "~/.config/waybar/window.sh",
+    "exec": "~/.config/waybar/Scripts/window.sh",
     "return-type": "json",
     "markup": true,
     "on-click": "omarchy-menu",
@@ -73,9 +72,26 @@
       "5": [],
       "6": [],
       "7": [],
-      "8": [],
-    },
+      "8": []
+    }
 	},
+
+    "custom/playerinfo": {
+      "format": "&lt; {} &gt;",
+      "exec": "~/.config/waybar/playerinfo.sh",
+      "escape": true,
+      "return-type": "json",
+      "interval": 1,
+      "tooltip": true,
+      "on-click-middle": "playerctl play-pause",
+      "on-click-right": "playerctl next",
+      "on-click-left": "playerctl previous"
+  },
+
+  "custom/cava": {
+      "format": "{}",
+      "exec": "~/.config/waybar/cava.sh"
+  },
 
   "custom/omarchy": {
     // "format": "󰹡",
@@ -201,8 +217,8 @@
   },
 
   "custom/screenrecording-indicator": {
-    "on-click": "omarchy-cmd-screenrecord",
-    "exec": "$OMARCHY_PATH/default/waybar/indicators/screen-recording.sh",
+    "on-click": "screenrecorder",
+    "exec": "screen-recording",
     "signal": 8,
     "return-type": "json"
   },

@@ -1,8 +1,13 @@
 #!/bin/bash
-pkill waybar
-pkill swaync
-pkill swayosd-server
+
+killall -9 waybar 
+killall -9 swaync 
+pkill -x swayosd-server
 waybar &
 swaync &
 swayosd-server &
-hyprctl reload
+
+(
+    sleep 0.9
+    notify-send "󰑓 Reload Complete" "Waybar and SwayNC"
+) &

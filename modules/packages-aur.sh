@@ -14,6 +14,7 @@ install_aur_packages() {
         fzf
         gamemode
         github-copilot-cli
+        gpu-screen-recorder
         gtk-engine-murrine
         heroic-games-launcher
         hyprland

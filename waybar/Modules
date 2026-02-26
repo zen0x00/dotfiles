@@ -36,10 +36,7 @@
     "on-click": "omarchy-launch-or-focus-tui btop",
     "on-click-right": "alacritty"
   },
-  "custom/cava": {
-    "format": "{}",
-    "exec": "~/.config/waybar/Modules/cava.sh"
-  },
+
   "custom/expand-icon": {
     "icon-size": 16,
     "format": "",
@@ -53,6 +50,24 @@
     "format": "󰣇",
     "on-click": "rofi -show run"
   },
+
+  "custom/playerinfo": {
+      "format": "&lt; {} &gt;",
+      "exec": "~/.config/waybar/playerinfo.sh",
+      "escape": true,
+      "return-type": "json",
+      "interval": 1,
+      "tooltip": true,
+      "on-click-middle": "playerctl play-pause",
+      "on-click-right": "playerctl next",
+      "on-click-left": "playerctl previous"
+  },
+
+  "custom/cava": {
+      "format": "{}",
+      "exec": "~/.config/waybar/cava.sh"
+  },
+
   "custom/separator#dot": {
     "format": "",
     "interval": "once",

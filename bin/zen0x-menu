@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MAIN=$(printf "Theme\nWaybar\nWallpaper" | rofi -dmenu -p "Zen Menu")
+MAIN=$(printf "Theme\nWaybar\nWallpaper\nScreen Record" | zen0x-launch-walker -d -p "Zen Menu")
 [ -z "$MAIN" ] && exit
 
 THEMES="$HOME/.config/themes/colorschemes"
@@ -8,11 +8,12 @@ CURRENT="$HOME/.config/themes/current"
 WAYBAR_THEMES="$HOME/.config/themes/waybar"
 WAYBAR_CONFIG="$HOME/.config/waybar"
 GEN="$HOME/.config/zen0x/generated"
+SCREENREC="screenrecorder"   # adjust if different
 
 case "$MAIN" in
 
   Theme)
-    THEME=$(ls -1 "$THEMES" | grep -v current | rofi -dmenu -p "Theme")
+    THEME=$(ls -1 "$THEMES" | grep -v current | zen0x-launch-walker -d -p "Theme")
     [ -z "$THEME" ] && exit
 
     ln -sfn "$THEMES/$THEME" "$CURRENT"
@@ -26,7 +27,7 @@ case "$MAIN" in
     ;;
 
   Waybar)
-    THEME=$(find -L "$WAYBAR_THEMES" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort | rofi -dmenu -p "Waybar Theme")
+    THEME=$(find -L "$WAYBAR_THEMES" -mindepth 1 -maxdepth 1 -type d -printf "%f\n" | sort | zen0x-launch-walker -d -p "Waybar Theme")
     [ -z "$THEME" ] && exit
 
     if [ -L "$WAYBAR_CONFIG" ]; then
@@ -56,7 +57,7 @@ case "$MAIN" in
         thumb="$CACHE/$(echo "$img" | md5sum | cut -d' ' -f1).png"
         [[ -f "$thumb" ]] || magick "$img" -resize 440x225^ -gravity center -extent 440x225 "$thumb"
         printf "%s\x00icon\x1f%s\n" "$(basename "$img")" "$thumb"
-      done | rofi -dmenu -p -config "$HOME/.config/rofi/wallpapers.rasi" -p "Wallpaper")
+      done | zen0x-launch-walker -d -p "Wallpaper")
 
     [ -z "$CHOICE" ] && exit
 
@@ -69,6 +70,35 @@ case "$MAIN" in
       --transition-fps 24
 
     ln -sf "$FILE" "$HOME/.current_wallpaper"
+    ;;
+
+      "Screen Record")
+    ACTION=$(printf "Toggle Recording\nRecord + Desktop Audio\nRecord + Mic\nRecord + All Audio\nRecord + Webcam" \
+      | zen0x-launch-walker -d -p "Screen Record")
+
+    [ -z "$ACTION" ] && exit
+
+    case "$ACTION" in
+      "Toggle Recording")
+        "$SCREENREC"
+        ;;
+
+      "Record + Desktop Audio")
+        "$SCREENREC" --with-desktop-audio
+        ;;
+
+      "Record + Mic")
+        "$SCREENREC" --with-microphone-audio
+        ;;
+
+      "Record + All Audio")
+        "$SCREENREC" --with-desktop-audio --with-microphone-audio
+        ;;
+
+      "Record + Webcam")
+        "$SCREENREC" --with-webcam --with-desktop-audio
+        ;;
+    esac
     ;;
 
 esac

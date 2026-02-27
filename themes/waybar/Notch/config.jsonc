@@ -216,13 +216,6 @@
     "tooltip": false
   },
 
-  "custom/screenrecording-indicator": {
-    "on-click": "screenrecorder",
-    "exec": "screen-recording",
-    "signal": 8,
-    "return-type": "json"
-  },
-
   "tray": {
     "icon-size": 16,
     "spacing": 8

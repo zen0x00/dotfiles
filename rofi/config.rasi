@@ -1,5 +1,5 @@
 configuration {
-	modi:                       "run";
+	modi:                       "run,drun";
     show-icons:                 false;
 	  window-format:              "{w} · {c} · {t}";
 }

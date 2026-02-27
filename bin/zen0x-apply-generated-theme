@@ -2,11 +2,10 @@
 
 GEN="$HOME/.config/zen0x/generated"
 
+install -Dm644 "$GEN/alacritty.toml" ~/.config/alacritty/colors.toml
 install -Dm644 "$GEN/waybar-colors.css" ~/.config/waybar/colors.css
-install -Dm644 "$GEN/kitty.conf" ~/.config/kitty/colors.conf
 install -Dm644 "$GEN/hypr.conf" ~/.config/hypr/configs/colors.conf
 install -Dm644 "$GEN/rofi.rasi" ~/.config/rofi/colors.rasi
-install -Dm644 "$GEN/swaync.css" ~/.config/swaync/colors.css
 install -Dm644 "$GEN/swayosd.css" ~/.config/swayosd/colors.css
 install -Dm644 "$GEN/wlogout.css" ~/.config/wlogout/colors.css
 install -Dm644 "$GEN/fastfetch.jsonc" ~/.config/fastfetch/config.jsonc
@@ -14,5 +13,5 @@ install -Dm644 "$GEN/starship.toml" ~/.config/starship.toml
 install -Dm644 "$GEN/ohmyposh.omp.json" ~/.config/oh-my-posh/current.omp.json
 install -Dm644 "$GEN/btop.theme" ~/.config/btop/themes/current.theme
 install -Dm644 "$GEN/vesktop.css" ~/.config/vesktop/themes/colors.css
-install -Dm644 "$GEN/alacritty.toml" ~/.config/alacritty/colors.toml
 install -Dm644 "$GEN/walker.css" ~/.config/walker/themes/current/colors.css
+install -Dm644 "$GEN/mako.ini" ~/.config/mako/config

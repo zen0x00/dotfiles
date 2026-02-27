@@ -9,6 +9,9 @@ install_aur_packages() {
         bc
         bluetui
         cpupower
+        elephant
+        elephant-desktopapplications
+        elephant-providerlist
         ffmpeg
         fastfetch
         fzf
@@ -29,6 +32,7 @@ install_aur_packages() {
         lib32-gamemode
         localsend
         ly
+        mako
         mangohud
         mangojuice
         nautilus
@@ -42,7 +46,6 @@ install_aur_packages() {
 	      oh-my-posh
         openrgb
         preload
-        rofi-wayland
         satty
         scx-scheds
         spicetify-cli
@@ -51,7 +54,6 @@ install_aur_packages() {
         steam
         stow
         sunset-cursors-git
-        swaync
         swayosd
         tlauncher-installer
         tor-browser-bin
@@ -63,6 +65,7 @@ install_aur_packages() {
         tuned
         tuned-ppd
         vesktop
+        walker
         waybar
         wiremix
         wlogout

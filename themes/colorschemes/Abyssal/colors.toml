@@ -28,8 +28,3 @@ yellow = "#d29922"
 blue   = "#4da6ff"
 cyan   = "#39c5cf"
 purple = "#bc8cff"
-
-# Optional extras (recommended for fidelity)
-
-orange = "#e3b341"
-cursor = "#e6edf3"

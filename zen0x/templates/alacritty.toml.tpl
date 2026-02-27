@@ -6,7 +6,7 @@ bright_foreground = "None"
 
 [colors.cursor]
 text = "{{ bg0 }}"
-cursor = "{{ cursor }}"
+cursor = "{{ fg0 }}"
 
 [colors.normal]
 black = "{{ bg1 }}"
@@ -22,7 +22,7 @@ white = "{{ fg0 }}"
 black = "{{ bg3 }}"
 red = "{{ red }}"
 green = "{{ green }}"
-yellow = "{{ orange }}"
+yellow = "{{ yellow }}"
 blue = "{{ accent }}"
 magenta = "{{ purple }}"
 cyan = "{{ cyan }}"

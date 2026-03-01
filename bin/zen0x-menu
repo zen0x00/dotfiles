@@ -67,7 +67,7 @@ case "$MAIN" in
     awww img "$FILE" \
       --transition-type grow \
       --transition-duration 2 \
-      --transition-fps 24
+      --transition-fps 60
 
     ln -sf "$FILE" "$HOME/.current_wallpaper"
     ;;

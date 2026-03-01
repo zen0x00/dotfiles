@@ -52,7 +52,6 @@
     "exec": "~/.config/waybar/Scripts/window.sh",
     "return-type": "json",
     "markup": true,
-    "on-click": "omarchy-menu",
     "on-click-right": "xdg-terminal-exec"
   },
   

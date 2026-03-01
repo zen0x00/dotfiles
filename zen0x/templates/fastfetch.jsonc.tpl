@@ -22,7 +22,7 @@
 
     {
       "type": "title",
-      "key": "   Host",
+      "keyWidth": 10,
       "keyColor": "{{ fg0 }}"
     },
 
@@ -30,63 +30,68 @@
 
     {
       "type": "os",
-      "key": "   OS         ",
-      "keyColor": "{{ accent }}"
+      "key": "os  ",
+      "keyColor": "{{ accent }}",
+      "format": "{name}"
     },
     {
       "type": "kernel",
-      "key": "   Kernel     ",
+      "key": "ker ",
       "keyColor": "{{ accent }}"
     },
     {
       "type": "cpu",
       "format": "{1}",
-      "key": "   CPU        ",
+      "key": "cpu ",
       "keyColor": "{{ green }}"
     },
     {
       "type": "gpu",
       "format": "{2}",
-      "key": "   GPU        ",
+      "key": "gpu ",
       "keyColor": "{{ cyan }}"
     },
     {
       "type": "memory",
-      "key": "   Memory     ",
+      "key": "ram ",
       "keyColor": "{{ purple }}"
     },
     {
       "type": "packages",
-      "key": "  󰏗 Packages   ",
+      "key": "pkgs",
       "keyColor": "{{ blue }}"
     },
     {
       "type": "wm",
-      "key": "   WM         ",
+      "key": "wm  ",
       "keyColor": "{{ accent }}"
     },
     {
       "type": "terminal",
-      "key": "   Terminal   ",
+      "key": "term",
       "keyColor": "{{ fg1 }}"
     },
     {
       "type": "uptime",
-      "key": "   Uptime     ",
+      "key": "up  ",
       "keyColor": "{{ yellow }}"
     },
     {
       "type": "battery",
-      "key": "   Battery    ",
+      "key": "bat",
       "keyColor": "{{ red }}"
     },
     {
       "type": "command",
-      "key": "  󰔟 OS Age     ",
+      "key": "age ",
       "keyColor": "{{ red }}",
       "text": "birth_install=$(stat -c %W /); current=$(date +%s); days_difference=$(( (current - birth_install) / 86400 )); echo $days_difference days"
     },
 
-    "break"
+    "break",
+    {
+      "type": "custom",
+      "format": "\u001b[33m󰮯 \u001b[32m󰊠 \u001b[34m󰊠 \u001b[31m󰊠 \u001b[36m󰊠 \u001b[35m󰊠 \u001b[37m󰊠 \u001b[97m󰊠"
+    }
   ]
 }

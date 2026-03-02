@@ -88,3 +88,6 @@ function y() {
 	[ "$cwd" != "$PWD" ] && [ -d "$cwd" ] && builtin cd -- "$cwd"
 	rm -f -- "$tmp"
 }
+
+bindkey '^[b' backward-word
+bindkey '^[f' forward-word

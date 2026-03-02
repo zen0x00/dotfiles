@@ -20,10 +20,6 @@
   border-radius: 8px;
 }
 
-#waybar button:hover {
-  background-color: alpha(@fg, 0.04);
-}
-
 .tray-group-item {
   padding: 4px 8px;
   color: @fg_dim;

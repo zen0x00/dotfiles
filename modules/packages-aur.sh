@@ -7,7 +7,9 @@ install_aur_packages() {
         ani-cli
         awww-git
         bc
+        blender
         bluetui
+        brave-bin
         cpupower
         elephant
         elephant-desktopapplications
@@ -73,8 +75,8 @@ install_aur_packages() {
         yad
         yaru-colors-icon-theme
         yaru-icon-theme
+        yazi
         zram-generator
-        zen-browser-bin
         zoxide
         )
 

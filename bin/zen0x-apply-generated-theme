@@ -15,3 +15,4 @@ install -Dm644 "$GEN/btop.theme" ~/.config/btop/themes/current.theme
 install -Dm644 "$GEN/vesktop.css" ~/.config/vesktop/themes/colors.css
 install -Dm644 "$GEN/walker.css" ~/.config/walker/themes/current/colors.css
 install -Dm644 "$GEN/mako.ini" ~/.config/mako/config
+install -Dm644 "$GEN/yazi.toml" ~/.config/yazi/theme.toml

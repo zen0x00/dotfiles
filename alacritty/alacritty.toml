@@ -21,6 +21,8 @@ decorations = "None"
 [keyboard]
 bindings = [
 { key = "Insert", mods = "Shift", action = "Paste" },
-{ key = "Insert", mods = "Control", action = "Copy" }
+{ key = "Insert", mods = "Control", action = "Copy" },
+{ key = "Left",  mods = "Control", chars = "\u001bb" },
+{ key = "Right", mods = "Control", chars = "\u001bf" }
 ]
 

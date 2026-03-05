@@ -73,7 +73,6 @@ install_aur_packages() {
         wlogout
         xdg-desktop-portal-hyprland
         yad
-        yaru-colors-icon-theme
         yaru-icon-theme
         yazi
         zram-generator

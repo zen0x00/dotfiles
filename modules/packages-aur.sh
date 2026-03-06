@@ -48,6 +48,7 @@ install_aur_packages() {
 	      oh-my-posh
         openrgb
         preload
+        quickshell
         satty
         scx-scheds
         spicetify-cli

@@ -23,7 +23,7 @@
     "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "zen0x-launch-or-focus-tui bluetui"
+    "on-click": "zen0x-launch-bluetooth"
   },
   "clock": {
     "tooltip": true,
@@ -54,7 +54,7 @@
   },
   "custom/logo": {
     "format": "󰣇",
-    "on-click": "zen0x-launch-walker"
+    "on-click": "zen0x-menu"
   },
 
   "custom/playerinfo": {
@@ -97,7 +97,7 @@
     "on-scroll-up": "swayosd-client --output-volume raise",
     "on-scroll-down": "swayosd-client --output-volume lower",
     "on-click-middle": "swayosd-client --output-volume mute",
-    "on-click": "zen0x-launch-or-focus-tui wiremix"
+    "on-click": "zen0x-launch-audio"
   },
   "group/notify": {
     "orientation": "inherit",
@@ -189,7 +189,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "zen0x-launch-or-focus-tui impala"
+    "on-click": "zen0x-launch-wifi"
   },
   "power-profiles-daemon": {
     "icon-size": 16,

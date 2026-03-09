@@ -1,0 +1,6 @@
+#!/bin/bash
+
+# Launch the Omarchy wifi controls (provided by the Impala TUI).
+
+rfkill unblock wifi
+zen0x-launch-or-focus-tui impala

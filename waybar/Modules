@@ -12,7 +12,7 @@
     "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
     "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
     "interval": 5,
-    "on-click": "omarchy-menu power",
+    "on-click": "wlogout -b 5",
     "states": {
       "warning": 20,
       "critical": 10
@@ -23,7 +23,7 @@
     "format-disabled": "󰂲",
     "format-connected": "",
     "tooltip-format": "Devices connected: {num_connections}",
-    "on-click": "alacritty --class bluetui --title bluetui -e bluetui"
+    "on-click": "zen0x-launch-or-focus-tui bluetui"
   },
   "clock": {
     "tooltip": true,
@@ -33,7 +33,7 @@
   "cpu": {
     "interval": 5,
     "format": "󰍛",
-    "on-click": "omarchy-launch-or-focus-tui btop",
+    "on-click": "zen0x-launch-or-focus-tui btop",
     "on-click-right": "alacritty"
   },
   "custom/active_window": {
@@ -54,7 +54,7 @@
   },
   "custom/logo": {
     "format": "󰣇",
-    "on-click": "rofi -show run"
+    "on-click": "zen0x-launch-walker"
   },
 
   "custom/playerinfo": {
@@ -91,34 +91,13 @@
   "custom/seperator": {
     "format": "❘"
   },
-  "custom/swaync": {
-    "tooltip": true,
-    "tooltip-format": "Left Click: Launch Notification Center\nRight Click: Do not Disturb",
-    "format": "{icon}",
-    "format-icons": {
-      "notification": "<span foreground='red'><sup></sup></span>",
-      "none": "",
-      "dnd-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-none": "",
-      "inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "inhibited-none": "",
-      "dnd-inhibited-notification": "<span foreground='red'><sup></sup></span>",
-      "dnd-inhibited-none": ""
-    },
-    "return-type": "json",
-    "exec-if": "which swaync-client",
-    "exec": "swaync-client -swb",
-    "on-click": "sleep 0.1 && swaync-client -t -sw",
-    "on-click-right": "swaync-client -d -sw",
-    "escape": true
-  },
   "custom/volume": {
     "format": "",
     "tooltip": false,
     "on-scroll-up": "swayosd-client --output-volume raise",
     "on-scroll-down": "swayosd-client --output-volume lower",
     "on-click-middle": "swayosd-client --output-volume mute",
-    "on-click": "alacritty --class wiremix --title wiremix -e wiremix"
+    "on-click": "zen0x-launch-or-focus-tui wiremix"
   },
   "group/notify": {
     "orientation": "inherit",
@@ -210,7 +189,7 @@
     "tooltip-format-disconnected": "Disconnected",
     "interval": 3,
     "spacing": 1,
-    "on-click": "alacritty --class impala --title impala -e impala"
+    "on-click": "zen0x-launch-or-focus-tui impala"
   },
   "power-profiles-daemon": {
     "icon-size": 16,
@@ -225,7 +204,7 @@
   },
   "pulseaudio": {
     "format": "{icon}",
-    "on-click": "alacritty --class wiremix --title wiremix -e wiremix",
+    "on-click": "zen0x-launch-or-focus-tui wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,

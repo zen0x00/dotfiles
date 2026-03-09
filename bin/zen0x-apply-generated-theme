@@ -8,6 +8,7 @@ install -Dm644 "$GEN/fastfetch.jsonc" ~/.config/fastfetch/config.jsonc
 install -Dm644 "$GEN/hypr.conf" ~/.config/hypr/configs/colors.conf
 install -Dm644 "$GEN/mako.ini" ~/.config/mako/config
 install -Dm644 "$GEN/ohmyposh.omp.json" ~/.config/oh-my-posh/current.omp.json
+install -Dm644 "$GEN/opencode.json" ~/.config/opencode/themes/current.json
 install -Dm644 "$GEN/rofi.rasi" ~/.config/rofi/colors.rasi
 install -Dm644 "$GEN/starship.toml" ~/.config/starship.toml
 install -Dm644 "$GEN/swayosd.css" ~/.config/swayosd/colors.css

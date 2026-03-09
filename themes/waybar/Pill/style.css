@@ -34,6 +34,10 @@
   font-weight: 700;
 }
 
+#mpris {
+  padding-left: 18px;
+}
+
 #pulseaudio {
   margin-right: 12px;
 }
@@ -67,7 +71,7 @@
     background-color: alpha(@background, 0.6);
     font-weight: 800;
     padding: 0px 5px;
-    margin: 3.5 2px;
+    margin-top: -8px;
     margin-right: 4px;
     border-radius: 16px;
 }
@@ -77,6 +81,6 @@
   background:alpha(@fg, 0.0);
   border-radius: 16px;
   padding: 0px 5px;
-  margin: 3.5 2px;
+  margin-top: -8px;
   margin-right: 4px;
 }

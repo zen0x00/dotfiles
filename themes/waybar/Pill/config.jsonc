@@ -12,11 +12,10 @@
   "margin-left": 6,
   "margin-right": 6,
   "modules-left": [],
-  "modules-center": ["hyprland/window", "custom/separator#blank", "custom/separator#dot", "mpris", "custom/separator#blank", "custom/separator#dot", "hyprland/workspaces", "custom/separator#blank", "custom/separator#dot", "battery", "group/notify", "tray", "clock"],
+  "modules-center": ["mpris", "hyprland/workspaces", "battery", "group/notify", "clock"],
     "modules-right": [
     "tray",
     "custom/separator#blank",
-    "custom/separator#dot",
     "group/right1"
     ]
 }

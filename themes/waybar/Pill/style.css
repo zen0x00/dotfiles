@@ -2,7 +2,7 @@
 
 * {
   font-family: "JetBrainsMono Nerd Font Propo";
-  font-weight: 500;
+  font-weight: 700;
   font-size: 13px;
 }
 
@@ -19,19 +19,27 @@
 }
 
 .modules-center {
-  background: alpha(@bg, 0.65);
+  background: alpha(@bg, 1);
   border-radius: 9999px;
-  padding: 6px 18px;
   transition: all 0.2s ease;
 }
 
-#clock,
-#workspaces,
-#bluetooth,
-#network,
-#mpris,
-#custom-volume {
-  padding: 4px 14px;
+#window {
+  padding-left: 18px;
+}
+
+#clock {
+  font-size: 13px;
+  padding-right: 18px;
+  font-weight: 700;
+}
+
+#pulseaudio {
+  margin-right: 12px;
+}
+
+#bluetooth {
+  margin-right: 12px;
 }
 
 #workspaces button {
@@ -47,11 +55,28 @@
 
 #clock { color: @yellow; }
 
-#bluetooth { color: @teal; }
-#bluetooth.disabled { color: @fg_dim; }
+#custom-active_window {
+    padding: 3px 6px;
+    margin-left: 10px;
+    font-size: 12px;
+}
 
-#network { color: @green; }
-#network.disconnected { color: @red; }
+#group-right1,
+#group_right1,
+#right1 {
+    background-color: alpha(@background, 0.6);
+    font-weight: 800;
+    padding: 0px 5px;
+    margin: 3.5 2px;
+    margin-right: 4px;
+    border-radius: 16px;
+}
 
-#custom-volume { color: @teal; }
-#custom-volume.muted { color: @fg_muted; }
+#tray {
+  font-weight: 800;
+  background:alpha(@fg, 0.0);
+  border-radius: 16px;
+  padding: 0px 5px;
+  margin: 3.5 2px;
+  margin-right: 4px;
+}

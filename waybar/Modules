@@ -36,6 +36,12 @@
     "on-click": "omarchy-launch-or-focus-tui btop",
     "on-click-right": "alacritty"
   },
+  "custom/active_window": {
+    "exec": "~/.config/waybar/Scripts/window.sh",
+    "return-type": "json",
+    "markup": true,
+    "on-click-right": "xdg-terminal-exec"
+  },
 
   "custom/expand-icon": {
     "icon-size": 16,
@@ -67,6 +73,15 @@
       "format": "{}",
       "exec": "~/.config/waybar/cava.sh"
   },
+    "group/right1": {
+	"orientation": "inherit",
+	"modules": [
+    "pulseaudio",
+    "bluetooth",
+    "network",
+    "battery"
+	]
+},
 
   "custom/separator#dot": {
     "format": "",
@@ -214,6 +229,9 @@
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",
     "scroll-step": 5,
+    "on-scroll-up": "swayosd-client --output-volume raise",
+    "on-scroll-down": "swayosd-client --output-volume lower",
+    "on-click-middle": "swayosd-client --output-volume mute",
     "format-muted": "",
     "format-icons": {
       "headphone": "",

@@ -7,7 +7,8 @@
   "border-radius": 25,
   "margin-right": 0,
   "margin-left": 0,
-  "margin-top": 0,
+  "margin-top": 6,
+  "margin-bottom": -8,
   "modules-left": ["custom/active_window"],
   "modules-center": [ "group/center3-expander", "hyprland/workspaces", "group/center2-expander" ],
   "modules-right": [

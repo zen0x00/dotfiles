@@ -35,7 +35,6 @@ install_aur_packages() {
         lib32-gamemode
         localsend
         ly
-        mako
         mangohud
         mangojuice
         nautilus
@@ -57,6 +56,7 @@ install_aur_packages() {
         steam
         stow
         sunset-cursors-git
+        swaync
         swayosd
         tlauncher-installer
         ttf-gohu-nerd
@@ -74,6 +74,7 @@ install_aur_packages() {
         wiremix
         wlogout
         xdg-desktop-portal-hyprland
+        xdg-terminal-exec
         yad
         yaru-icon-theme
         yazi

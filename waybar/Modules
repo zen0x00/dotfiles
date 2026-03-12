@@ -1,22 +1,10 @@
 {
   "battery": {
-    "format": "{capacity}% {icon}",
-    "format-discharging": "{icon}",
-    "format-charging": "{icon}",
-    "format-plugged": "",
-    "format-icons": {
-      "charging": ["󰢜", "󰂆", "󰂇", "󰂈", "󰢝", "󰂉", "󰢞", "󰂊", "󰂋", "󰂅"],
-      "default": ["󰁺", "󰁻", "󰁼", "󰁽", "󰁾", "󰁿", "󰂀", "󰂁", "󰂂", "󰁹"]
-    },
-    "format-full": "󰂅",
-    "tooltip-format-discharging": "{power:>1.0f}W↓ {capacity}%",
-    "tooltip-format-charging": "{power:>1.0f}W↑ {capacity}%",
-    "interval": 5,
-    "on-click": "wlogout -b 5",
-    "states": {
-      "warning": 20,
-      "critical": 10
-    }
+      "states": {
+          "critical": 15
+      },
+      "format": "{icon}",
+      "format-icons": ["", "", "", "", ""]
   },
   "bluetooth": {
     "format": "",
@@ -73,15 +61,14 @@
       "format": "{}",
       "exec": "~/.config/waybar/cava.sh"
   },
-    "group/right1": {
-	"orientation": "inherit",
-	"modules": [
-    "pulseaudio",
-    "bluetooth",
-    "network",
-    "battery"
-	]
-},
+
+  "custom/launcher": {
+      "format": "󰣇",
+      "on-click": "rofi -show drun",
+      "tooltip": false
+  },
+
+  "custom/power": { "format": "", "on-click": "pgrep -x wlogout || wlogout -b 5" },
 
   "custom/separator#dot": {
     "format": "",
@@ -111,6 +98,15 @@
       "custom/dot_update"
     ]
   },
+  "group/right1": {
+    "orientation": "inherit",
+    "modules": [
+      "pulseaudio",
+      "bluetooth",
+      "network",
+      "battery"
+    ]
+  },
   "group/tray-expander": {
     "orientation": "inherit",
     "drawer": {
@@ -123,33 +119,24 @@
     ]
   },
   "hyprland/window": {
-    "format": "{class}",
-    "separate-outputs": true
+      "format": "Desktop\n{initialTitle}",
+      "max-length": 20
   },
   "hyprland/workspaces": {
-    "on-click": "activate",
-    "format": "{icon}",
-    "format-icons": {
-      "default": "",
-      "1": "1",
-      "2": "2",
-      "3": "3",
-      "4": "4",
-      "5": "5",
-      "6": "6",
-      "7": "7",
-      "8": "8",
-      "9": "9",
-      "active": "󱓻"
-    },
-    "persistent-workspaces": {
-      "1": [],
-      "2": [],
-      "3": [],
-      "4": [],
-      "5": []
-    }
+      "format": "{name}",
+      "on-click": "activate",
+      "all-outputs": true,
+      "sort-by-number": true,
+      "persistent-workspaces": {
+          "*": 5
+      }
   },
+
+  "memory": {
+      "interval": 5,
+      "format": "󰍛 {percentage}%"
+  },
+
   "mpris": {
     "interval": 1,
     "format": "{player_icon} {dynamic}",

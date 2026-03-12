@@ -4,16 +4,15 @@ set -euo pipefail
 install_local_bin() {
     local DOTFILES_DIR="$BASE_DIR"
     local SRC_DIR="$DOTFILES_DIR/bin"
-    local DST_DIR="$HOME/.local/bin"
+    local DST_DIR="/usr/bin"
 
-    info "Installing executables to ~/.local/bin"
+    info "Installing executables to /usr/bin"
 
     if [[ ! -d "$SRC_DIR" ]]; then
         warn "No bin/ directory found in dotfiles, skipping."
         return 0
     fi
 
-    mkdir -p "$DST_DIR"
 
     local linked=0
     local skipped=0
@@ -37,10 +36,10 @@ install_local_bin() {
             continue
         fi
 
-        ln -s "$file" "$target"
+        sudo ln -s "$file" "$target"
         ok "Linked $name"
         ((++linked))
     done
 
-    ok "Local bin setup complete ($linked linked, $skipped skipped)"
+    ok "Bin setup complete ($linked linked, $skipped skipped)"
 }

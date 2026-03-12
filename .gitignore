@@ -5,3 +5,4 @@ nvim/lua/plugins/colorscheme.lua
 walker/themes/current/colors.css
 yazi/theme.toml
 opencode/themes/current.json
+themes/colorschemes/current

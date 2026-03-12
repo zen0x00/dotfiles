@@ -59,7 +59,6 @@ install_aur_packages() {
         sunset-cursors-git
         swayosd
         tlauncher-installer
-        tor-browser-bin
         ttf-gohu-nerd
         ttf-ibm-plex
         ttf-jetbrains-mono-nerd

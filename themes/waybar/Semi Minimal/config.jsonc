@@ -1,4 +1,7 @@
 {
+    "include": [
+    "$HOME/.config/waybar/Modules"
+    ],
     "layer": "top",
     "position": "top",
     "margin-top": 5,
@@ -9,7 +12,7 @@
     "spacing": 0,
 
     "modules-left": [
-        "custom/launcher",
+        "custom/logo",
         "hyprland/workspaces",
         "clock#time"
     ],
@@ -28,11 +31,6 @@
     ],
 
     // --- LEFT ---
-    "custom/launcher": {
-        "format": "󰣇",
-        "on-click": "rofi -show drun",
-        "tooltip": false
-    },
 
     "hyprland/workspaces": {
         "format": "{icon}",

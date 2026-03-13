@@ -26,7 +26,7 @@ window#waybar {
     border: none; 
 }
 
-#custom-launcher { color: @accent; font-size: 16px; }
+#custom-logo { color: @accent; font-size: 16px; }
 #workspaces button { color: @fg_dim; background: transparent; padding: 0 6px; border: none; }
 #workspaces button.active { color: @accent; }
 #clock { color: @fg_muted; }

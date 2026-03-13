@@ -6,6 +6,7 @@ install -Dm644 "$GEN/alacritty.toml" ~/.config/alacritty/colors.toml
 install -Dm644 "$GEN/btop.theme" ~/.config/btop/themes/current.theme
 install -Dm644 "$GEN/fastfetch.jsonc" ~/.config/fastfetch/config.jsonc
 install -Dm644 "$GEN/hypr.conf" ~/.config/hypr/configs/colors.conf
+install -Dm644 "$GEN/kitty.conf" ~/.config/kitty/colors.conf
 install -Dm644 "$GEN/ohmyposh.omp.json" ~/.config/oh-my-posh/current.omp.json
 install -Dm644 "$GEN/opencode.json" ~/.config/opencode/themes/current.json
 install -Dm644 "$GEN/rofi.rasi" ~/.config/rofi/colors.rasi

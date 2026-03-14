@@ -15,6 +15,7 @@ install_aur_packages() {
         elephant
         elephant-desktopapplications
         elephant-providerlist
+        fcitx5
         ffmpeg
         fastfetch
         fzf
@@ -23,6 +24,7 @@ install_aur_packages() {
         gpu-screen-recorder
         gtk-engine-murrine
         heroic-games-launcher
+        hypridle
         hyprland
         hyprpolkitagent
         hyprshot

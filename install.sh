@@ -1,4 +1,4 @@
-#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zen0x/rex-os/main/install.sh)"
+#   sh -c "$(curl -fsSL https://raw.githubusercontent.com/zen0x00/hyprdots/main/install.sh)"
 #!/bin/bash
 set -e
 

@@ -1,4 +1,4 @@
-if status --is-interactive
+if status is-interactive
     set fish_greeting ""
     fastfetch
 
@@ -7,11 +7,6 @@ if status --is-interactive
     end
 
     fzf --fish | source
-end
-
-
-
-if type -q zoxide
     zoxide init fish | source
 end
 

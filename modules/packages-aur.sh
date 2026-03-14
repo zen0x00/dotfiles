@@ -47,7 +47,6 @@ install_aur_packages() {
         obs-pipewire-audio-capture
         obs-studio
         obs-vkcapture
-	      oh-my-posh
         openrgb
         preload
         satty

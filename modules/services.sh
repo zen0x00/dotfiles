@@ -147,6 +147,21 @@ if command -v systemctl >/dev/null 2>&1; then
 fi
 
 # ---------------------------------------------------
+# RUBY GEM AND COLORLS SETUP
+# ---------------------------------------------------
+echo "Updating RubyGems to 4.0.8..."
+gem update --system 4.0.8 || true
+
+echo "Installing colorls gem for enhanced directory listing..."
+gem install colorls || true
+
+# ---------------------------------------------------
+# STARSHIP SHELL PROMPT SETUP
+# ---------------------------------------------------
+echo "Applying Starship preset 'jetpack' for $USER_NAME..."
+sudo -u "$USER_NAME" starship preset jetpack -o "/home/$USER_NAME/.config/starship.toml" || true
+
+# ---------------------------------------------------
 # DONE
 # ---------------------------------------------------
 echo

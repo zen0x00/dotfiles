@@ -92,11 +92,6 @@ echo "KEYMAP=us" > /etc/vconsole.conf
 
 systemctl enable NetworkManager
 
-su - $USERNAME -c "
-cd /home/$USERNAME
-git clone https://github.com/zen0x00/dotfiles.git
-"
-
 mkinitcpio -P
 EOF
 

@@ -3,68 +3,112 @@
 install_core_packages() {
 
     local packages=(
-        bat
-        bluez
-        bluez-utils
-        btop
-        brightnessctl
-        cliphist
-        curl
-        dnsmasq
-        edk2-ovmf
-        fd
-        gnome-keyring
-        gvfs
-        gvfs-mtp
-        gzip
-        kvantum
-        lib32-vulkan-icd-loader
-        libsecret
+        # Hyprland compositor & core components
+        hyprland
+        xdg-desktop-portal-hyprland
+        xdg-terminal-exec
+        hyprpolkitagent
+        hypridle
+        hyprsunset
+        hyprshot
+
+        # Display manager
+        ly
+
+        # Status bar
+        waybar
+        playerctl
+
+        # App launcher
+        walker
+
+        # Elephant application provider ecosystem
+        elephant
+        elephant-desktopapplications
+        elephant-providerlist
+
+        # Network
         networkmanager
+        dnsmasq
+
+        # Fonts
         noto-fonts
         noto-fonts-cjk
         noto-fonts-emoji
         noto-fonts-extra
+        ttf-gohu-nerd
+        ttf-ibm-plex
+        ttf-jetbrains-mono-nerd
+        ttf-roboto
+        ttf-twemoji
+
+        # Storage & file system
         ntfs-3g
-        openbsd-netcat
-        openssh
-        os-prober
-        p7zip
-        pavucontrol
+        gvfs
+        gvfs-mtp
+
+        # Authentication & secrets
+        gnome-keyring
+        libsecret
+
+        # Audio (PipeWire)
         pipewire
-        pipewire-pulse
         pipewire-alsa
         pipewire-jack
-        playerctl
-        qemu-full
+        pipewire-pulse
+        wireplumber
+
+        # Graphics
+        vulkan-icd-loader
+        lib32-vulkan-icd-loader
+
+        # Bluetooth
+        bluez
+        bluez-utils
+
+        # Clipboard
+        cliphist
+        wl-clipboard
+
+        # Brightness & input control
+        brightnessctl
+
+        # Notifications & OSD
+        libnotify
+        swaync
+        swayosd
+
+        # Logout menu
+        wlogout
+
+        # Qt theming (Wayland)
+        kvantum
         qt5-base
         qt5-wayland
         qt5ct
+        qt6-5compat
         qt6-base
         qt6-declarative
-        qt6-wayland
-        qt6-5compat
         qt6-multimedia
+        qt6-quicktimeline
         qt6-shadertools
         qt6-svg
-        qt6-quicktimeline
         qt6-wayland
         qt6ct
-        ripgrep
-        rsync
-        sassc
-        tar
-        ufw
-        unzip
-        uwsm
-        vde2
-        virt-manager
-        virt-viewer
-        vulkan-icd-loader
-        wireplumber
+
+        # GTK settings
+        nwg-look
+
+        # Icons
+        yaru-icon-theme
+
+        # Dotfiles management
+        stow
+
+        # Basic utilities
+        curl
+        jq
         wget
-        wl-clipboard
-        zip
     )
 
     local to_install=()

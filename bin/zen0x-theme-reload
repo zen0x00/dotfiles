@@ -1,12 +1,12 @@
 #!/bin/bash
 
-killall -9 waybar 
-pkill -x swayosd-server
+killall -9 waybar 2>/dev/null
+pkill -x swayosd-server 2>/dev/null
 waybar &
 swayosd-server &
-makoctl reload
+swaync-client -rs
 
 (
     sleep 0.9
-    notify-send "󰑓 Reload Complete" "Waybar, Mako and SwayOSD" 
+    notify-send "󰑓 Reload Complete" "Waybar, SwayNC and SwayOSD"
 ) &

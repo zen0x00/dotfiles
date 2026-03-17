@@ -47,12 +47,11 @@ esac
 # Mode selection menu
 echo
 info "Select installation mode:"
-echo "1) Minimal (fonts, basic tools, core requirements)"
-echo "2) Normal  (Minimal + full system packages)"
-echo "3) Developer (Normal + dev tools, SDKs, environments)"
+echo "1) Minimal (Hyprland desktop core only)"
+echo "2) Full    (Minimal + all apps, tools, and dev packages)"
 echo
 
-read -rp "Enter choice (1/2/3): " MODE
+read -rp "Enter choice (1/2): " MODE
 echo
 
 case "$MODE" in
@@ -61,12 +60,8 @@ case "$MODE" in
         INSTALL_MODE="minimal"
         ;;
     2)
-        ok "Normal mode selected."
-        INSTALL_MODE="normal"
-        ;;
-    3)
-        ok "Developer mode selected."
-        INSTALL_MODE="developer"
+        ok "Full mode selected."
+        INSTALL_MODE="full"
         ;;
     *)
         err "Invalid choice."
@@ -77,9 +72,7 @@ esac
 # Load modules
 source "$BASE_DIR/modules/git.sh"
 source "$BASE_DIR/modules/packages-core.sh"
-source "$BASE_DIR/modules/packages-aur.sh"
-source "$BASE_DIR/modules/packages-dev.sh"
-source "$BASE_DIR/modules/zsh.sh"
+source "$BASE_DIR/modules/packages-extra.sh"
 source "$BASE_DIR/modules/stow.sh"
 source "$BASE_DIR/modules/default-theme.sh"
 source "$BASE_DIR/modules/monitors.sh"
@@ -100,26 +93,12 @@ configure_git_if_needed
 info "Installing core packages..."
 install_core_packages
 
-if [[ "$INSTALL_MODE" != "minimal" ]]; then
-    info "Installing AUR packages..."
-    install_aur_packages
-fi
-
-if [[ "$INSTALL_MODE" == "developer" ]]; then
-    info "Installing developer packages..."
-    install_dev_packages
+if [[ "$INSTALL_MODE" == "full" ]]; then
+    info "Installing extra packages..."
+    install_extra_packages
 fi
 
 ok "Package installation done!"
-
-# -----------------------------------------------
-# ZSH SETUP   👈 RIGHT HERE
-# -----------------------------------------------
-if [[ "$INSTALL_MODE" != "minimal" ]]; then
-    info "Configuring Zsh..."
-    setup_zsh
-fi
-
 
 # -----------------------------------------------
 # LOCAL BIN

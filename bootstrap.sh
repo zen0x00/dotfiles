@@ -7,6 +7,65 @@ BASE_DIR="$(cd "$(dirname "$0")" && pwd)"
 source "$BASE_DIR/utils/logging.sh"
 source "$BASE_DIR/utils/checks.sh"
 
+# ------------------------------
+# INTERACTIVE HELPERS
+# ------------------------------
+ask_choice() {
+    local prompt="$1"
+    local default="$2"
+    shift 2
+    local options=("$@")
+    local input
+
+    while true; do
+        echo >&2
+        info "$prompt" >&2
+        for option in "${options[@]}"; do
+            echo "$option" >&2
+        done
+        read -rp "Enter choice [default: $default]: " input >&2
+        input="${input:-$default}"
+
+        for option in "${options[@]}"; do
+            local key="${option%%)*}"
+            if [[ "$input" == "$key" ]]; then
+                echo "$input"
+                return 0
+            fi
+        done
+
+        warn "Invalid choice: $input" >&2
+    done
+}
+
+ask_yes_no() {
+    local prompt="$1"
+    local default="${2:-y}"
+    local input
+
+    while true; do
+        if [[ "$default" == "y" ]]; then
+            read -rp "$prompt [Y/n]: " input
+        else
+            read -rp "$prompt [y/N]: " input
+        fi
+
+        input="${input:-$default}"
+        case "${input,,}" in
+            y|yes) return 0 ;;
+            n|no) return 1 ;;
+            *) warn "Please answer yes or no." ;;
+        esac
+    done
+}
+
+confirm_or_exit() {
+    if ! ask_yes_no "Continue with these settings?" "y"; then
+        warn "Bootstrap cancelled by user."
+        exit 0
+    fi
+}
+
 info "Welcome to the Rex OS Bootstrap Installer"
 
 # Ensure not root
@@ -21,13 +80,7 @@ check_yay
 # -----------------------------------------------
 # MACHINE TYPE SELECTION
 # -----------------------------------------------
-info "Select machine type:"
-echo "1) Desktop"
-echo "2) Laptop"
-echo
-
-read -rp "Enter choice (1/2): " MACHINE
-echo
+MACHINE="$(ask_choice "Select machine type:" "1" "1) Desktop" "2) Laptop")"
 
 case "$MACHINE" in
     1)
@@ -45,14 +98,7 @@ case "$MACHINE" in
 esac
 
 # Mode selection menu
-echo
-info "Select installation mode:"
-echo "1) Minimal (Hyprland desktop core only)"
-echo "2) Full    (Minimal + all apps, tools, and dev packages)"
-echo
-
-read -rp "Enter choice (1/2): " MODE
-echo
+MODE="$(ask_choice "Select installation mode:" "1" "1) Minimal (Hyprland desktop core only)" "2) Full    (Minimal + all apps, tools, and dev packages)")"
 
 case "$MODE" in
     1)
@@ -69,11 +115,18 @@ case "$MODE" in
         ;;
 esac
 
+    echo
+    info "Configuration summary:"
+    echo "- Machine type      : $MACHINE_TYPE"
+    echo "- Installation mode : $INSTALL_MODE"
+    confirm_or_exit
+
 # Load modules
 source "$BASE_DIR/modules/git.sh"
 source "$BASE_DIR/modules/packages-core.sh"
 source "$BASE_DIR/modules/packages-extra.sh"
 source "$BASE_DIR/modules/stow.sh"
+source "$BASE_DIR/modules/zsh.sh"
 source "$BASE_DIR/modules/default-theme.sh"
 source "$BASE_DIR/modules/monitors.sh"
 source "$BASE_DIR/modules/bin.sh"
@@ -85,6 +138,13 @@ source "$BASE_DIR/modules/reboot.sh"
 # -----------------------------------------------
 info "Checking Git configuration…"
 configure_git_if_needed
+
+if ask_yes_no "Proceed to package installation?" "y"; then
+    ok "Starting package installation."
+else
+    warn "Bootstrap cancelled before package installation."
+    exit 0
+fi
 
 # -----------------------------------------------
 # INSTALL PACKAGES
@@ -100,6 +160,13 @@ fi
 
 ok "Package installation done!"
 
+if ask_yes_no "Continue with dotfiles and desktop setup?" "y"; then
+    ok "Proceeding with setup steps."
+else
+    warn "Bootstrap finished after package installation by request."
+    exit 0
+fi
+
 # -----------------------------------------------
 # LOCAL BIN
 # -----------------------------------------------
@@ -111,6 +178,14 @@ install_local_bin
 # -----------------------------------------------
 info "Applying dotfiles using stow..."
 run_stow
+
+# -----------------------------------------------
+# ZSH SETUP
+# -----------------------------------------------
+if declare -F setup_zsh >/dev/null 2>&1; then
+    info "Applying Zsh setup..."
+    setup_zsh
+fi
 
 # -----------------------------------------------
 # HYPRLAND MONITOR CONFIG

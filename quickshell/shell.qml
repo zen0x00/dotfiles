@@ -6,4 +6,5 @@ ShellRoot {
     Launcher {}
     Bar {}
     ZenMenu {}
+    NotificationPopup {}
 }

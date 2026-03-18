@@ -15,3 +15,4 @@ BarBluetooth 1.0 BarBluetooth.qml
 BarTray 1.0 BarTray.qml
 ZenMenu 1.0 ZenMenu.qml
 ZenMenuItem 1.0 ZenMenuItem.qml
+NotificationPopup 1.0 NotificationPopup.qml

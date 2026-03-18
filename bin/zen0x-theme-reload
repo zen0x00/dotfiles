@@ -1,9 +1,5 @@
 #!/bin/bash
 
-pkill -x swayosd-server 2>/dev/null
-swayosd-server &
-swaync-client -rs
-kitty @ set-colors --all ~/.config/kitty/colors.conf 2>/dev/null
 pkill -x quickshell 2>/dev/null
 uwsm-app -- quickshell -d &
 

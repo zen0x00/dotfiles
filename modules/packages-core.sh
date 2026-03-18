@@ -67,9 +67,6 @@ install_core_packages() {
         # Notifications
         libnotify
 
-        # Logout menu
-        wlogout
-
         # Qt theming (Wayland)
         kvantum
         qt5-base

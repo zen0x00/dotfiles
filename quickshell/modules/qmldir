@@ -17,3 +17,5 @@ ZenMenu 1.0 ZenMenu.qml
 ZenMenuItem 1.0 ZenMenuItem.qml
 NotificationPopup 1.0 NotificationPopup.qml
 Osd 1.0 Osd.qml
+PowerMenu 1.0 PowerMenu.qml
+PowerMenuButton 1.0 PowerMenuButton.qml

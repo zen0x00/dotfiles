@@ -20,5 +20,4 @@ install_if_exists "$GEN/kitty.conf" ~/.config/kitty/colors.conf
 install_if_exists "$GEN/opencode.json" ~/.config/opencode/themes/current.json
 install_if_exists "$GEN/quickshell-colors.qml" ~/.config/quickshell/modules/Colors.qml
 install_if_exists "$GEN/vesktop.css" ~/.config/vesktop/themes/colors.css
-install_if_exists "$GEN/wlogout.css" ~/.config/wlogout/colors.css
 install_if_exists "$GEN/yazi.toml" ~/.config/yazi/theme.toml

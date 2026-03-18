@@ -8,4 +8,5 @@ ShellRoot {
     ZenMenu {}
     NotificationPopup {}
     Osd {}
+    PowerMenu {}
 }

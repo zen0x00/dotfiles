@@ -16,7 +16,7 @@ Row {
 
             width: modelData.focused ? 36 : 28
             height: 22
-            radius: 0
+            radius: 6
             color: modelData.focused ? Colors.accent : (hovered ? Qt.rgba(Colors.fg0.r, Colors.fg0.g, Colors.fg0.b, 0.1) : "transparent")
 
             Behavior on width {

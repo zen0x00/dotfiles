@@ -41,7 +41,7 @@ PanelWindow {
         anchors.right: parent.right
         implicitHeight: innerColumn.implicitHeight + 24
         color: Qt.rgba(Colors.bg0.r, Colors.bg0.g, Colors.bg0.b, 0.95)
-        radius: 0
+        radius: 12
         border.color: Colors.bg2
         border.width: 2
 

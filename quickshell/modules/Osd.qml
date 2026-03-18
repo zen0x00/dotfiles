@@ -158,7 +158,7 @@ PanelWindow {
         anchors.centerIn: parent
         width: parent.width
         height: parent.height
-        radius: 0
+        radius: 12
         color: Qt.rgba(Colors.bg0.r, Colors.bg0.g, Colors.bg0.b, 0.95)
         border.color: Colors.bg2
         border.width: 1
@@ -185,13 +185,13 @@ PanelWindow {
                 Rectangle {
                     Layout.fillWidth: true
                     height: 6
-                    radius: 0
+                    radius: 12
                     color: Colors.bg3
 
                     Rectangle {
                         width: Math.min(root.value, 1.0) * parent.width
                         height: parent.height
-                        radius: 0
+                        radius: 12
                         color: root.mode === "volume" ? (root.muted ? Colors.fg2 : Colors.accent) : Colors.yellow
 
                         Behavior on width {

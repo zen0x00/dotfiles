@@ -23,7 +23,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         color: Colors.bg1
-        radius: 0
+        radius: 8
 
         TextInput {
             id: input

@@ -36,3 +36,5 @@ set_theme "code" "$HOME/.config/Code/User/settings.json"
 set_theme "code-oss" "$HOME/.config/Code - OSS/User/settings.json"
 set_theme "codium" "$HOME/.config/VSCodium/User/settings.json"
 set_theme "cursor" "$HOME/.config/Cursor/User/settings.json"
+
+exit 0

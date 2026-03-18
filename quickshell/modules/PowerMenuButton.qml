@@ -18,7 +18,7 @@ Item {
         color: "transparent"
         border.color: Colors.bg2
         border.width: 2
-        radius: 0
+        radius: 12
 
         states: State {
             name: "hovered"

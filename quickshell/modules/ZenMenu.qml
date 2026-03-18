@@ -20,14 +20,15 @@ PanelWindow {
     WlrLayershell.namespace: "zen0x-wallpicker"
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 
-    property var wallpapers: []
+    // Each entry: { name: "Abyssal", wallpaper: "/path/to/wallpaper.jpg", dir: "/path/to/theme" }
+    property var themes: []
     property int selectedIndex: 0
     property real cardWidth: 280
     property real cardHeight: 380
     property real skew: -12
 
     function show() {
-        wallpaperLoader.running = true;
+        themeLoader.running = true;
         root.visible = true;
         keyHandler.forceActiveFocus();
     }
@@ -45,36 +46,63 @@ PanelWindow {
         }
     }
 
-    // --- Load wallpapers ---
+    // --- Load themes ---
     Process {
-        id: wallpaperLoader
-        command: ["bash", "-c", "find -L \"$HOME/.config/walls\" -type f \\( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \\) | sort"]
+        id: themeLoader
+        command: ["bash", "-c", "for d in \"$HOME/.config/themes/colorschemes\"/*/; do [ -f \"$d/wallpapers/wallpaper.jpg\" ] && echo \"$(basename \"$d\")|$d/wallpapers/wallpaper.jpg|$d\"; done | sort"]
         stdout: StdioCollector {
             onStreamFinished: {
                 let out = this.text.trim();
                 if (out.length > 0) {
-                    root.wallpapers = out.split("\n");
+                    let lines = out.split("\n");
+                    let result = [];
+                    for (let i = 0; i < lines.length; i++) {
+                        let parts = lines[i].split("|");
+                        if (parts.length >= 3) {
+                            result.push({ name: parts[0], wallpaper: parts[1], dir: parts[2] });
+                        }
+                    }
+                    root.themes = result;
                     root.selectedIndex = 0;
                 }
             }
         }
     }
 
-    // --- Apply wallpaper ---
+    // --- Apply theme ---
     Process {
         id: wallpaperApply
         command: []
     }
 
-    function applyWallpaper(filePath: string): void {
+    Process {
+        id: themeApply
+        command: []
+    }
+
+    function applyTheme(theme: var): void {
+        // Set wallpaper with transition
         wallpaperApply.command = ["bash", "-c",
-            "awww img '" + filePath + "' " +
+            "awww img '" + theme.wallpaper + "' " +
             "--transition-type grow " +
             "--transition-duration 2 " +
             "--transition-fps 60 && " +
-            "ln -sf '" + filePath + "' \"$HOME/.current_wallpaper\""
+            "ln -sf '" + theme.wallpaper + "' \"$HOME/.current_wallpaper\""
         ];
         wallpaperApply.running = true;
+
+        // Apply full theme: symlink current, generate, apply, reload
+        themeApply.command = ["bash", "-c",
+            "ln -sfn '" + theme.dir + "' \"$HOME/.config/themes/current\" && " +
+            "zen0x-theme-generate '" + theme.name + "' && " +
+            "zen0x-apply-generated-theme && " +
+            "zen0x-theme-gtk && " +
+            "zen0x-theme-set-vscode && " +
+            "matugen image --source-color-index 0 '" + theme.wallpaper + "' && " +
+            "setsid zen0x-theme-reload >/dev/null 2>&1 &"
+        ];
+        themeApply.running = true;
+
         root.hide();
     }
 
@@ -92,11 +120,11 @@ PanelWindow {
                 if (root.selectedIndex > 0) root.selectedIndex--;
                 event.accepted = true;
             } else if (event.key === Qt.Key_Right) {
-                if (root.selectedIndex < root.wallpapers.length - 1) root.selectedIndex++;
+                if (root.selectedIndex < root.themes.length - 1) root.selectedIndex++;
                 event.accepted = true;
             } else if (event.key === Qt.Key_Return || event.key === Qt.Key_Enter) {
-                if (root.selectedIndex >= 0 && root.selectedIndex < root.wallpapers.length) {
-                    root.applyWallpaper(root.wallpapers[root.selectedIndex]);
+                if (root.selectedIndex >= 0 && root.selectedIndex < root.themes.length) {
+                    root.applyTheme(root.themes[root.selectedIndex]);
                 }
                 event.accepted = true;
             }
@@ -109,12 +137,12 @@ PanelWindow {
         onClicked: root.hide()
     }
 
-    // --- Filename label ---
+    // --- Theme name label ---
     Text {
         anchors.bottom: parent.verticalCenter
         anchors.bottomMargin: -(root.cardHeight / 2) - 40
         anchors.horizontalCenter: parent.horizontalCenter
-        text: root.wallpapers.length > 0 ? root.wallpapers[root.selectedIndex].split("/").pop() : ""
+        text: root.themes.length > 0 ? root.themes[root.selectedIndex].name : ""
         font.family: "JetBrainsMono Nerd Font Mono"
         font.pixelSize: 14
         font.weight: 500
@@ -130,7 +158,7 @@ PanelWindow {
         anchors.bottom: parent.verticalCenter
         anchors.bottomMargin: -(root.cardHeight / 2) - 64
         anchors.horizontalCenter: parent.horizontalCenter
-        text: root.wallpapers.length > 0 ? (root.selectedIndex + 1) + " / " + root.wallpapers.length : ""
+        text: root.themes.length > 0 ? (root.selectedIndex + 1) + " / " + root.themes.length : ""
         font.family: "JetBrainsMono Nerd Font Mono"
         font.pixelSize: 11
         color: Colors.fg2
@@ -149,16 +177,15 @@ PanelWindow {
         }
 
         Repeater {
-            model: root.wallpapers
+            model: root.themes.length
 
             Item {
                 id: card
-                required property string modelData
-                required property int index
 
                 property int offset: index - root.selectedIndex
                 property bool isCurrent: offset === 0
                 property real spacing: 200
+                property var theme: root.themes[index]
 
                 visible: Math.abs(offset) <= 4
 
@@ -192,11 +219,11 @@ PanelWindow {
                     border.color: card.isCurrent ? Colors.accent : "transparent"
                     border.width: 2
 
-                    // Wallpaper image
+                    // Theme wallpaper preview
                     Image {
                         anchors.fill: parent
                         anchors.margins: 2
-                        source: card.visible ? "file://" + card.modelData : ""
+                        source: card.visible && card.theme ? "file://" + card.theme.wallpaper : ""
                         fillMode: Image.PreserveAspectCrop
                         asynchronous: true
                         sourceSize.width: 400
@@ -220,7 +247,7 @@ PanelWindow {
                     cursorShape: Qt.PointingHandCursor
                     onClicked: {
                         if (card.isCurrent) {
-                            root.applyWallpaper(card.modelData);
+                            root.applyTheme(card.theme);
                         } else {
                             root.selectedIndex = card.index;
                         }

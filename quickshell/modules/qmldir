@@ -1,0 +1,8 @@
+module modules
+
+singleton Colors 1.0 Colors.qml
+
+Launcher 1.0 Launcher.qml
+SearchField 1.0 SearchField.qml
+AppList 1.0 AppList.qml
+AppEntry 1.0 AppEntry.qml

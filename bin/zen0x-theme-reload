@@ -5,8 +5,11 @@ pkill -x swayosd-server 2>/dev/null
 waybar &
 swayosd-server &
 swaync-client -rs
+kitty @ set-colors --all ~/.config/kitty/colors.conf 2>/dev/null
+pkill -x quickshell 2>/dev/null
+uwsm-app -- quickshell -d &
 
 (
     sleep 0.9
-    notify-send "󰑓 Reload Complete" "Waybar, SwayNC and SwayOSD"
+    notify-send "󰑓 Reload Complete" "Waybar, SwayNC, SwayOSD, Kitty and QuickShell"
 ) &

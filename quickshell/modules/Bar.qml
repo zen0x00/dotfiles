@@ -30,6 +30,10 @@ PanelWindow {
         border.color: Colors.bg2
         border.width: 1
 
+        BarClock {
+            anchors.centerIn: parent
+        }
+
         RowLayout {
             anchors.fill: parent
             anchors.leftMargin: 16
@@ -73,11 +77,6 @@ PanelWindow {
                 BarVolume {}
                 BarNetwork {}
                 BarBluetooth {}
-            }
-
-            BarClock {
-                Layout.alignment: Qt.AlignVCenter
-                Layout.leftMargin: 14
             }
         }
     }

@@ -9,6 +9,7 @@ install_core_packages() {
         xdg-terminal-exec
         hyprpolkitagent
         hypridle
+        hyprlock
         hyprsunset
         hyprshot
 

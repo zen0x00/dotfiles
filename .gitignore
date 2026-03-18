@@ -1,6 +1,7 @@
 # Hyprland machine-specific configs
 hypr/configs/monitors.conf
 hypr/configs/colors.conf
+hypr/hyprlock-colors.conf
 nvim/lua/plugins/colorscheme.lua
 yazi/theme.toml
 opencode/themes/current.json

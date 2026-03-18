@@ -1,0 +1,10 @@
+$bg0 = rgb({{ bg0_strip }})
+$bg1 = rgb({{ bg1_strip }})
+$fg0 = rgb({{ fg0_strip }})
+$fg1 = rgb({{ fg1_strip }})
+$fg2 = rgb({{ fg2_strip }})
+$accent = rgb({{ accent_strip }})
+$red = rgb({{ red_strip }})
+$yellow = rgb({{ yellow_strip }})
+$fg2_strip = {{ fg2_strip }}
+$red_strip = {{ red_strip }}

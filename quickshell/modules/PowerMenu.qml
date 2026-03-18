@@ -40,7 +40,7 @@ PanelWindow {
 
     Rectangle {
         anchors.fill: parent
-        color: Qt.rgba(Colors.bg0.r, Colors.bg0.g, Colors.bg0.b, 0.85)
+        color: Qt.rgba(Colors.bg0.r, Colors.bg0.g, Colors.bg0.b, 0.55)
 
         RowLayout {
             anchors.centerIn: parent

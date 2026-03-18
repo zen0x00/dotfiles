@@ -4,4 +4,5 @@ import "modules"
 
 ShellRoot {
     Launcher {}
+    Bar {}
 }

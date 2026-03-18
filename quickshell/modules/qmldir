@@ -6,3 +6,9 @@ Launcher 1.0 Launcher.qml
 SearchField 1.0 SearchField.qml
 AppList 1.0 AppList.qml
 AppEntry 1.0 AppEntry.qml
+Bar 1.0 Bar.qml
+BarClock 1.0 BarClock.qml
+BarWorkspaces 1.0 BarWorkspaces.qml
+BarVolume 1.0 BarVolume.qml
+BarNetwork 1.0 BarNetwork.qml
+BarBluetooth 1.0 BarBluetooth.qml

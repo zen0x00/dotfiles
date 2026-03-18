@@ -63,13 +63,13 @@ PanelWindow {
             }
 
             Text {
-                text: "●"
-                font.pixelSize: 10
-                color: Colors.fg0
-                opacity: 0.4
+                text: "·"
+                font.pixelSize: 20
+                font.weight: 800
+                color: Colors.fg2
                 Layout.alignment: Qt.AlignVCenter
-                Layout.leftMargin: 14
-                Layout.rightMargin: 14
+                Layout.leftMargin: 8
+                Layout.rightMargin: 8
             }
 
             Row {

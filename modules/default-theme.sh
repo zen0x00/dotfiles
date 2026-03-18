@@ -30,6 +30,7 @@ apply_default_theme() {
         zen0x-apply-generated-theme
         zen0x-theme-gtk
         zen0x-theme-set-vscode
+        zen0x-theme-nvim
         zen0x-theme-wallpaper "$DEFAULT_THEME"
 
         ok "Default color scheme applied."

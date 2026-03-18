@@ -1,5 +1,6 @@
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Effects
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
@@ -20,6 +21,44 @@ PanelWindow {
     WlrLayershell.namespace: "zen0x-wallpicker"
     WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 
+    property string currentWallpaper: ""
+
+    // --- Resolve current wallpaper path ---
+    Process {
+        id: wallpaperResolver
+        command: ["bash", "-c", "readlink -f \"$HOME/.current_wallpaper\""]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let path = this.text.trim();
+                if (path.length > 0) root.currentWallpaper = "file://" + path;
+            }
+        }
+    }
+
+    // --- Background wallpaper with blur ---
+    Image {
+        id: bgImage
+        anchors.fill: parent
+        source: root.currentWallpaper
+        fillMode: Image.PreserveAspectCrop
+        visible: false
+        cache: false
+    }
+
+    MultiEffect {
+        anchors.fill: bgImage
+        source: bgImage
+        blurEnabled: true
+        blurMax: 64
+        blur: 1.0
+    }
+
+    // Dim overlay
+    Rectangle {
+        anchors.fill: parent
+        color: Qt.rgba(0, 0, 0, 0.4)
+    }
+
     // Each entry: { name: "Abyssal", wallpaper: "/path/to/wallpaper.jpg", dir: "/path/to/theme" }
     property var themes: []
     property int selectedIndex: 0
@@ -28,6 +67,7 @@ PanelWindow {
     property real skew: -12
 
     function show() {
+        wallpaperResolver.running = true;
         themeLoader.running = true;
         root.visible = true;
         keyHandler.forceActiveFocus();
@@ -98,7 +138,7 @@ PanelWindow {
             "zen0x-apply-generated-theme && " +
             "zen0x-theme-gtk && " +
             "zen0x-theme-set-vscode && " +
-            "matugen image --source-color-index 0 '" + theme.wallpaper + "' && " +
+            "zen0x-theme-nvim && " +
             "setsid zen0x-theme-reload >/dev/null 2>&1 &"
         ];
         themeApply.running = true;

@@ -3,6 +3,9 @@
 pkill -x quickshell 2>/dev/null
 uwsm-app -- quickshell -d &
 
+# Reload kitty colors
+pkill -USR1 kitty 2>/dev/null
+
 (
     sleep 0.9
     notify-send "󰑓 Reload Complete" "QuickShell"

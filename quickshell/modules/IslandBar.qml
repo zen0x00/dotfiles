@@ -49,14 +49,15 @@ PanelWindow {
             }
 
             // --- Divider after media ---
-            Rectangle {
+            Text {
                 visible: mediaSection.hasMedia
-                width: 1
-                height: 18
-                color: Colors.bg2
+                text: "·"
+                font.pixelSize: 20
+                font.weight: 800
+                color: Colors.fg2
                 Layout.alignment: Qt.AlignVCenter
-                Layout.leftMargin: 10
-                Layout.rightMargin: 10
+                Layout.leftMargin: 8
+                Layout.rightMargin: 8
             }
 
             // --- Workspaces ---
@@ -65,13 +66,14 @@ PanelWindow {
             }
 
             // --- Divider ---
-            Rectangle {
-                width: 1
-                height: 18
-                color: Colors.bg2
+            Text {
+                text: "·"
+                font.pixelSize: 20
+                font.weight: 800
+                color: Colors.fg2
                 Layout.alignment: Qt.AlignVCenter
-                Layout.leftMargin: 10
-                Layout.rightMargin: 10
+                Layout.leftMargin: 8
+                Layout.rightMargin: 8
             }
 
             // --- Clock ---

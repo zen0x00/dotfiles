@@ -49,12 +49,14 @@ Item {
 
     MouseArea {
         anchors.fill: parent
-        acceptedButtons: Qt.LeftButton | Qt.MiddleButton
+        acceptedButtons: Qt.LeftButton | Qt.MiddleButton | Qt.RightButton
         cursorShape: Qt.PointingHandCursor
 
         onClicked: (mouse) => {
             if (mouse.button === Qt.MiddleButton) {
                 muteProc.running = true;
+            } else if (mouse.button === Qt.RightButton) {
+                audioLauncher.running = true;
             } else {
                 controlCenter.running = true;
             }
@@ -86,5 +88,10 @@ Item {
     Process {
         id: controlCenter
         command: ["quickshell", "ipc", "call", "controlcenter", "toggle"]
+    }
+
+    Process {
+        id: audioLauncher
+        command: ["zen0x-launch-audio"]
     }
 }

@@ -1,5 +1,6 @@
 import QtQuick
 import Quickshell.Hyprland
+import Quickshell.Io
 
 Row {
     id: root
@@ -11,10 +12,12 @@ Row {
         delegate: Rectangle {
             required property var modelData
 
+            property bool hovered: mouseArea.containsMouse
+
             width: modelData.focused ? 36 : 28
             height: 22
             radius: 0
-            color: modelData.focused ? Colors.accent : "transparent"
+            color: modelData.focused ? Colors.accent : (hovered ? Qt.rgba(Colors.fg0.r, Colors.fg0.g, Colors.fg0.b, 0.1) : "transparent")
 
             Behavior on width {
                 NumberAnimation { duration: 300; easing.type: Easing.OutBack; easing.overshoot: 1.5 }
@@ -38,17 +41,11 @@ Row {
             }
 
             MouseArea {
+                id: mouseArea
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
                 hoverEnabled: true
-                onClicked: modelData.activate()
-
-                onEntered: {
-                    if (!modelData.focused) parent.color = Qt.rgba(Colors.fg0.r, Colors.fg0.g, Colors.fg0.b, 0.1);
-                }
-                onExited: {
-                    if (!modelData.focused) parent.color = "transparent";
-                }
+                onClicked: Hyprland.dispatch("workspace " + modelData.name)
             }
         }
     }

@@ -19,14 +19,6 @@ install_core_packages() {
         waybar
         playerctl
 
-        # App launcher
-        walker
-
-        # Elephant application provider ecosystem
-        elephant
-        elephant-desktopapplications
-        elephant-providerlist
-
         # Network
         networkmanager
         dnsmasq

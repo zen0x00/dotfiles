@@ -5,6 +5,7 @@
     "layer": "top",
     "position": "top",
     "margin-top": 8,
+    "margin-bottom": 8,
     "height": 38,
     "spacing": 12,
     "modules-left": [],

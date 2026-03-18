@@ -61,6 +61,8 @@ Item {
 
             Text {
                 anchors.centerIn: parent
+                anchors.horizontalCenterOffset: root.status === "Playing" ? 0 : 1
+                anchors.verticalCenterOffset: 1
                 text: root.status === "Playing" ? "󰏤" : "󰐊"
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 14

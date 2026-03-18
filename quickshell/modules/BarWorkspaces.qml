@@ -4,7 +4,7 @@ import Quickshell.Io
 
 Row {
     id: root
-    spacing: 0
+    spacing: 2
 
     Repeater {
         model: Hyprland.workspaces
@@ -15,39 +15,52 @@ Row {
             property bool focused: modelData.focused
             property bool hovered: mouseArea.containsMouse
 
-            width: focused ? 28 : 22
-            height: 22
+            width: 28
+            height: 28
 
-            Behavior on width {
-                NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
-            }
+            // Workspace number
+            Text {
+                id: label
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.verticalCenter: parent.verticalCenter
+                anchors.verticalCenterOffset: focused ? -2 : 0
+                text: modelData.name
+                font.family: "JetBrainsMono Nerd Font Mono"
+                font.pixelSize: focused ? 13 : 11
+                font.weight: focused ? 900 : 600
+                color: focused ? Colors.accent : (hovered ? Colors.fg0 : Colors.fg2)
 
-            Rectangle {
-                anchors.centerIn: parent
-                width: parent.width - 4
-                height: 18
-                radius: 9
-                color: focused ? Colors.accent : "transparent"
-
-                Behavior on width {
-                    NumberAnimation { duration: 200; easing.type: Easing.OutCubic }
+                Behavior on anchors.verticalCenterOffset {
+                    NumberAnimation { duration: 300; easing.type: Easing.OutBack }
                 }
-
+                Behavior on font.pixelSize {
+                    NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+                }
                 Behavior on color {
                     ColorAnimation { duration: 200 }
                 }
+            }
 
-                Text {
-                    anchors.centerIn: parent
-                    text: modelData.name
-                    font.family: "JetBrainsMono Nerd Font Mono"
-                    font.pixelSize: 12
-                    font.weight: 800
-                    color: focused ? Colors.bg0 : (hovered ? Colors.fg0 : Colors.fg1)
+            // Underline indicator
+            Rectangle {
+                id: underline
+                anchors.horizontalCenter: parent.horizontalCenter
+                anchors.bottom: parent.bottom
+                anchors.bottomMargin: 3
+                height: 2
+                radius: 1
+                width: focused ? 14 : (hovered ? 6 : 0)
+                color: focused ? Colors.accent : Colors.fg2
+                opacity: focused ? 1.0 : (hovered ? 0.6 : 0)
 
-                    Behavior on color {
-                        ColorAnimation { duration: 200 }
-                    }
+                Behavior on width {
+                    NumberAnimation { duration: 350; easing.type: Easing.OutBack }
+                }
+                Behavior on opacity {
+                    NumberAnimation { duration: 250; easing.type: Easing.OutCubic }
+                }
+                Behavior on color {
+                    ColorAnimation { duration: 200 }
                 }
             }
 

@@ -3,7 +3,7 @@ import Quickshell.Hyprland
 
 Row {
     id: root
-    spacing: 8
+    spacing: 2
 
     Repeater {
         model: Hyprland.workspaces
@@ -11,23 +11,44 @@ Row {
         delegate: Rectangle {
             required property var modelData
 
-            width: modelData.focused ? 22 : 10
-            height: 10
-            radius: 5
-            color: modelData.focused ? Colors.accent : Colors.fg1
+            width: modelData.focused ? 36 : 28
+            height: 22
+            radius: 11
+            color: modelData.focused ? Colors.accent : "transparent"
 
             Behavior on width {
-                NumberAnimation { duration: 150; easing.type: Easing.InOutQuad }
+                NumberAnimation { duration: 300; easing.type: Easing.OutBack; easing.overshoot: 1.5 }
             }
 
             Behavior on color {
-                ColorAnimation { duration: 150 }
+                ColorAnimation { duration: 200 }
+            }
+
+            Text {
+                anchors.centerIn: parent
+                text: modelData.name
+                font.family: "JetBrainsMono Nerd Font Mono"
+                font.pixelSize: 13
+                font.weight: 700
+                color: modelData.focused ? Colors.bg0 : Qt.rgba(Colors.fg0.r, Colors.fg0.g, Colors.fg0.b, 0.5)
+
+                Behavior on color {
+                    ColorAnimation { duration: 200 }
+                }
             }
 
             MouseArea {
                 anchors.fill: parent
                 cursorShape: Qt.PointingHandCursor
+                hoverEnabled: true
                 onClicked: modelData.activate()
+
+                onEntered: {
+                    if (!modelData.focused) parent.color = Qt.rgba(Colors.fg0.r, Colors.fg0.g, Colors.fg0.b, 0.1);
+                }
+                onExited: {
+                    if (!modelData.focused) parent.color = "transparent";
+                }
             }
         }
     }

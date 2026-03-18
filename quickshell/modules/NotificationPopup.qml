@@ -10,6 +10,22 @@ Scope {
 
     property var historyList: []
     property int unreadCount: 0
+    property bool dndEnabled: false
+
+    // ── System state ──
+    property real volumeLevel: 0.0
+    property bool volumeMuted: false
+    property string networkState: "disconnected"
+    property string networkName: ""
+    property string btState: "off"
+    property string btDevice: ""
+    property real brightnessLevel: 1.0
+    property real brightnessMax: 1.0
+
+    // ── Media state ──
+    property string mediaTitle: ""
+    property string mediaArtist: ""
+    property string mediaStatus: ""  // Playing, Paused, Stopped, ""
 
     NotificationServer {
         id: server
@@ -18,10 +34,23 @@ Scope {
         keepOnReload: true
 
         onNotification: (notification) => {
+            if (root.dndEnabled) {
+                // Still save to history but don't show popup
+                notification.tracked = true;
+                root.historyList = [{
+                    appName: notification.appName ?? "Notification",
+                    appIcon: notification.appIcon ?? "",
+                    summary: notification.summary ?? "",
+                    body: notification.body ?? "",
+                    time: new Date()
+                }].concat(root.historyList).slice(0, 100);
+                root.unreadCount++;
+                return;
+            }
+
             notifModel.insert(0, { notif: notification });
             notification.tracked = true;
 
-            // Add to history
             root.historyList = [{
                 appName: notification.appName ?? "Notification",
                 appIcon: notification.appIcon ?? "",
@@ -35,6 +64,161 @@ Scope {
 
     ListModel {
         id: notifModel
+    }
+
+    // ── Pollers ──
+
+    Process {
+        id: volumePoll
+        command: ["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let out = this.text.trim();
+                let parts = out.split(" ");
+                if (parts.length >= 2) {
+                    root.volumeLevel = parseFloat(parts[1]);
+                    root.volumeMuted = out.includes("[MUTED]");
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 2000; running: true; repeat: true; triggeredOnStart: true
+        onTriggered: volumePoll.running = true
+    }
+
+    Process {
+        id: networkPoll
+        command: ["bash", "-c", "nmcli -t -f TYPE,STATE,CONNECTION device | head -5"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let out = this.text.trim();
+                let lines = out.split("\n");
+                root.networkState = "disconnected";
+                root.networkName = "";
+                for (let line of lines) {
+                    let parts = line.split(":");
+                    if (parts[1] === "connected") {
+                        root.networkState = parts[0] === "ethernet" ? "ethernet" : "wifi";
+                        root.networkName = parts[2] ?? "";
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 5000; running: true; repeat: true; triggeredOnStart: true
+        onTriggered: networkPoll.running = true
+    }
+
+    Process {
+        id: btPoll
+        command: ["bash", "-c", "systemctl is-active bluetooth > /dev/null 2>&1 && bluetoothctl show | grep 'Powered:' || echo 'Powered: no'"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let out = this.text.trim();
+                if (out.includes("yes")) {
+                    root.btState = "on";
+                    btDevicePoll.running = true;
+                } else {
+                    root.btState = "off";
+                    root.btDevice = "";
+                }
+            }
+        }
+    }
+
+    Process {
+        id: btDevicePoll
+        command: ["bash", "-c", "bluetoothctl devices Connected | head -1 | cut -d' ' -f3-"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let out = this.text.trim();
+                if (out.length > 0) {
+                    root.btState = "connected";
+                    root.btDevice = out;
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 5000; running: true; repeat: true; triggeredOnStart: true
+        onTriggered: btPoll.running = true
+    }
+
+    Process {
+        id: brightnessPoll
+        command: ["bash", "-c", "brightnessctl info -m 2>/dev/null | cut -d, -f2,5 || echo '0,0'"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let out = this.text.trim();
+                // format: "current,max" or percentage
+                let parts = out.split(",");
+                if (parts.length >= 2) {
+                    root.brightnessLevel = parseInt(parts[0]) || 0;
+                    root.brightnessMax = parseInt(parts[1]) || 1;
+                }
+            }
+        }
+    }
+
+    Timer {
+        interval: 5000; running: true; repeat: true; triggeredOnStart: true
+        onTriggered: brightnessPoll.running = true
+    }
+
+    Process {
+        id: mediaPoll
+        command: ["bash", "-c", "playerctl metadata --format '{{title}}\\n{{artist}}\\n{{status}}' 2>/dev/null || echo ''"]
+        stdout: StdioCollector {
+            onStreamFinished: {
+                let out = this.text.trim();
+                let lines = out.split("\n");
+                root.mediaTitle = lines[0] ?? "";
+                root.mediaArtist = lines[1] ?? "";
+                root.mediaStatus = lines[2] ?? "";
+            }
+        }
+    }
+
+    Timer {
+        interval: 2000; running: true; repeat: true; triggeredOnStart: true
+        onTriggered: mediaPoll.running = true
+    }
+
+    // ── Action processes ──
+    Process {
+        id: volumeSet
+        property string cmd: ""
+        command: ["bash", "-c", cmd]
+    }
+
+    Process {
+        id: brightnessSet
+        property string cmd: ""
+        command: ["bash", "-c", cmd]
+    }
+
+    Process {
+        id: mediaCmd
+        property string cmd: ""
+        command: ["bash", "-c", cmd]
+    }
+
+    Process {
+        id: btToggle
+        property string cmd: ""
+        command: ["bash", "-c", cmd]
+    }
+
+    Process {
+        id: networkCmd
+        property string cmd: ""
+        command: ["bash", "-c", cmd]
     }
 
     // ── Live notification popups (top-right) ──
@@ -240,7 +424,7 @@ Scope {
         }
     }
 
-    // ── Notification Center (fullscreen overlay) ──
+    // ── Control Center (fullscreen overlay) ──
     PanelWindow {
         id: center
 
@@ -256,11 +440,16 @@ Scope {
         exclusionMode: ExclusionMode.Ignore
 
         WlrLayershell.layer: WlrLayer.Overlay
-        WlrLayershell.namespace: "zen0x-notification-center"
+        WlrLayershell.namespace: "zen0x-control-center"
         WlrLayershell.keyboardFocus: WlrKeyboardFocus.Exclusive
 
         function show() {
             root.unreadCount = 0;
+            volumePoll.running = true;
+            networkPoll.running = true;
+            btPoll.running = true;
+            brightnessPoll.running = true;
+            mediaPoll.running = true;
             center.visible = true;
             centerKey.forceActiveFocus();
         }
@@ -270,7 +459,7 @@ Scope {
         }
 
         IpcHandler {
-            target: "notifications"
+            target: "controlcenter"
 
             function toggle(): void {
                 if (center.visible) center.hide();
@@ -278,7 +467,6 @@ Scope {
             }
         }
 
-        // Dismiss on click outside panel
         MouseArea {
             anchors.fill: parent
             onClicked: center.hide()
@@ -300,232 +488,709 @@ Scope {
             anchors.topMargin: 52
             anchors.bottomMargin: 12
             anchors.rightMargin: 12
-            width: 400
+            width: 420
             radius: 16
             color: Qt.rgba(Colors.bg0.r, Colors.bg0.g, Colors.bg0.b, 0.95)
             border.color: Colors.bg2
             border.width: 1
 
-            // Prevent clicks on panel from closing
             MouseArea {
                 anchors.fill: parent
                 onClicked: (event) => event.accepted = true
             }
 
-            ColumnLayout {
+            Flickable {
                 anchors.fill: parent
                 anchors.margins: 16
-                spacing: 0
+                contentHeight: mainColumn.implicitHeight
+                clip: true
+                boundsBehavior: Flickable.StopAtBounds
 
-                // Header
-                RowLayout {
-                    Layout.fillWidth: true
-                    spacing: 8
+                ColumnLayout {
+                    id: mainColumn
+                    width: parent.width
+                    spacing: 12
 
-                    Text {
-                        text: "Notifications"
-                        font.family: "JetBrainsMono Nerd Font Mono"
-                        font.pixelSize: 16
-                        font.weight: 700
-                        color: Colors.fg0
+                    // ── Header ──
+                    RowLayout {
                         Layout.fillWidth: true
-                    }
-
-                    // Clear all button
-                    Rectangle {
-                        width: clearRow.implicitWidth + 16
-                        height: 28
-                        radius: 8
-                        color: clearMouse.containsMouse ? Colors.bg3 : "transparent"
-                        visible: root.historyList.length > 0
-
-                        Row {
-                            id: clearRow
-                            anchors.centerIn: parent
-                            spacing: 6
-
-                            Text {
-                                text: "Clear"
-                                font.family: "JetBrainsMono Nerd Font Mono"
-                                font.pixelSize: 11
-                                font.weight: 600
-                                color: Colors.fg2
-                                anchors.verticalCenter: parent.verticalCenter
-                            }
-                        }
-
-                        MouseArea {
-                            id: clearMouse
-                            anchors.fill: parent
-                            hoverEnabled: true
-                            cursorShape: Qt.PointingHandCursor
-                            onClicked: {
-                                root.historyList = [];
-                            }
-                        }
-                    }
-                }
-
-                // Separator
-                Rectangle {
-                    Layout.fillWidth: true
-                    Layout.topMargin: 12
-                    Layout.bottomMargin: 12
-                    height: 1
-                    color: Colors.bg2
-                }
-
-                // Empty state
-                Item {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    visible: root.historyList.length === 0
-
-                    ColumnLayout {
-                        anchors.centerIn: parent
-                        spacing: 8
 
                         Text {
-                            text: "󰂚"
+                            text: "Control Center"
                             font.family: "JetBrainsMono Nerd Font Mono"
-                            font.pixelSize: 48
-                            color: Colors.bg4
-                            Layout.alignment: Qt.AlignHCenter
+                            font.pixelSize: 16
+                            font.weight: 700
+                            color: Colors.fg0
+                            Layout.fillWidth: true
                         }
 
-                        Text {
-                            text: "No notifications"
-                            font.family: "JetBrainsMono Nerd Font Mono"
-                            font.pixelSize: 13
-                            color: Colors.fg2
-                            Layout.alignment: Qt.AlignHCenter
-                        }
-                    }
-                }
+                        // DND Toggle
+                        Rectangle {
+                            width: dndRow.implicitWidth + 16
+                            height: 28
+                            radius: 8
+                            color: root.dndEnabled ? Colors.accent : (dndMouse.containsMouse ? Colors.bg3 : Colors.bg1)
 
-                // Notification list
-                Flickable {
-                    Layout.fillWidth: true
-                    Layout.fillHeight: true
-                    contentHeight: historyColumn.implicitHeight
-                    clip: true
-                    visible: root.historyList.length > 0
-                    boundsBehavior: Flickable.StopAtBounds
+                            Behavior on color { ColorAnimation { duration: 120 } }
 
-                    ColumnLayout {
-                        id: historyColumn
-                        width: parent.width
-                        spacing: 8
+                            Row {
+                                id: dndRow
+                                anchors.centerIn: parent
+                                spacing: 6
 
-                        Repeater {
-                            model: root.historyList
-
-                            delegate: Rectangle {
-                                required property var modelData
-                                required property int index
-
-                                Layout.fillWidth: true
-                                implicitHeight: historyContent.implicitHeight + 24
-                                radius: 12
-                                color: historyMouse.containsMouse ? Colors.bg3 : Qt.rgba(Colors.bg1.r, Colors.bg1.g, Colors.bg1.b, 0.4)
-
-                                Behavior on color {
-                                    ColorAnimation { duration: 120 }
+                                Text {
+                                    text: root.dndEnabled ? "󰂛" : "󰂚"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 14
+                                    color: root.dndEnabled ? Colors.bg0 : Colors.fg2
+                                    anchors.verticalCenter: parent.verticalCenter
                                 }
 
-                                ColumnLayout {
-                                    id: historyContent
-                                    anchors.fill: parent
-                                    anchors.margins: 12
-                                    spacing: 4
+                                Text {
+                                    text: "DND"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 11
+                                    font.weight: 600
+                                    color: root.dndEnabled ? Colors.bg0 : Colors.fg2
+                                    anchors.verticalCenter: parent.verticalCenter
+                                }
+                            }
 
-                                    RowLayout {
-                                        spacing: 8
-                                        Layout.fillWidth: true
+                            MouseArea {
+                                id: dndMouse
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: root.dndEnabled = !root.dndEnabled
+                            }
+                        }
+                    }
 
-                                        Image {
-                                            source: modelData.appIcon ?? ""
-                                            sourceSize.width: 16
-                                            sourceSize.height: 16
-                                            visible: status === Image.Ready
-                                            Layout.alignment: Qt.AlignVCenter
-                                        }
+                    // ── Quick Toggles ──
+                    Row {
+                        Layout.fillWidth: true
+                        spacing: 8
 
-                                        Text {
-                                            text: modelData.appName
-                                            font.family: "JetBrainsMono Nerd Font Mono"
-                                            font.pixelSize: 10
-                                            font.weight: 600
-                                            color: Colors.fg2
-                                            Layout.fillWidth: true
-                                            Layout.alignment: Qt.AlignVCenter
-                                            elide: Text.ElideRight
-                                        }
+                        // WiFi/Network toggle
+                        Rectangle {
+                            width: (panel.width - 32 - 16) / 3
+                            height: 72
+                            radius: 14
+                            color: root.networkState !== "disconnected" ? Qt.rgba(Colors.accent.r, Colors.accent.g, Colors.accent.b, 0.15) : Colors.bg1
 
-                                        Text {
-                                            text: formatTime(modelData.time)
-                                            font.family: "JetBrainsMono Nerd Font Mono"
-                                            font.pixelSize: 10
-                                            color: Colors.bg4
-                                            Layout.alignment: Qt.AlignVCenter
-                                        }
+                            Behavior on color { ColorAnimation { duration: 120 } }
 
-                                        Text {
-                                            text: "✕"
-                                            font.pixelSize: 11
-                                            color: Colors.fg2
-                                            opacity: historyMouse.containsMouse ? 1 : 0
-                                            Layout.alignment: Qt.AlignVCenter
+                            ColumnLayout {
+                                anchors.centerIn: parent
+                                spacing: 4
 
-                                            Behavior on opacity {
-                                                NumberAnimation { duration: 100 }
-                                            }
+                                Text {
+                                    text: root.networkState === "ethernet" ? "󰈀" : root.networkState === "wifi" ? "󰤨" : "󰤭"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 22
+                                    color: root.networkState !== "disconnected" ? Colors.accent : Colors.fg2
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
 
-                                            MouseArea {
-                                                anchors.fill: parent
-                                                cursorShape: Qt.PointingHandCursor
-                                                onClicked: {
-                                                    let arr = root.historyList.slice();
-                                                    arr.splice(index, 1);
-                                                    root.historyList = arr;
-                                                }
-                                            }
+                                Text {
+                                    text: root.networkState === "disconnected" ? "Network" : root.networkName || (root.networkState === "ethernet" ? "Ethernet" : "WiFi")
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 10
+                                    font.weight: 600
+                                    color: root.networkState !== "disconnected" ? Colors.accent : Colors.fg2
+                                    Layout.alignment: Qt.AlignHCenter
+                                    Layout.maximumWidth: parent.parent.width - 16
+                                    elide: Text.ElideRight
+                                }
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {
+                                    networkCmd.cmd = "uwsm-app -- kitty -e nmtui";
+                                    networkCmd.running = true;
+                                    center.hide();
+                                }
+                            }
+                        }
+
+                        // Bluetooth toggle
+                        Rectangle {
+                            width: (panel.width - 32 - 16) / 3
+                            height: 72
+                            radius: 14
+                            color: root.btState !== "off" ? Qt.rgba(Colors.accent.r, Colors.accent.g, Colors.accent.b, 0.15) : Colors.bg1
+
+                            Behavior on color { ColorAnimation { duration: 120 } }
+
+                            ColumnLayout {
+                                anchors.centerIn: parent
+                                spacing: 4
+
+                                Text {
+                                    text: root.btState === "connected" ? "󰂱" : root.btState === "on" ? "󰂯" : "󰂲"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 22
+                                    color: root.btState !== "off" ? Colors.accent : Colors.fg2
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
+
+                                Text {
+                                    text: root.btState === "connected" ? root.btDevice : root.btState === "on" ? "Bluetooth" : "Bluetooth"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 10
+                                    font.weight: 600
+                                    color: root.btState !== "off" ? Colors.accent : Colors.fg2
+                                    Layout.alignment: Qt.AlignHCenter
+                                    Layout.maximumWidth: parent.parent.width - 16
+                                    elide: Text.ElideRight
+                                }
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: {
+                                    if (root.btState === "off") {
+                                        btToggle.cmd = "bluetoothctl power on";
+                                    } else {
+                                        btToggle.cmd = "bluetoothctl power off";
+                                    }
+                                    btToggle.running = true;
+                                    btPoll.running = true;
+                                }
+                            }
+                        }
+
+                        // DND toggle (big)
+                        Rectangle {
+                            width: (panel.width - 32 - 16) / 3
+                            height: 72
+                            radius: 14
+                            color: root.dndEnabled ? Qt.rgba(Colors.accent.r, Colors.accent.g, Colors.accent.b, 0.15) : Colors.bg1
+
+                            Behavior on color { ColorAnimation { duration: 120 } }
+
+                            ColumnLayout {
+                                anchors.centerIn: parent
+                                spacing: 4
+
+                                Text {
+                                    text: root.dndEnabled ? "󰂛" : "󰂚"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 22
+                                    color: root.dndEnabled ? Colors.accent : Colors.fg2
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
+
+                                Text {
+                                    text: root.dndEnabled ? "DND On" : "DND Off"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 10
+                                    font.weight: 600
+                                    color: root.dndEnabled ? Colors.accent : Colors.fg2
+                                    Layout.alignment: Qt.AlignHCenter
+                                }
+                            }
+
+                            MouseArea {
+                                anchors.fill: parent
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: root.dndEnabled = !root.dndEnabled
+                            }
+                        }
+                    }
+
+                    // ── Volume Slider ──
+                    Rectangle {
+                        Layout.fillWidth: true
+                        implicitHeight: volumeSliderLayout.implicitHeight + 24
+                        radius: 14
+                        color: Colors.bg1
+
+                        ColumnLayout {
+                            id: volumeSliderLayout
+                            anchors.fill: parent
+                            anchors.margins: 12
+                            spacing: 8
+
+                            RowLayout {
+                                Layout.fillWidth: true
+                                spacing: 10
+
+                                Text {
+                                    text: root.volumeMuted ? "󰖁" : root.volumeLevel < 0.33 ? "󰕿" : root.volumeLevel < 0.66 ? "󰖀" : "󰕾"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 18
+                                    color: root.volumeMuted ? Colors.fg2 : Colors.accent
+                                    Layout.alignment: Qt.AlignVCenter
+
+                                    MouseArea {
+                                        anchors.fill: parent
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            volumeSet.cmd = "wpctl set-mute @DEFAULT_AUDIO_SINK@ toggle";
+                                            volumeSet.running = true;
+                                            volumePoll.running = true;
                                         }
                                     }
+                                }
 
-                                    Text {
-                                        text: modelData.summary
-                                        font.family: "JetBrainsMono Nerd Font Mono"
-                                        font.pixelSize: 12
-                                        font.weight: 700
-                                        color: Colors.fg0
-                                        wrapMode: Text.WordWrap
-                                        Layout.fillWidth: true
-                                        visible: text.length > 0
-                                    }
+                                Text {
+                                    text: "Volume"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 12
+                                    font.weight: 600
+                                    color: Colors.fg0
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignVCenter
+                                }
 
-                                    Text {
-                                        text: modelData.body
-                                        font.family: "JetBrainsMono Nerd Font Mono"
-                                        font.pixelSize: 11
-                                        color: Colors.fg1
-                                        wrapMode: Text.WordWrap
-                                        Layout.fillWidth: true
-                                        visible: text.length > 0
-                                        maximumLineCount: 3
-                                        elide: Text.ElideRight
+                                Text {
+                                    text: Math.round(root.volumeLevel * 100) + "%"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 11
+                                    color: Colors.fg2
+                                    Layout.alignment: Qt.AlignVCenter
+                                }
+                            }
+
+                            // Slider track
+                            Rectangle {
+                                Layout.fillWidth: true
+                                height: 6
+                                radius: 3
+                                color: Colors.bg3
+
+                                Rectangle {
+                                    width: Math.min(root.volumeLevel, 1.0) * parent.width
+                                    height: parent.height
+                                    radius: 3
+                                    color: root.volumeMuted ? Colors.fg2 : Colors.accent
+
+                                    Behavior on width {
+                                        NumberAnimation { duration: 100 }
                                     }
                                 }
 
                                 MouseArea {
-                                    id: historyMouse
                                     anchors.fill: parent
-                                    hoverEnabled: true
-                                    z: -1
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: (mouse) => {
+                                        let vol = Math.max(0, Math.min(1, mouse.x / width));
+                                        volumeSet.cmd = "wpctl set-volume @DEFAULT_AUDIO_SINK@ " + vol.toFixed(2);
+                                        volumeSet.running = true;
+                                        root.volumeLevel = vol;
+                                    }
+                                    onPositionChanged: (mouse) => {
+                                        if (pressed) {
+                                            let vol = Math.max(0, Math.min(1, mouse.x / width));
+                                            volumeSet.cmd = "wpctl set-volume @DEFAULT_AUDIO_SINK@ " + vol.toFixed(2);
+                                            volumeSet.running = true;
+                                            root.volumeLevel = vol;
+                                        }
+                                    }
                                 }
                             }
                         }
                     }
+
+                    // ── Brightness Slider ──
+                    Rectangle {
+                        Layout.fillWidth: true
+                        implicitHeight: brightnessSliderLayout.implicitHeight + 24
+                        radius: 14
+                        color: Colors.bg1
+                        visible: root.brightnessMax > 0
+
+                        ColumnLayout {
+                            id: brightnessSliderLayout
+                            anchors.fill: parent
+                            anchors.margins: 12
+                            spacing: 8
+
+                            RowLayout {
+                                Layout.fillWidth: true
+                                spacing: 10
+
+                                Text {
+                                    text: root.brightnessMax > 0 && (root.brightnessLevel / root.brightnessMax) < 0.5 ? "󰃞" : "󰃠"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 18
+                                    color: Colors.yellow
+                                    Layout.alignment: Qt.AlignVCenter
+                                }
+
+                                Text {
+                                    text: "Brightness"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 12
+                                    font.weight: 600
+                                    color: Colors.fg0
+                                    Layout.fillWidth: true
+                                    Layout.alignment: Qt.AlignVCenter
+                                }
+
+                                Text {
+                                    text: root.brightnessMax > 0 ? Math.round((root.brightnessLevel / root.brightnessMax) * 100) + "%" : "N/A"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 11
+                                    color: Colors.fg2
+                                    Layout.alignment: Qt.AlignVCenter
+                                }
+                            }
+
+                            Rectangle {
+                                Layout.fillWidth: true
+                                height: 6
+                                radius: 3
+                                color: Colors.bg3
+
+                                Rectangle {
+                                    width: root.brightnessMax > 0 ? (root.brightnessLevel / root.brightnessMax) * parent.width : 0
+                                    height: parent.height
+                                    radius: 3
+                                    color: Colors.yellow
+
+                                    Behavior on width {
+                                        NumberAnimation { duration: 100 }
+                                    }
+                                }
+
+                                MouseArea {
+                                    anchors.fill: parent
+                                    cursorShape: Qt.PointingHandCursor
+                                    onClicked: (mouse) => {
+                                        let pct = Math.max(0.01, Math.min(1, mouse.x / width));
+                                        brightnessSet.cmd = "brightnessctl set " + Math.round(pct * 100) + "%";
+                                        brightnessSet.running = true;
+                                        root.brightnessLevel = pct * root.brightnessMax;
+                                    }
+                                    onPositionChanged: (mouse) => {
+                                        if (pressed) {
+                                            let pct = Math.max(0.01, Math.min(1, mouse.x / width));
+                                            brightnessSet.cmd = "brightnessctl set " + Math.round(pct * 100) + "%";
+                                            brightnessSet.running = true;
+                                            root.brightnessLevel = pct * root.brightnessMax;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // ── Media Player ──
+                    Rectangle {
+                        Layout.fillWidth: true
+                        implicitHeight: mediaLayout.implicitHeight + 24
+                        radius: 14
+                        color: Colors.bg1
+                        visible: root.mediaTitle.length > 0
+
+                        ColumnLayout {
+                            id: mediaLayout
+                            anchors.fill: parent
+                            anchors.margins: 12
+                            spacing: 8
+
+                            RowLayout {
+                                Layout.fillWidth: true
+                                spacing: 10
+
+                                Text {
+                                    text: "󰎈"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 18
+                                    color: Colors.green
+                                    Layout.alignment: Qt.AlignVCenter
+                                }
+
+                                ColumnLayout {
+                                    Layout.fillWidth: true
+                                    spacing: 2
+
+                                    Text {
+                                        text: root.mediaTitle
+                                        font.family: "JetBrainsMono Nerd Font Mono"
+                                        font.pixelSize: 12
+                                        font.weight: 700
+                                        color: Colors.fg0
+                                        elide: Text.ElideRight
+                                        Layout.fillWidth: true
+                                    }
+
+                                    Text {
+                                        text: root.mediaArtist
+                                        font.family: "JetBrainsMono Nerd Font Mono"
+                                        font.pixelSize: 11
+                                        color: Colors.fg2
+                                        elide: Text.ElideRight
+                                        Layout.fillWidth: true
+                                        visible: text.length > 0
+                                    }
+                                }
+                            }
+
+                            // Controls
+                            RowLayout {
+                                Layout.alignment: Qt.AlignHCenter
+                                spacing: 24
+
+                                Text {
+                                    text: "󰒮"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 22
+                                    color: prevMouse.containsMouse ? Colors.fg0 : Colors.fg2
+
+                                    Behavior on color { ColorAnimation { duration: 100 } }
+
+                                    MouseArea {
+                                        id: prevMouse
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            mediaCmd.cmd = "playerctl previous";
+                                            mediaCmd.running = true;
+                                        }
+                                    }
+                                }
+
+                                Rectangle {
+                                    width: 40
+                                    height: 40
+                                    radius: 20
+                                    color: playMouse.containsMouse ? Colors.accent : Colors.bg3
+
+                                    Behavior on color { ColorAnimation { duration: 100 } }
+
+                                    Text {
+                                        anchors.centerIn: parent
+                                        text: root.mediaStatus === "Playing" ? "󰏤" : "󰐊"
+                                        font.family: "JetBrainsMono Nerd Font Mono"
+                                        font.pixelSize: 20
+                                        color: playMouse.containsMouse ? Colors.bg0 : Colors.fg0
+                                    }
+
+                                    MouseArea {
+                                        id: playMouse
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            mediaCmd.cmd = "playerctl play-pause";
+                                            mediaCmd.running = true;
+                                        }
+                                    }
+                                }
+
+                                Text {
+                                    text: "󰒭"
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 22
+                                    color: nextMouse.containsMouse ? Colors.fg0 : Colors.fg2
+
+                                    Behavior on color { ColorAnimation { duration: 100 } }
+
+                                    MouseArea {
+                                        id: nextMouse
+                                        anchors.fill: parent
+                                        hoverEnabled: true
+                                        cursorShape: Qt.PointingHandCursor
+                                        onClicked: {
+                                            mediaCmd.cmd = "playerctl next";
+                                            mediaCmd.running = true;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    // ── Separator ──
+                    Rectangle {
+                        Layout.fillWidth: true
+                        height: 1
+                        color: Colors.bg2
+                    }
+
+                    // ── Notifications Header ──
+                    RowLayout {
+                        Layout.fillWidth: true
+
+                        Text {
+                            text: "Notifications"
+                            font.family: "JetBrainsMono Nerd Font Mono"
+                            font.pixelSize: 14
+                            font.weight: 700
+                            color: Colors.fg0
+                            Layout.fillWidth: true
+                        }
+
+                        Rectangle {
+                            width: clearText.implicitWidth + 16
+                            height: 26
+                            radius: 8
+                            color: clearAllMouse.containsMouse ? Colors.bg3 : "transparent"
+                            visible: root.historyList.length > 0
+
+                            Text {
+                                id: clearText
+                                anchors.centerIn: parent
+                                text: "Clear all"
+                                font.family: "JetBrainsMono Nerd Font Mono"
+                                font.pixelSize: 10
+                                font.weight: 600
+                                color: Colors.fg2
+                            }
+
+                            MouseArea {
+                                id: clearAllMouse
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                cursorShape: Qt.PointingHandCursor
+                                onClicked: root.historyList = []
+                            }
+                        }
+                    }
+
+                    // ── Empty state ──
+                    Item {
+                        Layout.fillWidth: true
+                        implicitHeight: 120
+                        visible: root.historyList.length === 0
+
+                        ColumnLayout {
+                            anchors.centerIn: parent
+                            spacing: 8
+
+                            Text {
+                                text: "󰂚"
+                                font.family: "JetBrainsMono Nerd Font Mono"
+                                font.pixelSize: 36
+                                color: Colors.bg4
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+
+                            Text {
+                                text: "No notifications"
+                                font.family: "JetBrainsMono Nerd Font Mono"
+                                font.pixelSize: 12
+                                color: Colors.fg2
+                                Layout.alignment: Qt.AlignHCenter
+                            }
+                        }
+                    }
+
+                    // ── Notification history ──
+                    Repeater {
+                        model: root.historyList
+
+                        delegate: Rectangle {
+                            required property var modelData
+                            required property int index
+
+                            Layout.fillWidth: true
+                            implicitHeight: historyContent.implicitHeight + 20
+                            radius: 12
+                            color: historyMouse.containsMouse ? Colors.bg3 : Qt.rgba(Colors.bg1.r, Colors.bg1.g, Colors.bg1.b, 0.5)
+
+                            Behavior on color { ColorAnimation { duration: 120 } }
+
+                            ColumnLayout {
+                                id: historyContent
+                                anchors.fill: parent
+                                anchors.margins: 10
+                                spacing: 3
+
+                                RowLayout {
+                                    spacing: 8
+                                    Layout.fillWidth: true
+
+                                    Image {
+                                        source: modelData.appIcon ?? ""
+                                        sourceSize.width: 14
+                                        sourceSize.height: 14
+                                        visible: status === Image.Ready
+                                        Layout.alignment: Qt.AlignVCenter
+                                    }
+
+                                    Text {
+                                        text: modelData.appName
+                                        font.family: "JetBrainsMono Nerd Font Mono"
+                                        font.pixelSize: 10
+                                        font.weight: 600
+                                        color: Colors.fg2
+                                        Layout.fillWidth: true
+                                        Layout.alignment: Qt.AlignVCenter
+                                        elide: Text.ElideRight
+                                    }
+
+                                    Text {
+                                        text: formatTime(modelData.time)
+                                        font.family: "JetBrainsMono Nerd Font Mono"
+                                        font.pixelSize: 9
+                                        color: Colors.bg4
+                                        Layout.alignment: Qt.AlignVCenter
+                                    }
+
+                                    Text {
+                                        text: "✕"
+                                        font.pixelSize: 10
+                                        color: Colors.fg2
+                                        opacity: historyMouse.containsMouse ? 1 : 0
+                                        Layout.alignment: Qt.AlignVCenter
+
+                                        Behavior on opacity { NumberAnimation { duration: 100 } }
+
+                                        MouseArea {
+                                            anchors.fill: parent
+                                            cursorShape: Qt.PointingHandCursor
+                                            onClicked: {
+                                                let arr = root.historyList.slice();
+                                                arr.splice(index, 1);
+                                                root.historyList = arr;
+                                            }
+                                        }
+                                    }
+                                }
+
+                                Text {
+                                    text: modelData.summary
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 11
+                                    font.weight: 700
+                                    color: Colors.fg0
+                                    wrapMode: Text.WordWrap
+                                    Layout.fillWidth: true
+                                    visible: text.length > 0
+                                }
+
+                                Text {
+                                    text: modelData.body
+                                    font.family: "JetBrainsMono Nerd Font Mono"
+                                    font.pixelSize: 10
+                                    color: Colors.fg1
+                                    wrapMode: Text.WordWrap
+                                    Layout.fillWidth: true
+                                    visible: text.length > 0
+                                    maximumLineCount: 2
+                                    elide: Text.ElideRight
+                                }
+                            }
+
+                            MouseArea {
+                                id: historyMouse
+                                anchors.fill: parent
+                                hoverEnabled: true
+                                z: -1
+                            }
+                        }
+                    }
+
+                    // Bottom padding
+                    Item { Layout.fillWidth: true; implicitHeight: 8 }
                 }
             }
         }

@@ -10,10 +10,10 @@ Item {
     property bool muted: false
 
     function getIcon(): string {
-        if (root.muted) return "";
-        if (root.volume < 0.33) return "";
-        if (root.volume < 0.66) return "";
-        return "";
+        if (root.muted) return "󰖁";
+        if (root.volume < 0.33) return "󰕿";
+        if (root.volume < 0.66) return "󰖀";
+        return "󰕾";
     }
 
     Process {
@@ -44,7 +44,7 @@ Item {
         id: icon
         text: root.getIcon()
         font.family: "JetBrainsMono Nerd Font Mono"
-        font.pixelSize: 16
+        font.pixelSize: 20
         color: Colors.fg0
     }
 
@@ -71,17 +71,17 @@ Item {
 
     Process {
         id: scrollUpProc
-        command: ["swayosd-client", "--output-volume", "raise"]
+        command: ["quickshell", "ipc", "call", "osd", "volumeUp"]
     }
 
     Process {
         id: scrollDownProc
-        command: ["swayosd-client", "--output-volume", "lower"]
+        command: ["quickshell", "ipc", "call", "osd", "volumeDown"]
     }
 
     Process {
         id: muteProc
-        command: ["swayosd-client", "--output-volume", "mute"]
+        command: ["quickshell", "ipc", "call", "osd", "volumeMute"]
     }
 
     Process {

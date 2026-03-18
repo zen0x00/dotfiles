@@ -7,4 +7,5 @@ ShellRoot {
     Bar {}
     ZenMenu {}
     NotificationPopup {}
+    Osd {}
 }

@@ -29,6 +29,7 @@ Item {
         anchors.verticalCenter: parent.verticalCenter
         font.family: "JetBrainsMono Nerd Font Mono"
         font.pixelSize: 13
+        font.weight: 800
         color: Colors.fg0
     }
 }

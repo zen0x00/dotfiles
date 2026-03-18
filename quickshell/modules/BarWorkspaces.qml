@@ -3,7 +3,7 @@ import Quickshell.Hyprland
 
 Row {
     id: root
-    spacing: 6
+    spacing: 8
 
     Repeater {
         model: Hyprland.workspaces
@@ -11,9 +11,9 @@ Row {
         delegate: Rectangle {
             required property var modelData
 
-            width: modelData.focused ? 16 : 8
-            height: 8
-            radius: 4
+            width: modelData.focused ? 22 : 10
+            height: 10
+            radius: 5
             color: modelData.focused ? Colors.accent : Colors.fg1
 
             Behavior on width {

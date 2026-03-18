@@ -36,14 +36,38 @@ PanelWindow {
             anchors.rightMargin: 16
             spacing: 0
 
+            Text {
+                text: "󰣇"
+                font.family: "JetBrainsMono Nerd Font Mono"
+                font.pixelSize: 22
+                font.weight: 800
+                color: Colors.accent
+                Layout.alignment: Qt.AlignVCenter
+                Layout.rightMargin: 14
+            }
+
             BarWorkspaces {
                 Layout.alignment: Qt.AlignVCenter
             }
 
             Item { Layout.fillWidth: true }
 
+            BarTray {
+                Layout.alignment: Qt.AlignVCenter
+            }
+
+            Text {
+                text: "●"
+                font.pixelSize: 10
+                color: Colors.fg0
+                opacity: 0.4
+                Layout.alignment: Qt.AlignVCenter
+                Layout.leftMargin: 14
+                Layout.rightMargin: 14
+            }
+
             Row {
-                spacing: 12
+                spacing: 14
                 Layout.alignment: Qt.AlignVCenter
 
                 BarVolume {}
@@ -53,7 +77,7 @@ PanelWindow {
 
             BarClock {
                 Layout.alignment: Qt.AlignVCenter
-                Layout.leftMargin: 12
+                Layout.leftMargin: 14
             }
         }
     }

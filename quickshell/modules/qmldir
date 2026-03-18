@@ -12,3 +12,4 @@ BarWorkspaces 1.0 BarWorkspaces.qml
 BarVolume 1.0 BarVolume.qml
 BarNetwork 1.0 BarNetwork.qml
 BarBluetooth 1.0 BarBluetooth.qml
+BarTray 1.0 BarTray.qml

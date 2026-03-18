@@ -6,7 +6,7 @@ Item {
     implicitWidth: icon.implicitWidth
     implicitHeight: icon.implicitHeight
 
-    property string status: "on"  // "on", "off", "connected"
+    property string status: "off"  // "on", "off", "connected"
 
     function getIcon(): string {
         if (root.status === "connected") return "";
@@ -16,14 +16,12 @@ Item {
 
     Process {
         id: btProc
-        command: ["bluetoothctl", "show"]
+        command: ["bash", "-c", "systemctl is-active bluetooth >/dev/null 2>&1 && bluetoothctl show 2>/dev/null || echo 'Powered: no'"]
         stdout: StdioCollector {
-            id: showCollector
-            onDataChanged: {
-                let text = showCollector.text;
-                if (text.includes("Powered: yes")) {
-                    // Check for connected devices
-                    connectedProc.exec();
+            onStreamFinished: {
+                let out = this.text;
+                if (out.includes("Powered: yes")) {
+                    connectedProc.running = true;
                 } else {
                     root.status = "off";
                 }
@@ -33,12 +31,11 @@ Item {
 
     Process {
         id: connectedProc
-        command: ["bluetoothctl", "devices", "Connected"]
+        command: ["bash", "-c", "bluetoothctl devices Connected 2>/dev/null"]
         stdout: StdioCollector {
-            id: connCollector
-            onDataChanged: {
-                let text = connCollector.text.trim();
-                root.status = text.length > 0 ? "connected" : "on";
+            onStreamFinished: {
+                let out = this.text.trim();
+                root.status = out.length > 0 ? "connected" : "on";
             }
         }
     }
@@ -48,7 +45,7 @@ Item {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: btProc.exec()
+        onTriggered: btProc.running = true
     }
 
     Text {

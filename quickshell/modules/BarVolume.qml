@@ -20,14 +20,13 @@ Item {
         id: volumeProc
         command: ["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"]
         stdout: StdioCollector {
-            id: collector
-            onDataChanged: {
+            onStreamFinished: {
                 // Output: "Volume: 0.50" or "Volume: 0.50 [MUTED]"
-                let text = collector.text.trim();
-                let parts = text.split(" ");
+                let out = this.text.trim();
+                let parts = out.split(" ");
                 if (parts.length >= 2) {
                     root.volume = parseFloat(parts[1]) || 0;
-                    root.muted = text.includes("[MUTED]");
+                    root.muted = out.includes("[MUTED]");
                 }
             }
         }
@@ -38,7 +37,7 @@ Item {
         running: true
         repeat: true
         triggeredOnStart: true
-        onTriggered: volumeProc.exec()
+        onTriggered: volumeProc.running = true
     }
 
     Text {

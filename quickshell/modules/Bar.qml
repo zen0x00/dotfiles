@@ -42,12 +42,6 @@ PanelWindow {
 
             Item { Layout.fillWidth: true }
 
-            BarClock {
-                Layout.alignment: Qt.AlignVCenter
-            }
-
-            Item { Layout.fillWidth: true }
-
             Row {
                 spacing: 12
                 Layout.alignment: Qt.AlignVCenter
@@ -55,6 +49,11 @@ PanelWindow {
                 BarVolume {}
                 BarNetwork {}
                 BarBluetooth {}
+            }
+
+            BarClock {
+                Layout.alignment: Qt.AlignVCenter
+                Layout.leftMargin: 12
             }
         }
     }

@@ -26,6 +26,7 @@ Item {
     Text {
         id: label
         text: root.timeText
+        anchors.verticalCenter: parent.verticalCenter
         font.family: "JetBrainsMono Nerd Font Mono"
         font.pixelSize: 13
         color: Colors.fg0

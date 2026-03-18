@@ -81,9 +81,6 @@ install_extra_packages() {
         gpu-screen-recorder
         openrgb
 
-        # Input method
-        fcitx5
-
         # GTK / theming
         abyssal-gtk-theme
         gtk-engine-murrine

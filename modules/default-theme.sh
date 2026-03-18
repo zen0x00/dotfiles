@@ -3,11 +3,8 @@ apply_default_theme() {
     DOTFILES_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
 
     local THEMES="$HOME/.config/themes/colorschemes"
-    local WAYBAR_THEMES="$HOME/.config/themes/waybar"
     local CURRENT="$HOME/.config/themes/current"
-    local WAYBAR_DIR="$HOME/.config/waybar"
     local DEFAULT_THEME="Abyssal"
-    local DEFAULT_WAYBAR_THEME="Default"
 
     # -----------------------------------------------
     # 1. Ensure color scheme directory and theme exist
@@ -22,19 +19,7 @@ apply_default_theme() {
     fi
 
     # -----------------------------------------------
-    # 2. Ensure waybar theme directory and theme exist
-    # -----------------------------------------------
-    mkdir -p "$WAYBAR_THEMES"
-
-    if [[ ! -d "$WAYBAR_THEMES/$DEFAULT_WAYBAR_THEME" ]]; then
-        if [[ -d "$DOTFILES_DIR/themes/waybar/$DEFAULT_WAYBAR_THEME" ]]; then
-            ln -sfn "$DOTFILES_DIR/themes/waybar/$DEFAULT_WAYBAR_THEME" "$WAYBAR_THEMES/$DEFAULT_WAYBAR_THEME"
-            info "Linked waybar theme $DEFAULT_WAYBAR_THEME from repo to $WAYBAR_THEMES"
-        fi
-    fi
-
-    # -----------------------------------------------
-    # 3. Apply default color scheme
+    # 2. Apply default color scheme
     # -----------------------------------------------
     if [[ -d "$THEMES/$DEFAULT_THEME" ]]; then
         info "Applying default theme: $DEFAULT_THEME"
@@ -53,22 +38,7 @@ apply_default_theme() {
     fi
 
     # -----------------------------------------------
-    # 4. Apply default waybar theme
-    # -----------------------------------------------
-    if [[ -d "$WAYBAR_THEMES/$DEFAULT_WAYBAR_THEME" ]]; then
-        info "Applying default waybar theme: $DEFAULT_WAYBAR_THEME"
-
-        mkdir -p "$WAYBAR_DIR"
-        ln -sfn "$WAYBAR_THEMES/$DEFAULT_WAYBAR_THEME/config.jsonc" "$WAYBAR_DIR/config.jsonc"
-        ln -sfn "$WAYBAR_THEMES/$DEFAULT_WAYBAR_THEME/style.css" "$WAYBAR_DIR/style.css"
-
-        ok "Default waybar theme applied."
-    else
-        warn "Default waybar theme '$DEFAULT_WAYBAR_THEME' not found. Skipping waybar theme setup."
-    fi
-
-    # -----------------------------------------------
-    # 5. Reload UI
+    # 3. Reload UI
     # -----------------------------------------------
     zen0x-theme-reload
 }

@@ -11,10 +11,6 @@ PanelWindow {
     anchors.top: true
     anchors.left: true
     anchors.right: true
-    margins.top: 8
-    margins.left: 8
-    margins.right: 8
-
     height: 36
     color: "transparent"
     exclusionMode: ExclusionMode.Auto
@@ -26,9 +22,15 @@ PanelWindow {
         id: pill
         anchors.fill: parent
         color: Qt.rgba(Colors.bg0.r, Colors.bg0.g, Colors.bg0.b, 0.95)
-        radius: 18
-        border.color: Colors.bg2
-        border.width: 1
+        radius: 0
+
+        Rectangle {
+            anchors.left: parent.left
+            anchors.right: parent.right
+            anchors.bottom: parent.bottom
+            height: 1
+            color: Colors.fg0
+        }
 
         BarClock {
             anchors.centerIn: parent
@@ -74,9 +76,9 @@ PanelWindow {
                 spacing: 14
                 Layout.alignment: Qt.AlignVCenter
 
-                BarVolume {}
                 BarNetwork {}
                 BarBluetooth {}
+                BarVolume {}
             }
         }
     }

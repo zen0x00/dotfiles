@@ -257,7 +257,7 @@ Scope {
 
                     Layout.fillWidth: true
                     implicitHeight: cardContent.implicitHeight + 24
-                    radius: 14
+                    radius: 0
                     color: Qt.rgba(Colors.bg0.r, Colors.bg0.g, Colors.bg0.b, 0.95)
                     border.color: Colors.bg2
                     border.width: 1
@@ -382,7 +382,7 @@ Scope {
                                     required property var modelData
                                     Layout.fillWidth: true
                                     implicitHeight: 28
-                                    radius: 8
+                                    radius: 0
                                     color: actionMouse.containsMouse ? Colors.accent : Colors.bg3
 
                                     Text {
@@ -489,7 +489,7 @@ Scope {
             anchors.bottomMargin: 12
             anchors.rightMargin: 12
             width: 420
-            radius: 16
+            radius: 0
             color: Qt.rgba(Colors.bg0.r, Colors.bg0.g, Colors.bg0.b, 0.95)
             border.color: Colors.bg2
             border.width: 1
@@ -528,7 +528,7 @@ Scope {
                         Rectangle {
                             width: dndRow.implicitWidth + 16
                             height: 28
-                            radius: 8
+                            radius: 0
                             color: root.dndEnabled ? Colors.accent : (dndMouse.containsMouse ? Colors.bg3 : Colors.bg1)
 
                             Behavior on color { ColorAnimation { duration: 120 } }
@@ -575,7 +575,7 @@ Scope {
                         Rectangle {
                             width: (panel.width - 32 - 16) / 3
                             height: 72
-                            radius: 14
+                            radius: 0
                             color: root.networkState !== "disconnected" ? Qt.rgba(Colors.accent.r, Colors.accent.g, Colors.accent.b, 0.15) : Colors.bg1
 
                             Behavior on color { ColorAnimation { duration: 120 } }
@@ -619,7 +619,7 @@ Scope {
                         Rectangle {
                             width: (panel.width - 32 - 16) / 3
                             height: 72
-                            radius: 14
+                            radius: 0
                             color: root.btState !== "off" ? Qt.rgba(Colors.accent.r, Colors.accent.g, Colors.accent.b, 0.15) : Colors.bg1
 
                             Behavior on color { ColorAnimation { duration: 120 } }
@@ -667,7 +667,7 @@ Scope {
                         Rectangle {
                             width: (panel.width - 32 - 16) / 3
                             height: 72
-                            radius: 14
+                            radius: 0
                             color: root.dndEnabled ? Qt.rgba(Colors.accent.r, Colors.accent.g, Colors.accent.b, 0.15) : Colors.bg1
 
                             Behavior on color { ColorAnimation { duration: 120 } }
@@ -706,7 +706,7 @@ Scope {
                     Rectangle {
                         Layout.fillWidth: true
                         implicitHeight: volumeSliderLayout.implicitHeight + 24
-                        radius: 14
+                        radius: 0
                         color: Colors.bg1
 
                         ColumnLayout {
@@ -760,13 +760,13 @@ Scope {
                             Rectangle {
                                 Layout.fillWidth: true
                                 height: 6
-                                radius: 3
+                                radius: 0
                                 color: Colors.bg3
 
                                 Rectangle {
                                     width: Math.min(root.volumeLevel, 1.0) * parent.width
                                     height: parent.height
-                                    radius: 3
+                                    radius: 0
                                     color: root.volumeMuted ? Colors.fg2 : Colors.accent
 
                                     Behavior on width {
@@ -800,7 +800,7 @@ Scope {
                     Rectangle {
                         Layout.fillWidth: true
                         implicitHeight: brightnessSliderLayout.implicitHeight + 24
-                        radius: 14
+                        radius: 0
                         color: Colors.bg1
                         visible: root.brightnessMax > 0
 
@@ -844,13 +844,13 @@ Scope {
                             Rectangle {
                                 Layout.fillWidth: true
                                 height: 6
-                                radius: 3
+                                radius: 0
                                 color: Colors.bg3
 
                                 Rectangle {
                                     width: root.brightnessMax > 0 ? (root.brightnessLevel / root.brightnessMax) * parent.width : 0
                                     height: parent.height
-                                    radius: 3
+                                    radius: 0
                                     color: Colors.yellow
 
                                     Behavior on width {
@@ -884,7 +884,7 @@ Scope {
                     Rectangle {
                         Layout.fillWidth: true
                         implicitHeight: mediaLayout.implicitHeight + 24
-                        radius: 14
+                        radius: 0
                         color: Colors.bg1
                         visible: root.mediaTitle.length > 0
 
@@ -960,7 +960,7 @@ Scope {
                                 Rectangle {
                                     width: 40
                                     height: 40
-                                    radius: 20
+                                    radius: 0
                                     color: playMouse.containsMouse ? Colors.accent : Colors.bg3
 
                                     Behavior on color { ColorAnimation { duration: 100 } }
@@ -1031,7 +1031,7 @@ Scope {
                         Rectangle {
                             width: clearText.implicitWidth + 16
                             height: 26
-                            radius: 8
+                            radius: 0
                             color: clearAllMouse.containsMouse ? Colors.bg3 : "transparent"
                             visible: root.historyList.length > 0
 
@@ -1093,7 +1093,7 @@ Scope {
 
                             Layout.fillWidth: true
                             implicitHeight: historyContent.implicitHeight + 20
-                            radius: 12
+                            radius: 0
                             color: historyMouse.containsMouse ? Colors.bg3 : Qt.rgba(Colors.bg1.r, Colors.bg1.g, Colors.bg1.b, 0.5)
 
                             Behavior on color { ColorAnimation { duration: 120 } }

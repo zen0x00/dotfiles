@@ -5,5 +5,4 @@ nvim/lua/plugins/colorscheme.lua
 yazi/theme.toml
 opencode/themes/current.json
 themes/colorschemes/current
-swaync/colors.css
 quickshell/modules/Colors.qml

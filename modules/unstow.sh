@@ -2,7 +2,7 @@
 
 run_unstow() {
     local CONFIG_DIR="$HOME/.config"
-    local folders=(hypr waybar kitty fastfetch rofi gtk-3.0 gtk-4.0 swaync swayosd wlogout)
+    local folders=(hypr kitty fastfetch rofi gtk-3.0 gtk-4.0 wlogout)
 
     for folder in "${folders[@]}"; do
         local target="$CONFIG_DIR/$folder"

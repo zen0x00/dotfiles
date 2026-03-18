@@ -15,8 +15,7 @@ install_core_packages() {
         # Display manager
         ly
 
-        # Status bar
-        waybar
+        # Media control
         playerctl
 
         # Network
@@ -65,10 +64,8 @@ install_core_packages() {
         # Brightness & input control
         brightnessctl
 
-        # Notifications & OSD
+        # Notifications
         libnotify
-        swaync
-        swayosd
 
         # Logout menu
         wlogout

@@ -5,5 +5,5 @@ uwsm-app -- quickshell -d &
 
 (
     sleep 0.9
-    notify-send "󰑓 Reload Complete" "SwayNC, SwayOSD, Kitty and QuickShell"
+    notify-send "󰑓 Reload Complete" "QuickShell"
 ) &

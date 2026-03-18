@@ -14,7 +14,7 @@ Item {
 
     Rectangle {
         anchors.fill: parent
-        radius: 10
+        radius: 0
         color: root.selected ? Colors.accent : mouseArea.containsMouse ? Qt.rgba(Colors.fg0.r, Colors.fg0.g, Colors.fg0.b, 0.08) : "transparent"
 
         Behavior on color {

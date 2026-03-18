@@ -21,7 +21,6 @@ Item {
         command: ["wpctl", "get-volume", "@DEFAULT_AUDIO_SINK@"]
         stdout: StdioCollector {
             onStreamFinished: {
-                // Output: "Volume: 0.50" or "Volume: 0.50 [MUTED]"
                 let out = this.text.trim();
                 let parts = out.split(" ");
                 if (parts.length >= 2) {
@@ -55,27 +54,27 @@ Item {
 
         onClicked: (mouse) => {
             if (mouse.button === Qt.MiddleButton) {
-                muteProc.startDetached();
+                muteProc.running = true;
             } else {
-                launchProc.startDetached();
+                controlCenter.running = true;
             }
         }
 
         onWheel: (wheel) => {
             if (wheel.angleDelta.y > 0)
-                scrollUpProc.startDetached();
+                volUp.running = true;
             else
-                scrollDownProc.startDetached();
+                volDown.running = true;
         }
     }
 
     Process {
-        id: scrollUpProc
+        id: volUp
         command: ["quickshell", "ipc", "call", "osd", "volumeUp"]
     }
 
     Process {
-        id: scrollDownProc
+        id: volDown
         command: ["quickshell", "ipc", "call", "osd", "volumeDown"]
     }
 
@@ -85,7 +84,7 @@ Item {
     }
 
     Process {
-        id: launchProc
-        command: ["zen0x-launch-or-focus-tui", "wiremix"]
+        id: controlCenter
+        command: ["quickshell", "ipc", "call", "controlcenter", "toggle"]
     }
 }

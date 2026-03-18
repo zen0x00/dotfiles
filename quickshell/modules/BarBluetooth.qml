@@ -9,9 +9,9 @@ Item {
     property string status: "off"  // "on", "off", "connected"
 
     function getIcon(): string {
-        if (root.status === "connected") return "";
+        if (root.status === "connected") return "󰂯";
         if (root.status === "off") return "󰂲";
-        return "";
+        return "󰂯";
     }
 
     Process {
@@ -50,16 +50,18 @@ Item {
 
     Text {
         id: icon
+        anchors.verticalCenter: parent.verticalCenter
         text: root.getIcon()
         font.family: "JetBrainsMono Nerd Font Mono"
-        font.pixelSize: 16
+        font.pixelSize: 20
         color: Colors.fg0
+        scale: 0.65
     }
 
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        onClicked: launchProc.startDetached()
+        onClicked: launchProc.running = true
     }
 
     Process {

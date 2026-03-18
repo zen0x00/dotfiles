@@ -13,7 +13,7 @@ Row {
 
             width: modelData.focused ? 36 : 28
             height: 22
-            radius: 11
+            radius: 0
             color: modelData.focused ? Colors.accent : "transparent"
 
             Behavior on width {

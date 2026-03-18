@@ -81,7 +81,7 @@ Item {
     MouseArea {
         anchors.fill: parent
         cursorShape: Qt.PointingHandCursor
-        onClicked: launchProc.startDetached()
+        onClicked: launchProc.running = true
     }
 
     Process {

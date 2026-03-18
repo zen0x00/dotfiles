@@ -108,7 +108,7 @@ PanelWindow {
         width: 360
         implicitHeight: content.implicitHeight + 24
         color: Qt.rgba(Colors.bg0.r, Colors.bg0.g, Colors.bg0.b, 0.95)
-        radius: 16
+        radius: 0
         border.color: Colors.bg2
         border.width: 1
 

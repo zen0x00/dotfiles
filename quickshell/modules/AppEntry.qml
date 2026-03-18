@@ -15,7 +15,7 @@ Item {
         anchors.fill: parent
         anchors.leftMargin: 4
         anchors.rightMargin: 4
-        radius: 6
+        radius: 0
         color: root.selected ? Colors.bg2 : mouseArea.containsMouse ? Colors.bg4 : "transparent"
 
         RowLayout {

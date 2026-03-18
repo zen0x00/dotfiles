@@ -13,3 +13,5 @@ BarVolume 1.0 BarVolume.qml
 BarNetwork 1.0 BarNetwork.qml
 BarBluetooth 1.0 BarBluetooth.qml
 BarTray 1.0 BarTray.qml
+ZenMenu 1.0 ZenMenu.qml
+ZenMenuItem 1.0 ZenMenuItem.qml

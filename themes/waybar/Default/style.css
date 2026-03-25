@@ -10,9 +10,7 @@
 
 #waybar {
   background-color: alpha(@bg, 0.8);
-  border: 1px solid @fg;
   transition: background-color 0.4s ease;
-  border-radius: 9999px;
 }
 
 #waybar button {
@@ -103,7 +101,24 @@ window#waybar.empty #window {
   opacity: 0.75;
 }
 
-#clock { color: @yellow; }
+#cpu {
+  color: @green;
+  padding: 4px 8px;
+}
+
+#memory {
+  color: @teal;
+  padding: 4px 8px;
+}
+
+#disk {
+  color: @orange;
+  padding: 4px 8px;
+}
+#clock {
+  color: @yellow;
+  padding: 4px 8px;
+}
 
 #custom-seperator {
   margin: 0 -4px;

@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MAIN=$(printf "Theme\nWaybar\nWallpaper\nFont\nMode" | zen0x-launch-walker -d -p "Zen Menu")
+MAIN=$(printf "Theme\nWaybar\nWallpaper\nFont\nMode" | zen0x-launch-walker -d -p "Zen Menu" --width 200 --maxheight 250 --minheight 250)
 [ -z "$MAIN" ] && exit
 
 THEMES="$HOME/.config/themes/colorschemes"

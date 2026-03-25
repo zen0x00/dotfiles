@@ -200,7 +200,7 @@
     }
   },
   "pulseaudio": {
-    "format": "{icon}",
+    "format": "{icon} {volume}%",
     "on-click": "zen0x-launch-or-focus-tui wiremix",
     "on-click-right": "pamixer -t",
     "tooltip-format": "Playing at {volume}%",

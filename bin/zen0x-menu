@@ -1,6 +1,6 @@
 #!/bin/bash
 
-MAIN=$(printf "Theme\nWaybar\nWallpaper\nScreen Record" | zen0x-launch-walker -d -p "Zen Menu")
+MAIN=$(printf "Theme\nWaybar\nWallpaper\nFont\nMode" | zen0x-launch-walker -d -p "Zen Menu")
 [ -z "$MAIN" ] && exit
 
 THEMES="$HOME/.config/themes/colorschemes"
@@ -8,7 +8,6 @@ CURRENT="$HOME/.config/themes/current"
 WAYBAR_THEMES="$HOME/.config/themes/waybar"
 WAYBAR_CONFIG="$HOME/.config/waybar"
 GEN="$HOME/.config/zen0x/generated"
-SCREENREC="screenrecorder"   # adjust if different
 
 case "$MAIN" in
 
@@ -72,33 +71,47 @@ case "$MAIN" in
     ln -sf "$FILE" "$HOME/.current_wallpaper"
     ;;
 
-      "Screen Record")
-    ACTION=$(printf "Toggle Recording\nRecord + Desktop Audio\nRecord + Mic\nRecord + All Audio\nRecord + Webcam" \
-      | zen0x-launch-walker -d -p "Screen Record")
+  Font)
+    FONT=$(fc-list --format="%{family[0]}\n" | sort -u | zen0x-launch-walker -d -p "Font")
+    [ -z "$FONT" ] && exit
 
-    [ -z "$ACTION" ] && exit
+    CONFIG="$HOME/.config"
 
-    case "$ACTION" in
-      "Toggle Recording")
-        "$SCREENREC"
-        ;;
+    # Kitty
+    sed -i "s|^font_family.*|font_family      family=\"$FONT\"|" "$CONFIG/kitty/kitty.conf"
 
-      "Record + Desktop Audio")
-        "$SCREENREC" --with-desktop-audio
-        ;;
+    # Waybar (all themes)
+    find "$WAYBAR_THEMES" -name "style.css" -exec sed -i "s|font-family:.*\"|font-family: \"$FONT\"|g" {} +
 
-      "Record + Mic")
-        "$SCREENREC" --with-microphone-audio
-        ;;
+    # Walker
+    sed -i "s|font-family:.*|font-family: $FONT;|" "$CONFIG/walker/themes/current/style.css"
 
-      "Record + All Audio")
-        "$SCREENREC" --with-desktop-audio --with-microphone-audio
-        ;;
+    # Wlogout
+    sed -i "s|font-family:.*|font-family: $FONT;|" "$CONFIG/wlogout/style.css"
 
-      "Record + Webcam")
-        "$SCREENREC" --with-webcam --with-desktop-audio
-        ;;
-    esac
+    # SwayOSD
+    sed -i "s|font-family:.*|font-family: '$FONT';|" "$CONFIG/swayosd/style.css"
+
+    # GTK 3
+    mkdir -p "$CONFIG/gtk-3.0"
+    if [ -f "$CONFIG/gtk-3.0/settings.ini" ]; then
+      sed -i "s|^gtk-font-name=.*|gtk-font-name=$FONT 11|" "$CONFIG/gtk-3.0/settings.ini"
+    else
+      printf "[Settings]\ngtk-font-name=$FONT 11\n" > "$CONFIG/gtk-3.0/settings.ini"
+    fi
+
+    # Reload waybar
+    pkill -SIGUSR2 waybar 2>/dev/null
+
+    # Reload kitty
+    pkill -SIGUSR1 kitty 2>/dev/null
+    ;;
+
+  Mode)
+    MODES_DIR="$HOME/.config/modes"
+    MODE=$(ls -1 "$MODES_DIR" | sort | zen0x-launch-walker -d -p "Mode")
+    [ -z "$MODE" ] && exit
+    zen0x-mode "$MODE"
     ;;
 
 esac

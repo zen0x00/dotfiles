@@ -1,0 +1,58 @@
+#!/bin/bash
+
+MODES_DIR="$HOME/.config/modes"
+STATE_FILE="/tmp/zen0x_mode"
+
+HYPR_CONFIGS="$HOME/.config/hypr/configs"
+WAYBAR_CONFIG="$HOME/.config/waybar"
+WALKER_THEME="$HOME/.config/walker/themes/current"
+GEN="$HOME/.config/zen0x/generated"
+
+current_mode() {
+    if [ -f "$STATE_FILE" ]; then
+        cat "$STATE_FILE"
+    else
+        echo "minimal"
+    fi
+}
+
+apply_mode() {
+    local mode="$1"
+    local mode_dir="$MODES_DIR/$mode"
+
+    if [ ! -d "$mode_dir" ]; then
+        echo "Mode not found: $mode"
+        exit 1
+    fi
+
+    # Hyprland — copy general.conf and animations.conf (colors.conf stays untouched)
+    cp "$mode_dir/hypr/general.conf" "$HYPR_CONFIGS/general.conf"
+    cp "$mode_dir/hypr/animations.conf" "$HYPR_CONFIGS/animations.conf"
+    hyprctl reload
+
+    # Waybar — copy config and style (colors.css symlink stays untouched)
+    cp "$mode_dir/waybar/config.jsonc" "$WAYBAR_CONFIG/config.jsonc"
+    cp "$mode_dir/waybar/style.css" "$WAYBAR_CONFIG/style.css"
+    # Ensure colors.css link exists
+    ln -sfn "$GEN/waybar-colors.css" "$WAYBAR_CONFIG/colors.css"
+    pkill -SIGUSR2 waybar 2>/dev/null || waybar &
+
+    # Walker — copy style and layout (colors.css stays untouched)
+    cp "$mode_dir/walker/style.css" "$WALKER_THEME/style.css"
+    cp "$mode_dir/walker/layout.xml" "$WALKER_THEME/layout.xml"
+
+    echo "$mode" > "$STATE_FILE"
+    notify-send "Mode" "$(echo "$mode" | sed 's/-/ /g; s/\b./\U&/g')"
+}
+
+# If a mode name is passed, apply it directly
+if [ -n "$1" ]; then
+    apply_mode "$1"
+    exit 0
+fi
+
+# Otherwise, toggle
+case "$(current_mode)" in
+    minimal) apply_mode "eye-candy" ;;
+    *) apply_mode "minimal" ;;
+esac

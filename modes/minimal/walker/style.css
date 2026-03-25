@@ -23,16 +23,14 @@ scrollbar {
 }
 
 .box-wrapper {
-  background: alpha(@base, 0.85);
-  padding: 16px;
-  border: 1px solid alpha(@border, 0.25);
-  border-radius: 16px;
+  background: @base;
+  padding: 12px;
+  border: 1px solid @border;
 }
 
 .search-container {
-  background: alpha(@base, 0.6);
-  padding: 10px;
-  border-radius: 12px;
+  background: @base;
+  padding: 8px;
 }
 
 .input placeholder {
@@ -49,14 +47,8 @@ child:selected .item-box * {
   color: @selected-text;
 }
 
-child:selected .item-box {
-  background: alpha(@selected-text, 0.12);
-  border-radius: 10px;
-}
-
 .item-box {
-  padding: 4px 10px;
-  border-radius: 10px;
+  padding-left: 10px;
 }
 
 .item-text-box {
@@ -72,13 +64,12 @@ child:selected .item-box {
 }
 
 .item-image {
-  margin-right: 12px;
+  margin-right: 10px;
   -gtk-icon-transform: scale(0.9);
 }
 
 .keybind-hints {
-  background: alpha(@background, 0.5);
+  background: @background;
   padding: 8px;
-  margin-top: 6px;
-  border-radius: 10px;
+  margin-top: 4px;
 }

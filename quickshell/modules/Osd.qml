@@ -172,7 +172,7 @@ PanelWindow {
                 text: root.mode === "volume" ? root.getVolumeIcon() : root.getBrightnessIcon()
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 22
-                color: root.mode === "volume" ? (root.muted ? Colors.onSurfaceVariant : Colors.primary) : Colors.tertiary
+                color: root.mode === "volume" ? (root.muted ? Colors.contentSurfaceVariant : Colors.primary) : Colors.tertiary
                 Layout.alignment: Qt.AlignVCenter
             }
 
@@ -192,7 +192,7 @@ PanelWindow {
                         width: Math.min(root.value, 1.0) * parent.width
                         height: parent.height
                         radius: 12
-                        color: root.mode === "volume" ? (root.muted ? Colors.onSurfaceVariant : Colors.primary) : Colors.tertiary
+                        color: root.mode === "volume" ? (root.muted ? Colors.contentSurfaceVariant : Colors.primary) : Colors.tertiary
 
                         Behavior on width {
                             NumberAnimation { duration: 80; easing.type: Easing.OutCubic }
@@ -206,7 +206,7 @@ PanelWindow {
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 12
                 font.weight: 700
-                color: Colors.onSurface
+                color: Colors.contentSurface
                 Layout.alignment: Qt.AlignVCenter
                 Layout.minimumWidth: 36
                 horizontalAlignment: Text.AlignRight

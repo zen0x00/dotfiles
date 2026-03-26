@@ -30,6 +30,6 @@ Item {
         font.family: "JetBrainsMono Nerd Font Mono"
         font.pixelSize: 13
         font.weight: 800
-        color: Colors.onSurface
+        color: Colors.contentSurface
     }
 }

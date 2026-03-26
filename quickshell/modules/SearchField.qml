@@ -34,7 +34,7 @@ Item {
 
             font.family: "JetBrainsMono Nerd Font Mono"
             font.pixelSize: 16
-            color: Colors.onSurface
+            color: Colors.contentSurface
             selectionColor: Colors.primary
             selectedTextColor: Colors.surface
 
@@ -48,7 +48,7 @@ Item {
                 verticalAlignment: Text.AlignVCenter
                 text: "  Search applications..."
                 font: input.font
-                color: Colors.onSurfaceVariant
+                color: Colors.contentSurfaceVariant
                 visible: !input.text
             }
         }

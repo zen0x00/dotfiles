@@ -80,7 +80,7 @@ Item {
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 11
                 font.weight: 600
-                color: Colors.onSurface
+                color: Colors.contentSurface
                 elide: Text.ElideRight
                 width: Math.min(implicitWidth, 140)
             }
@@ -89,7 +89,7 @@ Item {
                 text: root.artist
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 9
-                color: Colors.onSurfaceVariant
+                color: Colors.contentSurfaceVariant
                 elide: Text.ElideRight
                 width: Math.min(implicitWidth, 140)
                 visible: text.length > 0

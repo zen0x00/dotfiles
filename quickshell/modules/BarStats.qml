@@ -66,7 +66,7 @@ Item {
             text: "󰋊 " + root.disk + "%"
             font.family: "JetBrainsMono Nerd Font Mono"
             font.pixelSize: 12
-            color: Colors.onSurfaceVariant
+            color: Colors.contentSurfaceVariant
             anchors.verticalCenter: parent.verticalCenter
         }
     }

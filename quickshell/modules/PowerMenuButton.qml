@@ -46,7 +46,7 @@ Item {
                 text: root.icon
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 36
-                color: Colors.onSurface
+                color: Colors.contentSurface
                 anchors.horizontalCenter: parent.horizontalCenter
 
                 Behavior on font.pixelSize {
@@ -59,7 +59,7 @@ Item {
                 text: root.label
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 13
-                color: Colors.onSurfaceVariant
+                color: Colors.contentSurfaceVariant
                 anchors.horizontalCenter: parent.horizontalCenter
             }
 
@@ -68,7 +68,7 @@ Item {
                 text: root.shortcut
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 11
-                color: Colors.onSurfaceVariant
+                color: Colors.contentSurfaceVariant
                 anchors.horizontalCenter: parent.horizontalCenter
             }
         }

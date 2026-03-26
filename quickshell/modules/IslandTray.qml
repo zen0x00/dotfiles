@@ -65,7 +65,7 @@ PanelWindow {
                 text: "󰂜"
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 16
-                color: Colors.onSurfaceVariant
+                color: Colors.contentSurfaceVariant
                 anchors.verticalCenter: parent.verticalCenter
 
                 MouseArea {

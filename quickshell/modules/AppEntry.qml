@@ -37,7 +37,7 @@ Item {
                 text: root.app ? root.app.name : ""
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 14
-                color: root.selected ? Colors.primary : Colors.onSurface
+                color: root.selected ? Colors.primary : Colors.contentSurface
                 elide: Text.ElideRight
             }
         }

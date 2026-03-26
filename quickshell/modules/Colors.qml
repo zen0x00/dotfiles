@@ -13,36 +13,36 @@ QtObject {
     readonly property color surfaceContainerHigh:      "#282a2d"
     readonly property color surfaceContainerHighest:   "#333537"
 
-    // On-surface
-    readonly property color onSurface:                 "#e2e2e5"
-    readonly property color onSurfaceVariant:          "#c3c6cf"
+    // Content on surfaces (Material "on" tokens — renamed to avoid QML signal handler conflicts)
+    readonly property color contentSurface:            "#e2e2e5"
+    readonly property color contentSurfaceVariant:     "#c3c6cf"
     readonly property color inverseSurface:            "#e2e2e5"
-    readonly property color inverseOnSurface:          "#2f3033"
+    readonly property color inverseContentSurface:     "#2f3033"
 
     // Primary
     readonly property color primary:                   "#aac7ff"
-    readonly property color onPrimary:                 "#0a2f60"
+    readonly property color contentPrimary:            "#0a2f60"
     readonly property color primaryContainer:          "#284578"
-    readonly property color onPrimaryContainer:        "#d6e3ff"
+    readonly property color contentPrimaryContainer:   "#d6e3ff"
     readonly property color inversePrimary:            "#415f91"
 
     // Secondary
     readonly property color secondary:                 "#bbc7db"
-    readonly property color onSecondary:               "#253140"
+    readonly property color contentSecondary:          "#253140"
     readonly property color secondaryContainer:        "#3b4858"
-    readonly property color onSecondaryContainer:      "#d7e3f7"
+    readonly property color contentSecondaryContainer: "#d7e3f7"
 
     // Tertiary
     readonly property color tertiary:                  "#d7bde2"
-    readonly property color onTertiary:                "#3b2947"
+    readonly property color contentTertiary:           "#3b2947"
     readonly property color tertiaryContainer:         "#523f5f"
-    readonly property color onTertiaryContainer:       "#f3daff"
+    readonly property color contentTertiaryContainer:  "#f3daff"
 
     // Error
     readonly property color error:                     "#ffb4ab"
-    readonly property color onError:                   "#690005"
+    readonly property color contentError:              "#690005"
     readonly property color errorContainer:            "#93000a"
-    readonly property color onErrorContainer:          "#ffdad6"
+    readonly property color contentErrorContainer:     "#ffdad6"
 
     // Outline
     readonly property color outline:                   "#8d9199"

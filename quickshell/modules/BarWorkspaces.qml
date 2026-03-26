@@ -28,7 +28,7 @@ Row {
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: focused ? 13 : 11
                 font.weight: focused ? 900 : 600
-                color: focused ? Colors.primary : (hovered ? Colors.onSurface : Colors.onSurfaceVariant)
+                color: focused ? Colors.primary : (hovered ? Colors.contentSurface : Colors.contentSurfaceVariant)
 
                 Behavior on anchors.verticalCenterOffset {
                     NumberAnimation { duration: 300; easing.type: Easing.OutBack }
@@ -50,7 +50,7 @@ Row {
                 height: 2
                 radius: 1
                 width: focused ? 14 : (hovered ? 6 : 0)
-                color: focused ? Colors.primary : Colors.onSurfaceVariant
+                color: focused ? Colors.primary : Colors.contentSurfaceVariant
                 opacity: focused ? 1.0 : (hovered ? 0.6 : 0)
 
                 Behavior on width {

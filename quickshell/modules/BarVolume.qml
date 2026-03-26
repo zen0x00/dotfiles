@@ -44,7 +44,7 @@ Item {
         text: root.getIcon()
         font.family: "JetBrainsMono Nerd Font Mono"
         font.pixelSize: 20
-        color: Colors.onSurface
+        color: Colors.contentSurface
     }
 
     MouseArea {

@@ -325,7 +325,7 @@ Scope {
                                 font.family: "JetBrainsMono Nerd Font Mono"
                                 font.pixelSize: 11
                                 font.weight: 600
-                                color: Colors.onSurfaceVariant
+                                color: Colors.contentSurfaceVariant
                                 Layout.fillWidth: true
                                 Layout.alignment: Qt.AlignVCenter
                                 elide: Text.ElideRight
@@ -334,7 +334,7 @@ Scope {
                             Text {
                                 text: "✕"
                                 font.pixelSize: 12
-                                color: Colors.onSurfaceVariant
+                                color: Colors.contentSurfaceVariant
                                 Layout.alignment: Qt.AlignVCenter
 
                                 MouseArea {
@@ -353,7 +353,7 @@ Scope {
                             font.family: "JetBrainsMono Nerd Font Mono"
                             font.pixelSize: 13
                             font.weight: 700
-                            color: Colors.onSurface
+                            color: Colors.contentSurface
                             wrapMode: Text.WordWrap
                             Layout.fillWidth: true
                             visible: text.length > 0
@@ -364,7 +364,7 @@ Scope {
                             font.family: "JetBrainsMono Nerd Font Mono"
                             font.pixelSize: 12
                             font.weight: 400
-                            color: Colors.onSurfaceVariant
+                            color: Colors.contentSurfaceVariant
                             wrapMode: Text.WordWrap
                             Layout.fillWidth: true
                             visible: text.length > 0
@@ -391,7 +391,7 @@ Scope {
                                         font.family: "JetBrainsMono Nerd Font Mono"
                                         font.pixelSize: 11
                                         font.weight: 600
-                                        color: actionMouse.containsMouse ? Colors.surface : Colors.onSurface
+                                        color: actionMouse.containsMouse ? Colors.surface : Colors.contentSurface
                                     }
 
                                     MouseArea {
@@ -520,7 +520,7 @@ Scope {
                             font.family: "JetBrainsMono Nerd Font Mono"
                             font.pixelSize: 16
                             font.weight: 700
-                            color: Colors.onSurface
+                            color: Colors.contentSurface
                             Layout.fillWidth: true
                         }
 
@@ -542,7 +542,7 @@ Scope {
                                     text: root.dndEnabled ? "󰂛" : "󰂚"
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 14
-                                    color: root.dndEnabled ? Colors.surface : Colors.onSurfaceVariant
+                                    color: root.dndEnabled ? Colors.surface : Colors.contentSurfaceVariant
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
 
@@ -551,7 +551,7 @@ Scope {
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 11
                                     font.weight: 600
-                                    color: root.dndEnabled ? Colors.surface : Colors.onSurfaceVariant
+                                    color: root.dndEnabled ? Colors.surface : Colors.contentSurfaceVariant
                                     anchors.verticalCenter: parent.verticalCenter
                                 }
                             }
@@ -588,7 +588,7 @@ Scope {
                                     text: root.networkState === "ethernet" ? "󰈀" : root.networkState === "wifi" ? "󰤨" : "󰤭"
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 22
-                                    color: root.networkState !== "disconnected" ? Colors.primary : Colors.onSurfaceVariant
+                                    color: root.networkState !== "disconnected" ? Colors.primary : Colors.contentSurfaceVariant
                                     Layout.alignment: Qt.AlignHCenter
                                 }
 
@@ -597,7 +597,7 @@ Scope {
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 10
                                     font.weight: 600
-                                    color: root.networkState !== "disconnected" ? Colors.primary : Colors.onSurfaceVariant
+                                    color: root.networkState !== "disconnected" ? Colors.primary : Colors.contentSurfaceVariant
                                     Layout.alignment: Qt.AlignHCenter
                                     Layout.maximumWidth: parent.parent.width - 16
                                     elide: Text.ElideRight
@@ -632,7 +632,7 @@ Scope {
                                     text: root.btState === "connected" ? "󰂱" : root.btState === "on" ? "󰂯" : "󰂲"
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 22
-                                    color: root.btState !== "off" ? Colors.primary : Colors.onSurfaceVariant
+                                    color: root.btState !== "off" ? Colors.primary : Colors.contentSurfaceVariant
                                     Layout.alignment: Qt.AlignHCenter
                                 }
 
@@ -641,7 +641,7 @@ Scope {
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 10
                                     font.weight: 600
-                                    color: root.btState !== "off" ? Colors.primary : Colors.onSurfaceVariant
+                                    color: root.btState !== "off" ? Colors.primary : Colors.contentSurfaceVariant
                                     Layout.alignment: Qt.AlignHCenter
                                     Layout.maximumWidth: parent.parent.width - 16
                                     elide: Text.ElideRight
@@ -680,7 +680,7 @@ Scope {
                                     text: root.dndEnabled ? "󰂛" : "󰂚"
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 22
-                                    color: root.dndEnabled ? Colors.primary : Colors.onSurfaceVariant
+                                    color: root.dndEnabled ? Colors.primary : Colors.contentSurfaceVariant
                                     Layout.alignment: Qt.AlignHCenter
                                 }
 
@@ -689,7 +689,7 @@ Scope {
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 10
                                     font.weight: 600
-                                    color: root.dndEnabled ? Colors.primary : Colors.onSurfaceVariant
+                                    color: root.dndEnabled ? Colors.primary : Colors.contentSurfaceVariant
                                     Layout.alignment: Qt.AlignHCenter
                                 }
                             }
@@ -723,7 +723,7 @@ Scope {
                                     text: root.volumeMuted ? "󰖁" : root.volumeLevel < 0.33 ? "󰕿" : root.volumeLevel < 0.66 ? "󰖀" : "󰕾"
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 18
-                                    color: root.volumeMuted ? Colors.onSurfaceVariant : Colors.primary
+                                    color: root.volumeMuted ? Colors.contentSurfaceVariant : Colors.primary
                                     Layout.alignment: Qt.AlignVCenter
 
                                     MouseArea {
@@ -742,7 +742,7 @@ Scope {
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 12
                                     font.weight: 600
-                                    color: Colors.onSurface
+                                    color: Colors.contentSurface
                                     Layout.fillWidth: true
                                     Layout.alignment: Qt.AlignVCenter
                                 }
@@ -751,7 +751,7 @@ Scope {
                                     text: Math.round(root.volumeLevel * 100) + "%"
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 11
-                                    color: Colors.onSurfaceVariant
+                                    color: Colors.contentSurfaceVariant
                                     Layout.alignment: Qt.AlignVCenter
                                 }
                             }
@@ -767,7 +767,7 @@ Scope {
                                     width: Math.min(root.volumeLevel, 1.0) * parent.width
                                     height: parent.height
                                     radius: 12
-                                    color: root.volumeMuted ? Colors.onSurfaceVariant : Colors.primary
+                                    color: root.volumeMuted ? Colors.contentSurfaceVariant : Colors.primary
 
                                     Behavior on width {
                                         NumberAnimation { duration: 100 }
@@ -827,7 +827,7 @@ Scope {
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 12
                                     font.weight: 600
-                                    color: Colors.onSurface
+                                    color: Colors.contentSurface
                                     Layout.fillWidth: true
                                     Layout.alignment: Qt.AlignVCenter
                                 }
@@ -836,7 +836,7 @@ Scope {
                                     text: root.brightnessMax > 0 ? Math.round((root.brightnessLevel / root.brightnessMax) * 100) + "%" : "N/A"
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 11
-                                    color: Colors.onSurfaceVariant
+                                    color: Colors.contentSurfaceVariant
                                     Layout.alignment: Qt.AlignVCenter
                                 }
                             }
@@ -915,7 +915,7 @@ Scope {
                                         font.family: "JetBrainsMono Nerd Font Mono"
                                         font.pixelSize: 12
                                         font.weight: 700
-                                        color: Colors.onSurface
+                                        color: Colors.contentSurface
                                         elide: Text.ElideRight
                                         Layout.fillWidth: true
                                     }
@@ -924,7 +924,7 @@ Scope {
                                         text: root.mediaArtist
                                         font.family: "JetBrainsMono Nerd Font Mono"
                                         font.pixelSize: 11
-                                        color: Colors.onSurfaceVariant
+                                        color: Colors.contentSurfaceVariant
                                         elide: Text.ElideRight
                                         Layout.fillWidth: true
                                         visible: text.length > 0
@@ -941,7 +941,7 @@ Scope {
                                     text: "󰒮"
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 22
-                                    color: prevMouse.containsMouse ? Colors.onSurface : Colors.onSurfaceVariant
+                                    color: prevMouse.containsMouse ? Colors.contentSurface : Colors.contentSurfaceVariant
 
                                     Behavior on color { ColorAnimation { duration: 100 } }
 
@@ -970,7 +970,7 @@ Scope {
                                         text: root.mediaStatus === "Playing" ? "󰏤" : "󰐊"
                                         font.family: "JetBrainsMono Nerd Font Mono"
                                         font.pixelSize: 20
-                                        color: playMouse.containsMouse ? Colors.surface : Colors.onSurface
+                                        color: playMouse.containsMouse ? Colors.surface : Colors.contentSurface
                                     }
 
                                     MouseArea {
@@ -989,7 +989,7 @@ Scope {
                                     text: "󰒭"
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 22
-                                    color: nextMouse.containsMouse ? Colors.onSurface : Colors.onSurfaceVariant
+                                    color: nextMouse.containsMouse ? Colors.contentSurface : Colors.contentSurfaceVariant
 
                                     Behavior on color { ColorAnimation { duration: 100 } }
 
@@ -1024,7 +1024,7 @@ Scope {
                             font.family: "JetBrainsMono Nerd Font Mono"
                             font.pixelSize: 14
                             font.weight: 700
-                            color: Colors.onSurface
+                            color: Colors.contentSurface
                             Layout.fillWidth: true
                         }
 
@@ -1042,7 +1042,7 @@ Scope {
                                 font.family: "JetBrainsMono Nerd Font Mono"
                                 font.pixelSize: 10
                                 font.weight: 600
-                                color: Colors.onSurfaceVariant
+                                color: Colors.contentSurfaceVariant
                             }
 
                             MouseArea {
@@ -1077,7 +1077,7 @@ Scope {
                                 text: "No notifications"
                                 font.family: "JetBrainsMono Nerd Font Mono"
                                 font.pixelSize: 12
-                                color: Colors.onSurfaceVariant
+                                color: Colors.contentSurfaceVariant
                                 Layout.alignment: Qt.AlignHCenter
                             }
                         }
@@ -1121,7 +1121,7 @@ Scope {
                                         font.family: "JetBrainsMono Nerd Font Mono"
                                         font.pixelSize: 10
                                         font.weight: 600
-                                        color: Colors.onSurfaceVariant
+                                        color: Colors.contentSurfaceVariant
                                         Layout.fillWidth: true
                                         Layout.alignment: Qt.AlignVCenter
                                         elide: Text.ElideRight
@@ -1138,7 +1138,7 @@ Scope {
                                     Text {
                                         text: "✕"
                                         font.pixelSize: 10
-                                        color: Colors.onSurfaceVariant
+                                        color: Colors.contentSurfaceVariant
                                         opacity: historyMouse.containsMouse ? 1 : 0
                                         Layout.alignment: Qt.AlignVCenter
 
@@ -1161,7 +1161,7 @@ Scope {
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 11
                                     font.weight: 700
-                                    color: Colors.onSurface
+                                    color: Colors.contentSurface
                                     wrapMode: Text.WordWrap
                                     Layout.fillWidth: true
                                     visible: text.length > 0
@@ -1171,7 +1171,7 @@ Scope {
                                     text: modelData.body
                                     font.family: "JetBrainsMono Nerd Font Mono"
                                     font.pixelSize: 10
-                                    color: Colors.onSurfaceVariant
+                                    color: Colors.contentSurfaceVariant
                                     wrapMode: Text.WordWrap
                                     Layout.fillWidth: true
                                     visible: text.length > 0

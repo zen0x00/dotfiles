@@ -15,7 +15,7 @@ Item {
     Rectangle {
         anchors.fill: parent
         radius: 8
-        color: root.selected ? Colors.primary : mouseArea.containsMouse ? Qt.rgba(Colors.onSurface.r, Colors.onSurface.g, Colors.onSurface.b, 0.08) : "transparent"
+        color: root.selected ? Colors.primary : mouseArea.containsMouse ? Qt.rgba(Colors.contentSurface.r, Colors.contentSurface.g, Colors.contentSurface.b, 0.08) : "transparent"
 
         Behavior on color {
             ColorAnimation { duration: 120 }
@@ -31,7 +31,7 @@ Item {
                 text: root.icon
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 16
-                color: root.selected ? Colors.surface : Colors.onSurface
+                color: root.selected ? Colors.surface : Colors.contentSurface
                 Layout.alignment: Qt.AlignVCenter
             }
 
@@ -40,7 +40,7 @@ Item {
                 font.family: "JetBrainsMono Nerd Font Mono"
                 font.pixelSize: 13
                 font.weight: 500
-                color: root.selected ? Colors.surface : Colors.onSurface
+                color: root.selected ? Colors.surface : Colors.contentSurface
                 elide: Text.ElideRight
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignVCenter
@@ -49,7 +49,7 @@ Item {
             Text {
                 text: "›"
                 font.pixelSize: 14
-                color: root.selected ? Colors.surface : Colors.onSurfaceVariant
+                color: root.selected ? Colors.surface : Colors.contentSurfaceVariant
                 Layout.alignment: Qt.AlignVCenter
                 visible: root.selected
             }

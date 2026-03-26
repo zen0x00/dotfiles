@@ -5,7 +5,7 @@ import Quickshell.Io
 import Quickshell.Wayland
 import Quickshell.Hyprland
 
-// Eye-candy mode: full-width floating pill matching waybar eye-candy layout
+// Eye-candy mode: full-width floating pill
 PanelWindow {
     id: root
 
@@ -45,7 +45,6 @@ PanelWindow {
 
         // ── Center: active window title ──
         Text {
-            id: windowTitle
             anchors.centerIn: parent
             text: Hyprland.activeToplevel?.title ?? ""
             font.family: "JetBrainsMono Nerd Font Propo"
@@ -54,12 +53,11 @@ PanelWindow {
             color: Qt.rgba(Colors.secondary.r, Colors.secondary.g, Colors.secondary.b, 0.85)
             elide: Text.ElideRight
             maximumLineCount: 1
-            // Constrain so it doesn't overlap left/right sections
             width: Math.min(implicitWidth, pill.width - workspaces.width - rightRow.width - 60)
             horizontalAlignment: Text.AlignHCenter
         }
 
-        // ── Right: tray · volume · stats · clock ──
+        // ── Right: tray · stats+clock ──
         Row {
             id: rightRow
             anchors.right: parent.right
@@ -80,18 +78,6 @@ PanelWindow {
             }
 
             BarStats { anchors.verticalCenter: parent.verticalCenter }
-
-            Text {
-                text: "·"
-                font.pixelSize: 16
-                font.weight: 800
-                color: Colors.outlineVariant
-                anchors.verticalCenter: parent.verticalCenter
-                leftPadding: 8
-                rightPadding: 8
-            }
-
-            BarClock { anchors.verticalCenter: parent.verticalCenter }
         }
     }
 }

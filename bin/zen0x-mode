@@ -6,7 +6,6 @@ STATE_FILE="/tmp/zen0x_mode"
 HYPR_CONFIGS="$HOME/.config/hypr/configs"
 WAYBAR_CONFIG="$HOME/.config/waybar"
 WALKER_THEME="$HOME/.config/walker/themes/current"
-GEN="$HOME/.config/zen0x/generated"
 
 current_mode() {
     if [ -f "$STATE_FILE" ]; then
@@ -33,13 +32,13 @@ apply_mode() {
     # Waybar — copy config and style (colors.css symlink stays untouched)
     cp "$mode_dir/waybar/config.jsonc" "$WAYBAR_CONFIG/config.jsonc"
     cp "$mode_dir/waybar/style.css" "$WAYBAR_CONFIG/style.css"
-    # Ensure colors.css link exists
-    ln -sfn "$GEN/waybar-colors.css" "$WAYBAR_CONFIG/colors.css"
     pkill -SIGUSR2 waybar 2>/dev/null || waybar &
 
     # Walker — copy style and layout (colors.css stays untouched)
+    mkdir -p "$WALKER_THEME"
     cp "$mode_dir/walker/style.css" "$WALKER_THEME/style.css"
     cp "$mode_dir/walker/layout.xml" "$WALKER_THEME/layout.xml"
+    pkill -f "walker" 2>/dev/null
 
     echo "$mode" > "$STATE_FILE"
     notify-send "Mode" "$(echo "$mode" | sed 's/-/ /g; s/\b./\U&/g')"

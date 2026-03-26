@@ -1,0 +1,48 @@
+[config]
+
+[templates.waybar]
+input_path = '~/.config/matugen/templates/matugen-waybar.css'
+output_path = '~/.config/waybar/colors.css'
+post_hook = 'pkill -SIGUSR2 waybar'
+
+[templates.swaync]
+input_path = '~/.config/matugen/templates/matugen-waybar.css'
+output_path = '~/.config/swaync/colors.css'
+post_hook = 'swaync-client -rs'
+
+[templates.swayosd]
+input_path = '~/.config/matugen/templates/matugen-swayosd.css'
+output_path = '~/.config/swayosd/colors.css'
+
+[templates.wlogout]
+input_path = '~/.config/matugen/templates/matugen-wlogout.css'
+output_path = '~/.config/wlogout/colors.css'
+
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/matugen-hyprland.conf'
+output_path = '~/.config/hypr/configs/colors.conf'
+post_hook = 'hyprctl reload'
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/matugen-kitty.conf'
+output_path = '~/.config/kitty/colors.conf'
+
+[templates.btop]
+input_path = '~/.config/matugen/templates/matugen-btop.theme'
+output_path = '~/.config/btop/themes/current.theme'
+
+[templates.gtk-colors]
+input_path = '~/.config/matugen/templates/matugen-gtk.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+
+[templates.starship]
+input_path = '~/.config/matugen/templates/starship-colors.toml'
+output_path = '~/.config/starship.toml'
+
+[templates.discord]
+input_path = '~/.config/matugen/templates/matugen-discord.css'
+output_path = '~/.config/vesktop/themes/current.css'
+
+[templates.walker]
+input_path = '~/.config/matugen/templates/matugen-walker.css'
+output_path = '~/.config/walker/themes/current/colors.css'

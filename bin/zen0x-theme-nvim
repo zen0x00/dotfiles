@@ -1,5 +1,0 @@
-#!/bin/bash
-
-CURRENT="$HOME/.config/themes/current"
-
-ln -sfn "$CURRENT/neovim.lua" ~/.config/nvim/lua/plugins/colorscheme.lua

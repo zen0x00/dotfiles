@@ -9,7 +9,7 @@
 }
 
 #waybar {
-  background-color: @bg;
+  background-color: @surface;
 }
 
 #waybar button {
@@ -24,7 +24,7 @@
 
 .tray-group-item {
   padding: 4px 8px;
-  color: @fg_dim;
+  color: @on_surface_variant;
 }
 
 .modules-left {
@@ -37,7 +37,7 @@
 
 #window {
   padding: 4px 10px;
-  color: @fg_dim;
+  color: @on_surface_variant;
 }
 
 window#waybar.empty #window {
@@ -55,16 +55,16 @@ window#waybar.empty #window {
 }
 
 #workspaces button.inactive {
-  color: @fg_dim;
+  color: @on_surface_variant;
 }
 
 #workspaces button.active {
-  color: @fg;
-  border-bottom: 2px solid @fg;
+  color: @on_surface;
+  border-bottom: 2px solid @on_surface;
 }
 
 #workspaces button.urgent {
-  color: @red;
+  color: @error;
 }
 
 #workspaces button.empty {
@@ -77,11 +77,11 @@ window#waybar.empty #window {
 #disk,
 #clock {
   padding: 4px 8px;
-  color: @fg;
+  color: @on_surface;
 }
 
 #custom-seperator {
   margin: 0 -2px;
-  color: @fg;
+  color: @on_surface;
   opacity: 0.2;
 }

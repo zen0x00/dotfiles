@@ -22,12 +22,11 @@ If you prefer selective installation, see the `modules/` folder for modular scri
 **Key files**
 - Installer / bootstrap: [install.sh](install.sh), [bootstrap.sh](bootstrap.sh)
 - Module scripts: [modules/](modules/)
-- Theme generator & tools: [zen0x/](zen0x/)
 - Neovim config: [nvim/](nvim/)
 
 **Customization**
-- Edit the configs under the relevant folders (for example, `alacritty/alacritty.toml`, `hypr/`, `waybar/`) or create templates in `zen0x/templates`.
-- Use the helper scripts in `bin/` and `modules/` to apply themes, set wallpapers, or install packages.
+- Edit the configs under the relevant folders (for example, `hypr/`, `waybar/`).
+- Use the helper scripts in `bin/` and `modules/` to switch modes, set wallpapers, or install packages.
 
 **Developer notes**
 - Scripts expect a typical Linux environment. Some scripts call package managers or AUR helpers—review `modules/packages-*.sh` before running on a new system.

@@ -1,9 +1,11 @@
-# Hyprland machine-specific configs
+# Machine-specific / generated configs
 hypr/configs/monitors.conf
 hypr/configs/colors.conf
 nvim/lua/plugins/colorscheme.lua
 walker/themes/current/colors.css
 yazi/theme.toml
 opencode/themes/current.json
-themes/colorschemes/current
 swaync/colors.css
+swayosd/colors.css
+wlogout/colors.css
+waybar/colors.css

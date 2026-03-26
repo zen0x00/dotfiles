@@ -25,7 +25,7 @@ case "$MAIN" in
     ln -sf "$FILE" "$HOME/.current_wallpaper"
 
     # Generate colors from wallpaper and reload apps
-    matugen image "$FILE"
+    matugen image "$FILE" --prefer=saturation
     pkill -SIGUSR2 waybar 2>/dev/null
     hyprctl reload
     ;;

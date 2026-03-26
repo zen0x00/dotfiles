@@ -43,9 +43,14 @@ output_path = '~/.config/starship.toml'
 input_path = '~/.config/matugen/templates/matugen-discord.css'
 output_path = '~/.config/vesktop/themes/current.css'
 
-[templates.walker]
-input_path = '~/.config/matugen/templates/matugen-walker.css'
-output_path = '~/.config/walker/themes/current/colors.css'
+[templates.rofi]
+input_path = '~/.config/matugen/templates/matugen-rofi.rasi'
+output_path = '~/.config/rofi/themes/colors.rasi'
+
+[templates.quickshell]
+input_path = '~/.config/matugen/templates/matugen-quickshell.qml'
+output_path = '~/.config/quickshell/modules/Colors.qml'
+post_hook = 'qs ipc call shell reload 2>/dev/null || true'
 
 [templates.vscode]
 input_path = '~/.config/matugen/templates/matugen-vscode.json'

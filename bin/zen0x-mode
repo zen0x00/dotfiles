@@ -4,8 +4,7 @@ MODES_DIR="$HOME/.config/modes"
 STATE_FILE="/tmp/zen0x_mode"
 
 HYPR_CONFIGS="$HOME/.config/hypr/configs"
-WAYBAR_CONFIG="$HOME/.config/waybar"
-WALKER_THEME="$HOME/.config/walker/themes/current"
+ROFI_THEMES="$HOME/.config/rofi/themes"
 
 current_mode() {
     if [ -f "$STATE_FILE" ]; then
@@ -29,16 +28,16 @@ apply_mode() {
     cp "$mode_dir/hypr/animations.conf" "$HYPR_CONFIGS/animations.conf"
     hyprctl reload
 
-    # Waybar — copy config and style (colors.css symlink stays untouched)
-    cp "$mode_dir/waybar/config.jsonc" "$WAYBAR_CONFIG/config.jsonc"
-    cp "$mode_dir/waybar/style.css" "$WAYBAR_CONFIG/style.css"
-    pkill -SIGUSR2 waybar 2>/dev/null || waybar &
+    # Rofi — symlink the mode theme as current.rasi
+    ln -sf "$ROFI_THEMES/$mode.rasi" "$ROFI_THEMES/current.rasi"
 
-    # Walker — copy style and layout (colors.css stays untouched)
-    mkdir -p "$WALKER_THEME"
-    cp "$mode_dir/walker/style.css" "$WALKER_THEME/style.css"
-    cp "$mode_dir/walker/layout.xml" "$WALKER_THEME/layout.xml"
-    pkill -f "walker" 2>/dev/null
+    # Quickshell — switch bar mode via IPC
+    if [ "$mode" = "eye-candy" ]; then
+        qs ipc call bar switchToIsland 2>/dev/null || true
+    else
+        qs ipc call bar switchToClassic 2>/dev/null || true
+    fi
+    qs ipc call shell reload 2>/dev/null || true
 
     echo "$mode" > "$STATE_FILE"
     notify-send "Mode" "$(echo "$mode" | sed 's/-/ /g; s/\b./\U&/g')"

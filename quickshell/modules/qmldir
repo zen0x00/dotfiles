@@ -1,0 +1,25 @@
+module modules
+
+singleton Colors 1.0 Colors.qml
+
+Launcher 1.0 Launcher.qml
+SearchField 1.0 SearchField.qml
+AppList 1.0 AppList.qml
+AppEntry 1.0 AppEntry.qml
+Bar 1.0 Bar.qml
+BarClock 1.0 BarClock.qml
+BarWorkspaces 1.0 BarWorkspaces.qml
+BarVolume 1.0 BarVolume.qml
+BarNetwork 1.0 BarNetwork.qml
+BarBluetooth 1.0 BarBluetooth.qml
+BarTray 1.0 BarTray.qml
+BarStats 1.0 BarStats.qml
+ZenMenu 1.0 ZenMenu.qml
+ZenMenuItem 1.0 ZenMenuItem.qml
+NotificationPopup 1.0 NotificationPopup.qml
+Osd 1.0 Osd.qml
+IslandBar 1.0 IslandBar.qml
+IslandMedia 1.0 IslandMedia.qml
+IslandTray 1.0 IslandTray.qml
+PowerMenu 1.0 PowerMenu.qml
+PowerMenuButton 1.0 PowerMenuButton.qml

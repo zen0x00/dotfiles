@@ -40,11 +40,11 @@ PanelWindow {
         }
     }
 
-    // --- Load walls from ~/hyprdots/walls/ ---
+    // --- Load walls from current theme ---
     Process {
         id: wallLoader
         command: ["bash", "-c",
-            "find \"$HOME/hyprdots/walls\" " +
+            "find \"$HOME/.config/themes/current/wallpapers\" " +
             "-maxdepth 1 -type f \\( -iname '*.jpg' -o -iname '*.jpeg' -o -iname '*.png' -o -iname '*.webp' \\) " +
             "| sort"
         ]
@@ -57,7 +57,7 @@ PanelWindow {
         }
     }
 
-    // --- Apply wallpaper + matugen ---
+    // --- Apply wallpaper ---
     Process {
         id: wallApply
         command: []
@@ -65,9 +65,8 @@ PanelWindow {
 
     function applyWall(wall) {
         wallApply.command = ["bash", "-c",
-            "awww img '" + wall.path + "' --transition-type grow --transition-duration 2 --transition-fps 60 && " +
-            "ln -sf '" + wall.path + "' \"$HOME/.current_wallpaper\" && " +
-            "matugen image '" + wall.path + "' --prefer=saturation"
+            "awww img '" + wall.path + "' --transition-type grow --transition-duration 2 --transition-fps 60; " +
+            "ln -sf '" + wall.path + "' \"$HOME/.current_wallpaper\""
         ];
         wallApply.running = true;
         root.hide();

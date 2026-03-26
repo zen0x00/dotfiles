@@ -90,3 +90,4 @@ function y() {
 
 bindkey '^[b' backward-word
 bindkey '^[f' forward-word
+export PATH="$HOME/.npm-global/bin:$PATH"

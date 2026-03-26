@@ -12,7 +12,7 @@ PanelWindow {
     anchors.bottom: true
 
     visible: false
-    color: Qt.rgba(0, 0, 0, 0.5)
+    color: "transparent"
     exclusionMode: ExclusionMode.Ignore
 
     WlrLayershell.layer: WlrLayer.Overlay
@@ -60,13 +60,19 @@ PanelWindow {
         if (screen === "main") {
             if (item === "Wallpaper") {
                 close();
-                wallpickerProc.running = true;
+                wallpickerIpc.running = true;
             } else if (item === "Theme") {
-                loadThemes.running = true;
+                loader.targetScreen = "theme";
+                loader.command = ["bash", "-c", "ls -1 \"$HOME/hyprdots/themes/colorschemes\""];
+                loader.running = true;
             } else if (item === "Font") {
-                loadFonts.running = true;
+                loader.targetScreen = "font";
+                loader.command = ["bash", "-c", "fc-list --format='%{family[0]}\\n' | sort -u"];
+                loader.running = true;
             } else if (item === "Mode") {
-                loadModes.running = true;
+                loader.targetScreen = "mode";
+                loader.command = ["bash", "-c", "ls -1 \"$HOME/.config/modes\""];
+                loader.running = true;
             }
         } else if (screen === "theme") {
             applyThemeProc.command = ["bash", "-c",
@@ -102,55 +108,35 @@ PanelWindow {
         }
     }
 
-    // ── Loaders ──
+    // ── Loader (single reusable process) ──
     Process {
-        id: loadThemes
-        command: ["bash", "-c", "ls -1 \"$HOME/hyprdots/themes/colorschemes\""]
+        id: loader
+        property string targetScreen: ""
         stdout: StdioCollector {
             onStreamFinished: {
                 root.listItems = this.text.trim().split("\n").filter(s => s.length > 0);
-                root.screen = "theme";
+                root.screen = loader.targetScreen;
                 root.selectedIndex = 0;
                 listView.forceActiveFocus();
             }
         }
+        onRunningChanged: if (!running) running = false
     }
 
-    Process {
-        id: loadFonts
-        command: ["bash", "-c", "fc-list --format='%{family[0]}\\n' | sort -u"]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                root.listItems = this.text.trim().split("\n").filter(s => s.length > 0);
-                root.screen = "font";
-                root.selectedIndex = 0;
-                listView.forceActiveFocus();
-            }
-        }
-    }
-
-    Process {
-        id: loadModes
-        command: ["bash", "-c", "ls -1 \"$HOME/.config/modes\""]
-        stdout: StdioCollector {
-            onStreamFinished: {
-                root.listItems = this.text.trim().split("\n").filter(s => s.length > 0);
-                root.screen = "mode";
-                root.selectedIndex = 0;
-                listView.forceActiveFocus();
-            }
-        }
-    }
-
-    Process { id: wallpickerProc; command: ["qs", "ipc", "call", "wallpicker", "toggle"] }
+    Process { id: wallpickerIpc; command: ["qs", "ipc", "call", "wallpicker", "toggle"] }
     Process { id: applyThemeProc }
     Process { id: applyFontProc }
     Process { id: applyModeProc }
 
     // ── UI ──
-    MouseArea {
+    Rectangle {
         anchors.fill: parent
-        onClicked: root.close()
+        color: Qt.rgba(0, 0, 0, 0.45)
+
+        MouseArea {
+            anchors.fill: parent
+            onClicked: root.close()
+        }
     }
 
     // Invisible measurer for dynamic width

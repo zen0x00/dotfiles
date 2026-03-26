@@ -1,2 +1,0 @@
-#!/bin/bash
-exec rofi -show drun "$@"

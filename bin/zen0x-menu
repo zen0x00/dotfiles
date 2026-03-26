@@ -1,9 +1,27 @@
 #!/bin/bash
 
-MAIN=$(printf "Wallpaper\nFont\nMode" | rofi -dmenu -p "Zen Menu" -theme-str 'window { width: 200px; }')
+MAIN=$(printf "Theme\nWallpaper\nFont\nMode" | rofi -dmenu -p "Zen Menu" -theme-str 'window { width: 200px; }')
 [ -z "$MAIN" ] && exit
 
+THEMES="$HOME/hyprdots/themes/colorschemes"
+CURRENT="$HOME/.config/themes/current"
+GEN="$HOME/.config/zen0x/generated"
+
 case "$MAIN" in
+
+  Theme)
+    THEME=$(ls -1 "$THEMES" | grep -v current | rofi -dmenu -p "Theme")
+    [ -z "$THEME" ] && exit
+
+    ln -sfn "$THEMES/$THEME" "$CURRENT"
+
+    zen0x-theme-generate "$THEME"
+    zen0x-apply-generated-theme
+    zen0x-theme-gtk
+    zen0x-theme-set-vscode
+    zen0x-theme-wallpaper "$THEME"
+    zen0x-theme-reload
+    ;;
 
   Wallpaper)
     qs ipc call wallpicker toggle
@@ -18,16 +36,6 @@ case "$MAIN" in
     # Kitty
     sed -i "s|^font_family.*|font_family      family=\"$FONT\"|" "$CONFIG/kitty/kitty.conf"
 
-    # Rofi
-    sed -i "s|font:.*|font: \"$FONT 12\";|" "$CONFIG/rofi/themes/minimal.rasi"
-    sed -i "s|font:.*|font: \"$FONT 12\";|" "$CONFIG/rofi/themes/eye-candy.rasi"
-
-    # Wlogout
-    sed -i "s|font-family:.*|font-family: $FONT;|" "$CONFIG/wlogout/style.css"
-
-    # SwayOSD
-    sed -i "s|font-family:.*|font-family: '$FONT';|" "$CONFIG/swayosd/style.css"
-
     # GTK 3
     mkdir -p "$CONFIG/gtk-3.0"
     if [ -f "$CONFIG/gtk-3.0/settings.ini" ]; then
@@ -36,10 +44,6 @@ case "$MAIN" in
       printf "[Settings]\ngtk-font-name=$FONT 11\n" > "$CONFIG/gtk-3.0/settings.ini"
     fi
 
-    # Reload waybar
-    pkill -SIGUSR2 waybar 2>/dev/null
-
-    # Reload kitty
     pkill -SIGUSR1 kitty 2>/dev/null
     ;;
 

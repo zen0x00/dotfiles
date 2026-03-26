@@ -1,0 +1,23 @@
+#!/bin/bash
+
+GEN="$HOME/.config/zen0x/generated"
+
+install_if_exists() {
+	local src="$1"
+	local dst="$2"
+
+	if [[ -f "$src" ]]; then
+		install -Dm644 "$src" "$dst"
+	else
+		echo "warn: generated file missing, skipping: $src" >&2
+	fi
+}
+
+install_if_exists "$GEN/quickshell-colors.qml" ~/.config/quickshell/modules/Colors.qml
+install_if_exists "$GEN/btop.theme"    ~/.config/btop/themes/current.theme
+install_if_exists "$GEN/fastfetch.jsonc" ~/.config/fastfetch/config.jsonc
+install_if_exists "$GEN/hypr.conf"     ~/.config/hypr/configs/colors.conf
+install_if_exists "$GEN/kitty.conf"    ~/.config/kitty/colors.conf
+install_if_exists "$GEN/opencode.json" ~/.config/opencode/themes/current.json
+install_if_exists "$GEN/vesktop.css"   ~/.config/vesktop/themes/colors.css
+install_if_exists "$GEN/yazi.toml"     ~/.config/yazi/theme.toml

@@ -1,0 +1,9 @@
+#!/bin/bash
+
+qs ipc call shell reload 2>/dev/null || true
+swaync-client -rs 2>/dev/null || true
+
+(
+    sleep 0.5
+    notify-send "󰑓 Reload Complete" "Theme applied"
+) &

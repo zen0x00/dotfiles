@@ -1,0 +1,72 @@
+# Main bg
+theme[main_bg]="{{ bg0 }}"
+
+# Main text color
+theme[main_fg]="{{ fg0 }}"
+
+# Title color for boxes
+theme[title]="{{ fg0 }}"
+
+# Highlight color for keyboard shortcuts
+theme[hi_fg]="{{ accent }}"
+
+# Background color of selected item in processes box
+theme[selected_bg]="{{ bg3 }}"
+
+# Foreground color of selected item in processes box
+theme[selected_fg]="{{ fg0 }}"
+
+# Color of inactive/disabled text
+theme[inactive_fg]="{{ fg2 }}"
+
+# Misc colors for processes box
+theme[proc_misc]="{{ accent }}"
+
+# Box outlines
+theme[cpu_box]="{{ bg2 }}"
+theme[mem_box]="{{ bg2 }}"
+theme[net_box]="{{ bg2 }}"
+theme[proc_box]="{{ bg2 }}"
+
+# Box divider
+theme[div_line]="{{ bg2 }}"
+
+# Temperature graph colors
+theme[temp_start]="{{ green }}"
+theme[temp_mid]="{{ yellow }}"
+theme[temp_end]="{{ red }}"
+
+# CPU graph colors
+theme[cpu_start]="{{ green }}"
+theme[cpu_mid]="{{ yellow }}"
+theme[cpu_end]="{{ red }}"
+
+# Mem/Disk free meter
+theme[free_start]="{{ green }}"
+theme[free_mid]="{{ yellow }}"
+theme[free_end]="{{ red }}"
+
+# Mem/Disk cached meter
+theme[cached_start]="{{ green }}"
+theme[cached_mid]="{{ yellow }}"
+theme[cached_end]="{{ red }}"
+
+# Mem/Disk available meter
+theme[available_start]="{{ green }}"
+theme[available_mid]="{{ yellow }}"
+theme[available_end]="{{ red }}"
+
+# Mem/Disk used meter
+theme[used_start]="{{ green }}"
+theme[used_mid]="{{ yellow }}"
+theme[used_end]="{{ red }}"
+
+# Download graph colors
+theme[download_start]="{{ green }}"
+theme[download_mid]="{{ yellow }}"
+theme[download_end]="{{ red }}"
+
+# Upload graph colors
+theme[upload_start]="{{ green }}"
+theme[upload_mid]="{{ yellow }}"
+theme[upload_end]="{{ red }}"

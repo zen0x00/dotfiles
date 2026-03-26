@@ -1,0 +1,38 @@
+#!/bin/bash
+
+ZEN_CURRENT="$HOME/.config/themes/current"
+VSCODE_THEME_FILE="$ZEN_CURRENT/vscode.json"
+
+set_theme() {
+  local cmd="$1"
+  local settings="$2"
+
+  command -v "$cmd" >/dev/null 2>&1 || return
+
+  [[ -f "$VSCODE_THEME_FILE" ]] || return
+
+  theme_name=$(jq -r '.name // empty' "$VSCODE_THEME_FILE")
+  extension=$(jq -r '.extension // empty' "$VSCODE_THEME_FILE")
+
+  [[ -n "$theme_name" ]] || return
+
+  if [[ -n "$extension" ]] && ! "$cmd" --list-extensions | grep -Fxq "$extension"; then
+    "$cmd" --install-extension "$extension" >/dev/null 2>&1
+  fi
+
+  mkdir -p "$(dirname "$settings")"
+  [[ -f "$settings" ]] || echo "{}" >"$settings"
+
+  if ! grep -q '"workbench.colorTheme"' "$settings"; then
+    sed -i --follow-symlinks -E '0,/\{/{s/\{/{\ "workbench.colorTheme": "",/}' "$settings"
+  fi
+
+  sed -i --follow-symlinks -E \
+    "s/(\"workbench.colorTheme\"[[:space:]]*:[[:space:]]*\")[^\"]*(\")/\1$theme_name\2/" \
+    "$settings"
+}
+
+set_theme "code" "$HOME/.config/Code/User/settings.json"
+set_theme "code-oss" "$HOME/.config/Code - OSS/User/settings.json"
+set_theme "codium" "$HOME/.config/VSCodium/User/settings.json"
+set_theme "cursor" "$HOME/.config/Cursor/User/settings.json"

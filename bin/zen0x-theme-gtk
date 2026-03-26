@@ -1,0 +1,36 @@
+#!/bin/bash
+
+CURRENT="$HOME/.config/themes/current"
+GTK_SRC="$CURRENT/gtk/settings.ini"
+
+[ -f "$GTK_SRC" ] || exit
+
+GTK_THEME=$(awk -F= '/gtk-theme-name/ {gsub(/[[:space:]]*/, "", $2); print $2}' "$GTK_SRC")
+GTK_ICON=$(awk -F= '/gtk-icon-theme-name/ {gsub(/[[:space:]]*/, "", $2); print $2}' "$GTK_SRC")
+
+for DIR in "$HOME/.config/gtk-3.0" "$HOME/.config/gtk-4.0"; do
+  SETTINGS="$DIR/settings.ini"
+  mkdir -p "$DIR"
+  [[ -f "$SETTINGS" ]] || echo -e "[Settings]\n" > "$SETTINGS"
+
+  [[ -n "$GTK_THEME" ]] && \
+    sed -i -E "s/^gtk-theme-name=.*/gtk-theme-name=$GTK_THEME/; t; \$a gtk-theme-name=$GTK_THEME" "$SETTINGS"
+
+  [[ -n "$GTK_ICON" ]] && \
+    sed -i -E "s/^gtk-icon-theme-name=.*/gtk-icon-theme-name=$GTK_ICON/; t; \$a gtk-icon-theme-name=$GTK_ICON" "$SETTINGS"
+done
+
+[[ -n "$GTK_THEME" ]] && gsettings set org.gnome.desktop.interface gtk-theme "$GTK_THEME"
+[[ -n "$GTK_ICON" ]] && gsettings set org.gnome.desktop.interface icon-theme "$GTK_ICON"
+
+if [[ "$GTK_THEME" == *"latte"* ]]; then
+  gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
+else
+  gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
+fi
+
+LIBADWAITA_SRC="$HOME/.local/share/themes/$GTK_THEME/gtk-4.0/gtk.css"
+if [[ -f "$LIBADWAITA_SRC" ]]; then
+  ln -sf "$LIBADWAITA_SRC" "$HOME/.config/gtk-4.0/gtk.css"
+  ln -sf "$LIBADWAITA_SRC" "$HOME/.config/gtk-4.0/gtk-dark.css"
+fi

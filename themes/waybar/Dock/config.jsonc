@@ -1,0 +1,21 @@
+{
+    "include": [
+    "$HOME/.config/waybar/Modules"
+    ],
+    "layer": "top",
+    "position": "top",
+    "margin-top": 8,
+    "margin-bottom": 8,
+    "height": 38,
+    "spacing": 12,
+    "modules-left": [],
+    "modules-center": [
+        "clock",
+        "mpris",
+        "hyprland/workspaces",
+        "pulseaudio",
+        "network",
+        "battery"
+    ],
+    "modules-right": []
+}

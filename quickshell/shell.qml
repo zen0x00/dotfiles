@@ -29,7 +29,6 @@ ShellRoot {
     Launcher {}
     Bar { visible: shell.activeBar === "classic" }
     IslandBar { visible: shell.activeBar === "island" }
-    IslandTray { visible: shell.activeBar === "island" }
     ZenMenu {}
     NotificationPopup {}
     Osd {}

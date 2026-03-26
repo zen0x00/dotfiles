@@ -31,12 +31,7 @@ apply_mode() {
     # Rofi — symlink the mode theme as current.rasi
     ln -sf "$ROFI_THEMES/$mode.rasi" "$ROFI_THEMES/current.rasi"
 
-    # Quickshell — switch bar mode via IPC
-    if [ "$mode" = "eye-candy" ]; then
-        qs ipc call bar switchToIsland 2>/dev/null || true
-    else
-        qs ipc call bar switchToClassic 2>/dev/null || true
-    fi
+    # Quickshell — reload to pick up hypr config changes
     qs ipc call shell reload 2>/dev/null || true
 
     echo "$mode" > "$STATE_FILE"

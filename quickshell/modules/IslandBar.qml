@@ -79,20 +79,6 @@ PanelWindow {
                 rightPadding: 8
             }
 
-            BarNetwork { anchors.verticalCenter: parent.verticalCenter }
-            BarBluetooth { anchors.verticalCenter: parent.verticalCenter }
-            BarVolume { anchors.verticalCenter: parent.verticalCenter }
-
-            Text {
-                text: "·"
-                font.pixelSize: 16
-                font.weight: 800
-                color: Colors.outlineVariant
-                anchors.verticalCenter: parent.verticalCenter
-                leftPadding: 8
-                rightPadding: 8
-            }
-
             BarStats { anchors.verticalCenter: parent.verticalCenter }
 
             Text {

@@ -11,6 +11,7 @@ ShellRoot {
     }
 
     Launcher {}
+    AppMenu {}
     IslandBar {}
     ZenMenu {}
     NotificationPopup {}

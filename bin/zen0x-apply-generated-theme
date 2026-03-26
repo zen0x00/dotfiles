@@ -21,3 +21,10 @@ install_if_exists "$GEN/kitty.conf"    ~/.config/kitty/colors.conf
 install_if_exists "$GEN/opencode.json" ~/.config/opencode/themes/current.json
 install_if_exists "$GEN/vesktop.css"   ~/.config/vesktop/themes/colors.css
 install_if_exists "$GEN/yazi.toml"     ~/.config/yazi/theme.toml
+
+# Apply wallpaper from current theme
+WALLPAPER="$HOME/.config/themes/current/wallpapers/wallpaper.jpg"
+if [[ -f "$WALLPAPER" ]]; then
+    awww img "$WALLPAPER" --transition-type any --transition-duration 1 --transition-fps 60 &
+    ln -sf "$WALLPAPER" "$HOME/.current_wallpaper"
+fi

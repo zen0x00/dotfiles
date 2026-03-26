@@ -15,6 +15,5 @@ ZenMenuItem 1.0 ZenMenuItem.qml
 NotificationPopup 1.0 NotificationPopup.qml
 Osd 1.0 Osd.qml
 IslandBar 1.0 IslandBar.qml
-IslandTray 1.0 IslandTray.qml
 PowerMenu 1.0 PowerMenu.qml
 PowerMenuButton 1.0 PowerMenuButton.qml

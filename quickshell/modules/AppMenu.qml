@@ -1,5 +1,4 @@
 import QtQuick
-import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 import Quickshell.Wayland
@@ -23,11 +22,8 @@ PanelWindow {
     IpcHandler {
         target: "appmenu"
         function toggle(): void {
-            if (root.visible) {
-                root.close();
-            } else {
-                root.open();
-            }
+            if (root.visible) root.close();
+            else root.open();
         }
     }
 
@@ -37,19 +33,20 @@ PanelWindow {
     }
 
     // ── State ──
-    property string screen: "main"   // "main" | "theme" | "font" | "mode"
+    property string screen: "main"
     property var listItems: []
     property int selectedIndex: 0
-    property string searchQuery: ""
+    property var filteredItems: []
+
+    onListItemsChanged: filteredItems = listItems.slice()
 
     function open(): void {
         screen = "main";
-        listItems = ["Theme", "Wallpaper", "Font", "Mode"];
         selectedIndex = 0;
-        searchQuery = "";
-        searchInput.text = "";
+        listItems = ["Theme", "Wallpaper", "Font", "Mode"];
+        filteredItems = ["Theme", "Wallpaper", "Font", "Mode"];
         visible = true;
-        searchInput.forceActiveFocus();
+        listView.forceActiveFocus();
     }
 
     function close(): void {
@@ -73,26 +70,27 @@ PanelWindow {
             }
         } else if (screen === "theme") {
             applyThemeProc.command = ["bash", "-c",
+                "THEME='" + item + "'; " +
                 "THEMES=\"$HOME/hyprdots/themes/colorschemes\"; " +
                 "CURRENT=\"$HOME/.config/themes/current\"; " +
-                "ln -sfn \"$THEMES/" + item + "\" \"$CURRENT\"; " +
-                "zen0x-theme-generate '" + item + "'; " +
+                "ln -sfn \"$THEMES/$THEME\" \"$CURRENT\"; " +
+                "zen0x-theme-generate \"$THEME\"; " +
                 "zen0x-apply-generated-theme; " +
                 "zen0x-theme-gtk; " +
                 "zen0x-theme-set-vscode; " +
-                "zen0x-theme-wallpaper '" + item + "'; " +
                 "zen0x-theme-reload"
             ];
             applyThemeProc.running = true;
             close();
         } else if (screen === "font") {
             applyFontProc.command = ["bash", "-c",
+                "FONT='" + item + "'; " +
                 "CONFIG=\"$HOME/.config\"; " +
-                "sed -i \"s|^font_family.*|font_family      family=\\\"" + item + "\\\"|\" \"$CONFIG/kitty/kitty.conf\"; " +
+                "sed -i \"s|^font_family.*|font_family      family=\\\"$FONT\\\"|\" \"$CONFIG/kitty/kitty.conf\"; " +
                 "mkdir -p \"$CONFIG/gtk-3.0\"; " +
                 "grep -q 'gtk-font-name' \"$CONFIG/gtk-3.0/settings.ini\" 2>/dev/null && " +
-                "sed -i \"s|^gtk-font-name=.*|gtk-font-name=" + item + " 11|\" \"$CONFIG/gtk-3.0/settings.ini\" || " +
-                "printf '[Settings]\\ngtk-font-name=" + item + " 11\\n' > \"$CONFIG/gtk-3.0/settings.ini\"; " +
+                "sed -i \"s|^gtk-font-name=.*|gtk-font-name=$FONT 11|\" \"$CONFIG/gtk-3.0/settings.ini\" || " +
+                "printf '[Settings]\\ngtk-font-name=$FONT 11\\n' > \"$CONFIG/gtk-3.0/settings.ini\"; " +
                 "pkill -SIGUSR1 kitty"
             ];
             applyFontProc.running = true;
@@ -104,13 +102,6 @@ PanelWindow {
         }
     }
 
-    // ── Filtered list ──
-    property var filteredItems: {
-        let q = searchQuery.toLowerCase();
-        if (q === "") return listItems;
-        return listItems.filter(i => i.toLowerCase().includes(q));
-    }
-
     // ── Loaders ──
     Process {
         id: loadThemes
@@ -120,9 +111,7 @@ PanelWindow {
                 root.listItems = this.text.trim().split("\n").filter(s => s.length > 0);
                 root.screen = "theme";
                 root.selectedIndex = 0;
-                root.searchQuery = "";
-                searchInput.text = "";
-                searchInput.forceActiveFocus();
+                listView.forceActiveFocus();
             }
         }
     }
@@ -135,9 +124,7 @@ PanelWindow {
                 root.listItems = this.text.trim().split("\n").filter(s => s.length > 0);
                 root.screen = "font";
                 root.selectedIndex = 0;
-                root.searchQuery = "";
-                searchInput.text = "";
-                searchInput.forceActiveFocus();
+                listView.forceActiveFocus();
             }
         }
     }
@@ -150,9 +137,7 @@ PanelWindow {
                 root.listItems = this.text.trim().split("\n").filter(s => s.length > 0);
                 root.screen = "mode";
                 root.selectedIndex = 0;
-                root.searchQuery = "";
-                searchInput.text = "";
-                searchInput.forceActiveFocus();
+                listView.forceActiveFocus();
             }
         }
     }
@@ -168,119 +153,73 @@ PanelWindow {
         onClicked: root.close()
     }
 
+    // Invisible measurer for dynamic width
+    Text {
+        id: textMeasure
+        visible: false
+        font.family: "JetBrainsMono Nerd Font Mono"
+        font.pixelSize: 13
+        font.weight: 700
+        text: root.filteredItems.reduce((a, s) => s.length > a.length ? s : a, "")
+    }
+
     Rectangle {
+        id: panel
         anchors.centerIn: parent
-        width: 480
-        height: Math.min(contentCol.implicitHeight + 24, 520)
-        radius: 16
+        width: textMeasure.implicitWidth + 48
+        height: root.filteredItems.length * 40 + 16
+        radius: 10
         color: Colors.surface
         border.color: Colors.outlineVariant
         border.width: 1
 
-        MouseArea { anchors.fill: parent }  // block backdrop clicks
+        MouseArea { anchors.fill: parent }
 
-        ColumnLayout {
-            id: contentCol
+        ListView {
+            id: listView
             anchors.fill: parent
-            anchors.margins: 12
-            spacing: 8
+            anchors.margins: 8
+            clip: true
+            model: root.filteredItems
+            focus: root.visible
 
-            // Header
-            Text {
-                text: root.screen === "main" ? "Zen Menu" :
-                      root.screen === "theme" ? "Select Theme" :
-                      root.screen === "font"  ? "Select Font" : "Select Mode"
-                font.family: "JetBrainsMono Nerd Font Mono"
-                font.pixelSize: 13
-                font.weight: 700
-                color: Colors.contentSurfaceVariant
-                Layout.leftMargin: 4
-            }
+            Keys.onUpPressed:   { if (root.selectedIndex > 0) root.selectedIndex-- }
+            Keys.onDownPressed: { if (root.selectedIndex < root.filteredItems.length - 1) root.selectedIndex++ }
+            Keys.onReturnPressed: root.confirm()
+            Keys.onEscapePressed: root.close()
 
-            // Search input
-            Rectangle {
-                Layout.fillWidth: true
+            delegate: Rectangle {
+                required property string modelData
+                required property int index
+
+                width: listView.width
                 height: 40
-                radius: 8
-                color: Colors.surfaceContainerLow
+                radius: 6
+                color: index === root.selectedIndex
+                    ? Qt.rgba(Colors.primary.r, Colors.primary.g, Colors.primary.b, 0.15)
+                    : (hoverArea.containsMouse
+                        ? Qt.rgba(Colors.contentSurface.r, Colors.contentSurface.g, Colors.contentSurface.b, 0.05)
+                        : "transparent")
 
-                TextInput {
-                    id: searchInput
-                    anchors.fill: parent
+                Text {
+                    anchors.verticalCenter: parent.verticalCenter
+                    anchors.left: parent.left
                     anchors.leftMargin: 12
-                    anchors.rightMargin: 12
-                    verticalAlignment: TextInput.AlignVCenter
+                    text: modelData
                     font.family: "JetBrainsMono Nerd Font Mono"
-                    font.pixelSize: 14
-                    color: Colors.contentSurface
-                    selectionColor: Colors.primary
-                    selectedTextColor: Colors.surface
-                    clip: true
-
-                    onTextChanged: {
-                        root.searchQuery = text;
-                        root.selectedIndex = 0;
-                    }
-
-                    Keys.onUpPressed: {
-                        if (root.selectedIndex > 0) root.selectedIndex--;
-                    }
-                    Keys.onDownPressed: {
-                        if (root.selectedIndex < root.filteredItems.length - 1) root.selectedIndex++;
-                    }
-                    Keys.onReturnPressed: root.confirm()
-                    Keys.onEscapePressed: root.close()
-
-                    Text {
-                        anchors.fill: parent
-                        verticalAlignment: Text.AlignVCenter
-                        text: "  Search..."
-                        font: searchInput.font
-                        color: Colors.outlineVariant
-                        visible: !searchInput.text
-                    }
+                    font.pixelSize: 13
+                    font.weight: index === root.selectedIndex ? 700 : 400
+                    color: index === root.selectedIndex ? Colors.primary : Colors.contentSurface
                 }
-            }
 
-            // List
-            ListView {
-                id: listView
-                Layout.fillWidth: true
-                Layout.fillHeight: true
-                clip: true
-                model: root.filteredItems
-
-                delegate: Rectangle {
-                    required property string modelData
-                    required property int index
-
-                    width: listView.width
-                    height: 40
-                    radius: 8
-                    color: index === root.selectedIndex
-                        ? Qt.rgba(Colors.primary.r, Colors.primary.g, Colors.primary.b, 0.15)
-                        : (hoverArea.containsMouse ? Qt.rgba(Colors.contentSurface.r, Colors.contentSurface.g, Colors.contentSurface.b, 0.05) : "transparent")
-
-                    Text {
-                        anchors.verticalCenter: parent.verticalCenter
-                        anchors.left: parent.left
-                        anchors.leftMargin: 12
-                        text: modelData
-                        font.family: "JetBrainsMono Nerd Font Mono"
-                        font.pixelSize: 13
-                        font.weight: index === root.selectedIndex ? 700 : 400
-                        color: index === root.selectedIndex ? Colors.primary : Colors.contentSurface
-                    }
-
-                    MouseArea {
-                        id: hoverArea
-                        anchors.fill: parent
-                        hoverEnabled: true
-                        cursorShape: Qt.PointingHandCursor
-                        onClicked: {
-                            root.selectedIndex = index;
-                            root.confirm();
-                        }
+                MouseArea {
+                    id: hoverArea
+                    anchors.fill: parent
+                    hoverEnabled: true
+                    cursorShape: Qt.PointingHandCursor
+                    onClicked: {
+                        root.selectedIndex = index;
+                        root.confirm();
                     }
                 }
             }

@@ -1,0 +1,84 @@
+@import "colors.css";
+
+* {
+  all: unset;
+}
+
+* {
+  font-family: JetBrainsMono Nerd Font Propo;
+  font-size: 16px;
+  color: @text;
+}
+
+scrollbar {
+  opacity: 0;
+}
+
+.normal-icons {
+  -gtk-icon-size: 16px;
+}
+
+.large-icons {
+  -gtk-icon-size: 32px;
+}
+
+.box-wrapper {
+  background: alpha(@base, 0.85);
+  padding: 16px;
+  border: 1px solid alpha(@border, 0.25);
+  border-radius: 16px;
+}
+
+.search-container {
+  background: alpha(@base, 0.6);
+  padding: 10px;
+  border-radius: 12px;
+}
+
+.input placeholder {
+  opacity: 0.4;
+}
+
+.input:focus,
+.input:active {
+  box-shadow: none;
+  outline: none;
+}
+
+child:selected .item-box * {
+  color: @selected-text;
+}
+
+child:selected .item-box {
+  background: alpha(@selected-text, 0.12);
+  border-radius: 10px;
+}
+
+.item-box {
+  padding: 4px 10px;
+  border-radius: 10px;
+}
+
+.item-text-box {
+  all: unset;
+  padding: 10px 0;
+}
+
+.item-subtext {
+  font-size: 0px;
+  min-height: 0px;
+  margin: 0px;
+  padding: 0px;
+}
+
+.item-image {
+  margin-right: 12px;
+  -gtk-icon-transform: scale(0.9);
+}
+
+.keybind-hints {
+  background: alpha(@background, 0.5);
+  padding: 8px;
+  margin-top: 6px;
+  border-radius: 10px;
+}

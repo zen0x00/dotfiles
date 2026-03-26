@@ -46,14 +46,12 @@ PanelWindow {
         // ── Center: active window title ──
         Text {
             anchors.centerIn: parent
-            text: Hyprland.activeToplevel?.title ?? ""
+            property string rawTitle: Hyprland.activeToplevel?.title ?? ""
+            text: rawTitle.length > 40 ? rawTitle.slice(0, 40) + "…" : rawTitle
             font.family: "JetBrainsMono Nerd Font Propo"
             font.pixelSize: 13
             font.weight: 600
             color: Qt.rgba(Colors.secondary.r, Colors.secondary.g, Colors.secondary.b, 0.85)
-            elide: Text.ElideRight
-            maximumLineCount: 1
-            width: Math.min(implicitWidth, pill.width - workspaces.width - rightRow.width - 60)
             horizontalAlignment: Text.AlignHCenter
         }
 

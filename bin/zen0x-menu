@@ -1,6 +1,10 @@
 #!/bin/bash
 
-MAIN=$(printf "Theme\nWallpaper\nFont\nMode" | qs ipc call launcher dmenu 2>/dev/null)
+fzf_pick() {
+    fzf --prompt="$1 > " --height=40% --layout=reverse --border
+}
+
+MAIN=$(printf "Theme\nWallpaper\nFont\nMode" | fzf_pick "Zen Menu")
 [ -z "$MAIN" ] && exit
 
 THEMES="$HOME/hyprdots/themes/colorschemes"
@@ -9,7 +13,7 @@ CURRENT="$HOME/.config/themes/current"
 case "$MAIN" in
 
   Theme)
-    THEME=$(ls -1 "$THEMES" | grep -v current | qs ipc call launcher dmenu 2>/dev/null)
+    THEME=$(ls -1 "$THEMES" | grep -v current | fzf_pick "Theme")
     [ -z "$THEME" ] && exit
 
     ln -sfn "$THEMES/$THEME" "$CURRENT"
@@ -27,7 +31,7 @@ case "$MAIN" in
     ;;
 
   Font)
-    FONT=$(fc-list --format="%{family[0]}\n" | sort -u | qs ipc call launcher dmenu 2>/dev/null)
+    FONT=$(fc-list --format="%{family[0]}\n" | sort -u | fzf_pick "Font")
     [ -z "$FONT" ] && exit
 
     CONFIG="$HOME/.config"
@@ -46,7 +50,7 @@ case "$MAIN" in
 
   Mode)
     MODES_DIR="$HOME/.config/modes"
-    MODE=$(ls -1 "$MODES_DIR" | sort | qs ipc call launcher dmenu 2>/dev/null)
+    MODE=$(ls -1 "$MODES_DIR" | sort | fzf_pick "Mode")
     [ -z "$MODE" ] && exit
     zen0x-mode "$MODE"
     ;;

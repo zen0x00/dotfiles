@@ -1,16 +1,15 @@
 #!/bin/bash
 
-MAIN=$(printf "Theme\nWallpaper\nFont\nMode" | rofi -dmenu -p "Zen Menu" -theme-str 'window { width: 200px; }')
+MAIN=$(printf "Theme\nWallpaper\nFont\nMode" | qs ipc call launcher dmenu 2>/dev/null)
 [ -z "$MAIN" ] && exit
 
 THEMES="$HOME/hyprdots/themes/colorschemes"
 CURRENT="$HOME/.config/themes/current"
-GEN="$HOME/.config/zen0x/generated"
 
 case "$MAIN" in
 
   Theme)
-    THEME=$(ls -1 "$THEMES" | grep -v current | rofi -dmenu -p "Theme")
+    THEME=$(ls -1 "$THEMES" | grep -v current | qs ipc call launcher dmenu 2>/dev/null)
     [ -z "$THEME" ] && exit
 
     ln -sfn "$THEMES/$THEME" "$CURRENT"
@@ -28,15 +27,13 @@ case "$MAIN" in
     ;;
 
   Font)
-    FONT=$(fc-list --format="%{family[0]}\n" | sort -u | rofi -dmenu -p "Font")
+    FONT=$(fc-list --format="%{family[0]}\n" | sort -u | qs ipc call launcher dmenu 2>/dev/null)
     [ -z "$FONT" ] && exit
 
     CONFIG="$HOME/.config"
 
-    # Kitty
     sed -i "s|^font_family.*|font_family      family=\"$FONT\"|" "$CONFIG/kitty/kitty.conf"
 
-    # GTK 3
     mkdir -p "$CONFIG/gtk-3.0"
     if [ -f "$CONFIG/gtk-3.0/settings.ini" ]; then
       sed -i "s|^gtk-font-name=.*|gtk-font-name=$FONT 11|" "$CONFIG/gtk-3.0/settings.ini"
@@ -49,7 +46,7 @@ case "$MAIN" in
 
   Mode)
     MODES_DIR="$HOME/.config/modes"
-    MODE=$(ls -1 "$MODES_DIR" | sort | rofi -dmenu -p "Mode")
+    MODE=$(ls -1 "$MODES_DIR" | sort | qs ipc call launcher dmenu 2>/dev/null)
     [ -z "$MODE" ] && exit
     zen0x-mode "$MODE"
     ;;

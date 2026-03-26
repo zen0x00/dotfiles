@@ -4,7 +4,6 @@ MODES_DIR="$HOME/.config/modes"
 STATE_FILE="/tmp/zen0x_mode"
 
 HYPR_CONFIGS="$HOME/.config/hypr/configs"
-ROFI_THEMES="$HOME/.config/rofi/themes"
 
 current_mode() {
     if [ -f "$STATE_FILE" ]; then
@@ -27,9 +26,6 @@ apply_mode() {
     cp "$mode_dir/hypr/general.conf" "$HYPR_CONFIGS/general.conf"
     cp "$mode_dir/hypr/animations.conf" "$HYPR_CONFIGS/animations.conf"
     hyprctl reload
-
-    # Rofi — symlink the mode theme as current.rasi
-    ln -sf "$ROFI_THEMES/$mode.rasi" "$ROFI_THEMES/current.rasi"
 
     # Quickshell — reload to pick up hypr config changes
     qs ipc call shell reload 2>/dev/null || true

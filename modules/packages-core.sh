@@ -15,17 +15,8 @@ install_core_packages() {
         # Display manager
         ly
 
-        # Status bar
-        waybar
-        playerctl
-
-        # App launcher
-        walker
-
-        # Elephant application provider ecosystem
-        elephant
-        elephant-desktopapplications
-        elephant-providerlist
+        # Shell
+        quickshell
 
         # Network
         networkmanager
@@ -73,13 +64,8 @@ install_core_packages() {
         # Brightness & input control
         brightnessctl
 
-        # Notifications & OSD
+        # Notifications
         libnotify
-        swaync
-        swayosd
-
-        # Logout menu
-        wlogout
 
         # Qt theming (Wayland)
         kvantum

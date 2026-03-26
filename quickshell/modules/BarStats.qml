@@ -4,7 +4,7 @@ import Quickshell.Io
 Item {
     id: root
     implicitWidth: label.implicitWidth
-    implicitHeight: label.implicitHeight
+    implicitHeight: label.height
 
     property int vol: 0
     property bool muted: false
@@ -107,29 +107,56 @@ Item {
         }
     }
 
-    Text {
+    Row {
         id: label
         anchors.verticalCenter: parent.verticalCenter
-        font.family: "JetBrainsMono Nerd Font Mono"
-        font.pixelSize: 12
-        font.weight: 600
-        color: Colors.contentSurface
-        text: (root.muted ? "VOL: MUTE" : "VOL: " + root.vol + "%") +
-              "   CPU: " + root.cpu + "%" +
-              "   MEM: " + root.mem + "%" +
-              "   DISK: " + root.disk + "%" +
-              "   ETH: ↓" + root.netDown + " ↑" + root.netUp +
-              "   " + root.timeText
+        spacing: 0
+
+        // ── VOL: clickable + scrollable ──
+        Text {
+            id: volText
+            anchors.verticalCenter: parent.verticalCenter
+            font.family: "JetBrainsMono Nerd Font Mono"
+            font.pixelSize: 12
+            font.weight: 600
+            color: Colors.contentSurface
+            text: root.muted ? "VOL: MUTE" : "VOL: " + root.vol + "%"
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                acceptedButtons: Qt.LeftButton
+                onClicked: audioLauncher.running = true
+                onWheel: (wheel) => {
+                    if (wheel.angleDelta.y > 0) volUp.running = true;
+                    else volDown.running = true;
+                }
+            }
+        }
+
+        // ── Rest: CPU/MEM/DISK/ETH/clock — click opens btop ──
+        Text {
+            anchors.verticalCenter: parent.verticalCenter
+            font.family: "JetBrainsMono Nerd Font Mono"
+            font.pixelSize: 12
+            font.weight: 600
+            color: Colors.contentSurface
+            text: "   CPU: " + root.cpu + "%" +
+                  "   MEM: " + root.mem + "%" +
+                  "   DISK: " + root.disk + "%" +
+                  "   ETH: ↓" + root.netDown + " ↑" + root.netUp +
+                  "   " + root.timeText
+
+            MouseArea {
+                anchors.fill: parent
+                cursorShape: Qt.PointingHandCursor
+                onClicked: btopProc.running = true
+            }
+        }
     }
 
-    MouseArea {
-        anchors.fill: parent
-        cursorShape: Qt.PointingHandCursor
-        onClicked: btopProc.running = true
-    }
-
-    Process {
-        id: btopProc
-        command: ["kitty", "--", "btop"]
-    }
+    Process { id: audioLauncher; command: ["zen0x-launch-audio"] }
+    Process { id: volUp;   command: ["qs", "ipc", "call", "osd", "volumeUp"] }
+    Process { id: volDown; command: ["qs", "ipc", "call", "osd", "volumeDown"] }
+    Process { id: btopProc; command: ["kitty", "--", "btop"] }
 }

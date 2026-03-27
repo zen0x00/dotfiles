@@ -17,3 +17,4 @@ Osd 1.0 Osd.qml
 IslandBar 1.0 IslandBar.qml
 PowerMenu 1.0 PowerMenu.qml
 PowerMenuButton 1.0 PowerMenuButton.qml
+ControlCenter 1.0 ControlCenter.qml

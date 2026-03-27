@@ -13,6 +13,7 @@ ShellRoot {
     Launcher {}
     AppMenu {}
     IslandBar {}
+    ControlCenter {}
     ZenMenu {}
     NotificationPopup {}
     Osd {}

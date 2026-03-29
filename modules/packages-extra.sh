@@ -63,13 +63,11 @@ install_extra_packages() {
         obs-pipewire-audio-capture
         obs-studio
         obs-vkcapture
-        spicetify-cli
         spotify
         wiremix
 
         # Gaming
         gamemode
-        heroic-games-launcher
         lib32-gamemode
         mangohud
         mangojuice
@@ -96,7 +94,6 @@ install_extra_packages() {
         # Apps
         brave-bin
         localsend
-        vesktop
 
         # Screen capture
         satty

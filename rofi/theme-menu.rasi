@@ -1,18 +1,13 @@
 @import "colors.rasi"
 
 configuration {
-    modi:                   "drun,run";
-    show-icons:             false;
-    font:                   "JetBrainsMono Nerd Font Propo 11";
+    modi:                   "dmenu";
+    font:                   "JetBrainsMono Nerd Font Propo 12";
     me-select-entry:        "";
     me-accept-entry:        "MousePrimary,Return";
     hover-select:           true;
     scroll-method:          1;
     scrollbar:              false;
-    location:               0;
-    anchor:                 0;
-    width:                  450;
-    height:                 520;
 }
 
 * {
@@ -23,81 +18,71 @@ configuration {
 }
 
 window {
-    background-color:   @bg;
-    border:             2px;
-    border-color:       @accent;
-    border-radius:      16px;
-    padding:            24px 24px 16px 24px;
+    background-color:   @bg-99;
+    border:             1px;
+    border-color:       @accent-50;
+    border-radius:      20px;
+    width:              520px;
+    location:           center;
+    anchor:             center;
 }
 
 mainbox {
     background-color:   transparent;
-    padding:            0;
-    spacing:            16px;
-    children:           "inputbar,listview";
-}
-
-inputbar {
-    background-color:   @fg-06;
-    border:             2px;
-    border-color:       @accent;
-    border-radius:      12px;
-    padding:            4px 16px;
-    children:           "entry";
-    min-height:         46px;
-}
-
-entry {
-    background-color:   transparent;
-    text-color:         @fg;
-    placeholder:        "Search themes...";
-    placeholder-color:  @muted;
-    vertical-align:     0.5;
-    cursor:             text;
-    font:               "JetBrainsMono Nerd Font Propo 15";
+    padding:            16px;
+    spacing:            8px;
+    children:           [listview];
 }
 
 listview {
     background-color:   transparent;
-    spacing:            6px;
+    spacing:            4px;
     scrollbar:          false;
+    dynamic:            true;
     cycle:              true;
     layout:             vertical;
+    lines:              10;
 }
 
 element {
     background-color:   transparent;
-    border:             2px;
+    border:             0 0 0 3px;
     border-color:       transparent;
-    border-radius:      10px;
-    padding:            10px 16px;
-    spacing:            10px;
+    border-radius:      0 12px 12px 0;
+    padding:            11px 16px;
+    spacing:            12px;
     orientation:        horizontal;
-    min-height:         44px;
+    min-height:         0;
     cursor:             pointer;
 }
 
-element normal.normal {
+element.normal.normal {
     background-color:   transparent;
-    text-color:         @fg;
     border-color:       transparent;
 }
 
-element alternate.normal {
+element.alternate.normal {
     background-color:   transparent;
-    text-color:         @fg;
     border-color:       transparent;
 }
 
-element selected.normal {
-    background-color:   @accent-28;
-    text-color:         @accent;
-    border-color:       @accent-60;
+element.selected.normal {
+    background-color:   @accent-16;
+    border-color:       @accent-70;
 }
 
 element-text {
     background-color:   transparent;
-    text-color:         inherit;
+    text-color:         @fg;
     vertical-align:     0.5;
-    font:               "JetBrainsMono Nerd Font Propo 13";
+    highlight:          bold;
 }
+
+element-text.selected {
+    text-color:         @accent;
+}
+
+element-text.alternate {
+    text-color:         @fg;
+}
+

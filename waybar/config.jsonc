@@ -29,9 +29,10 @@
       "3": "",
       "4": "󰏥",
       "5": "",
+      "6": "",
     },
     "persistent-workspaces": {
-      "*": [1, 2, 3, 4, 5],
+      "*": [1, 2, 3, 4, 5, 6],
     },
     "active-only": false,
     "all-outputs": false,

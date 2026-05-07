@@ -1,0 +1,120 @@
+* {
+  font-family: "JetBrainsMono Nerd Font Propo", "Symbols Nerd Font Mono";
+  font-size: 12px;
+  border: none;
+  min-height: 0;
+  padding: 0;
+  margin: 0;
+  box-shadow: none;
+  outline: none;
+}
+
+window.bar {
+  background: transparent;
+  border: none;
+}
+
+.bar-inner {
+  background: alpha(@panelAlt, 0.92);
+  border-bottom: 1px solid alpha(@accent, 0.25);
+  color: @fg;
+  min-height: 32px;
+  padding: 0 8px;
+}
+
+/* ── Workspaces ─────────────────────────── */
+
+.workspaces {
+  padding-left: 4px;
+}
+
+.workspace {
+  background: transparent;
+  color: alpha(@fg, 0.35);
+  border-radius: 0;
+  min-width: 0;
+  min-height: 0;
+  padding: 0 5px;
+  margin: 0;
+  font-size: 11px;
+  font-weight: 500;
+  border: 2px solid transparent;
+  transition: 120ms ease;
+}
+
+.workspace.active {
+  color: @accent;
+  font-weight: 700;
+  border-bottom: 2px solid @accent;
+}
+
+.workspace.occupied {
+  color: alpha(@fg, 0.65);
+}
+
+.workspace:hover:not(.active) {
+  color: @fg;
+  background: alpha(@fg, 0.06);
+}
+
+/* ── Window title ───────────────────────── */
+
+.window-title {
+  color: alpha(@fg, 0.5);
+  font-size: 11px;
+  font-weight: 400;
+  padding: 0 8px;
+}
+
+/* ── Sys info (right) ───────────────────── */
+
+.sys-info {
+  padding-right: 4px;
+}
+
+.volume,
+.network,
+.battery,
+.clock {
+  color: alpha(@fg, 0.7);
+  font-size: 12px;
+  padding: 0 5px;
+}
+
+.battery.warning {
+  color: @warning;
+}
+
+.battery.critical {
+  color: @danger;
+}
+
+.battery.charging {
+  color: @accent;
+}
+
+.clock {
+  color: @fg;
+  font-weight: 600;
+  font-size: 11px;
+  padding: 0 5px 0 3px;
+}
+
+/* ── Tray ───────────────────────────────── */
+
+.tray {
+  padding: 0 2px;
+}
+
+.tray-item {
+  background: transparent;
+  border-radius: 0;
+  padding: 3px;
+  min-width: 20px;
+  min-height: 20px;
+  transition: 120ms ease;
+}
+
+.tray-item:hover {
+  background: alpha(@fg, 0.08);
+}

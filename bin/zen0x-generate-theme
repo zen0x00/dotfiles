@@ -17,6 +17,7 @@ TEMPLATE_TARGETS = [
     ("templates/swayosd/style.css.tpl",        "~/.config/swayosd/style.css"),
     ("templates/swayosd/config.toml.tpl",      "~/.config/swayosd/config.toml"),
     ("templates/swaync/colors.css.tpl",        "~/.config/swaync/colors.css"),
+    ("templates/ags/colors.css.tpl",           "~/.config/ags/colors.css"),
     ("templates/opencode/theme.json.tpl",      "~/.config/opencode/themes/current.json"),
     ("templates/nvim/colors.lua.tpl",          "~/.config/nvim/lua/zen0x/colors.lua"),
 ]

@@ -1,0 +1,151 @@
+/* ── Notification Popups ────────────────── */
+
+window.notif-popup-window {
+  background: transparent;
+  border: none;
+}
+
+.notif-popup-list {
+  padding: 0;
+}
+
+.notif-popup {
+  background: @panelAlt;
+  border: 1px solid alpha(@accent, 0.3);
+  padding: 14px 16px;
+  min-width: 380px;
+}
+
+.notif-summary {
+  color: @fg;
+  font-size: 13px;
+  font-weight: 600;
+}
+
+.notif-body {
+  color: @muted;
+  font-size: 12px;
+  font-weight: 400;
+}
+
+.notif-close {
+  background: transparent;
+  color: @muted;
+  border-radius: 0;
+  padding: 0 2px;
+  font-size: 10px;
+  min-width: 0;
+  min-height: 0;
+  transition: 80ms ease;
+}
+
+.notif-close:hover {
+  color: @danger;
+}
+
+/* ── Notification Center ────────────────── */
+
+window.nc {
+  background: transparent;
+  border: none;
+}
+
+.nc-box {
+  background: @panelAlt;
+  border-left: 1px solid alpha(@accent, 0.3);
+  min-width: 320px;
+}
+
+.nc-header {
+  padding: 10px 12px;
+  border-bottom: 1px solid alpha(@fg, 0.08);
+}
+
+.nc-title {
+  color: @fg;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.nc-dnd {
+  background: transparent;
+  color: @muted;
+  border-radius: 0;
+  padding: 0 6px;
+  font-size: 14px;
+  min-height: 0;
+  transition: 80ms ease;
+}
+
+.nc-dnd.active {
+  color: @accent;
+}
+
+.nc-dnd:hover {
+  color: @fg;
+}
+
+.nc-clear {
+  background: transparent;
+  color: @muted;
+  border-radius: 0;
+  padding: 0 6px;
+  font-size: 10px;
+  min-height: 0;
+  transition: 80ms ease;
+}
+
+.nc-clear:hover {
+  color: @danger;
+}
+
+.nc-scroll {
+  background: transparent;
+}
+
+.nc-list {
+  padding: 6px 8px;
+}
+
+.nc-item {
+  background: alpha(@elevated, 0.5);
+  border: 1px solid alpha(@fg, 0.06);
+  padding: 8px 10px;
+}
+
+.nc-summary {
+  color: @fg;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.nc-time {
+  color: @muted;
+  font-size: 10px;
+}
+
+.nc-body {
+  color: @muted;
+  font-size: 10px;
+}
+
+.nc-dismiss {
+  background: transparent;
+  color: @muted;
+  border-radius: 0;
+  padding: 0 2px;
+  font-size: 10px;
+  min-width: 0;
+  min-height: 0;
+  transition: 80ms ease;
+}
+
+.nc-dismiss:hover {
+  color: @danger;
+}
+
+.nc-empty {
+  color: @muted;
+  font-size: 11px;
+  padding: 20px;
+}

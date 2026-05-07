@@ -1,3 +1,4 @@
+import { subprocess } from "astal"
 import SystemTray from "./Tray"
 import Volume from "./Volume"
 import NetworkIcon from "./Network"
@@ -12,6 +13,13 @@ export default function SysInfo() {
       <NetworkIcon />
       <BatteryIcon />
       <Clock />
+      <button
+        cssClasses={["cc-button"]}
+        onClicked={() => subprocess(["astal", "-i", "zen0x", "toggle-nc"])}
+        tooltipText="Notifications"
+      >
+        <label label="󰂚" />
+      </button>
     </box>
   )
 }

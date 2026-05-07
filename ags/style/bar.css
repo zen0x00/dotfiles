@@ -118,3 +118,18 @@ window.bar {
 .tray-item:hover {
   background: alpha(@fg, 0.08);
 }
+
+/* ── CC button ──────────────────────────── */
+
+.cc-button {
+  background: transparent;
+  color: alpha(@fg, 0.7);
+  border-radius: 0;
+  padding: 0 6px;
+  font-size: 14px;
+  transition: 120ms ease;
+}
+
+.cc-button:hover {
+  color: @accent;
+}

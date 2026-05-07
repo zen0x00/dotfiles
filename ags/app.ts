@@ -1,12 +1,14 @@
 import GLib from "gi://GLib"
 import { App } from "astal/gtk4"
 import Bar from "./widget/Bar"
+import Launcher from "./widget/Launcher"
 
 const HOME = GLib.get_home_dir()
 
 function loadCss() {
   App.apply_css(`${HOME}/.config/ags/colors.css`, true)
   App.apply_css(`${HOME}/.config/ags/style/bar.css`, false)
+  App.apply_css(`${HOME}/.config/ags/style/launcher.css`, false)
 }
 
 App.start({
@@ -15,12 +17,18 @@ App.start({
     if (request === "reload-css") {
       loadCss()
       res("ok")
+    } else if (request === "toggle-launcher") {
+      const win = App.get_window("zen0x-launcher")
+      if (win) win.visible ? (win as any).__hide() : (win as any).__show()
+      res("ok")
     } else {
       res("unknown request")
     }
   },
   main() {
     loadCss()
-    App.get_monitors().map(Bar)
+    const monitors = App.get_monitors()
+    monitors.map(Bar)
+    monitors.map(Launcher)
   },
 })

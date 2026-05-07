@@ -1,0 +1,59 @@
+window.launcher {
+  background: transparent;
+  border: none;
+}
+
+.launcher-box {
+  background: @panelAlt;
+  border: 1px solid alpha(@accent, 0.35);
+  padding: 0;
+  min-width: 480px;
+}
+
+.launcher-entry {
+  background: @panelAlt;
+  color: @fg;
+  border: none;
+  border-radius: 0;
+  padding: 10px 14px;
+  font-size: 13px;
+  font-weight: 500;
+  caret-color: @accent;
+  min-height: 0;
+}
+
+.launcher-entry:focus {
+  outline: none;
+  box-shadow: none;
+}
+
+.launcher-results {
+  padding: 4px 0;
+}
+
+.launcher-item {
+  background: transparent;
+  border-radius: 0;
+  padding: 7px 14px;
+  transition: 80ms ease;
+  border: none;
+  border-left: 2px solid transparent;
+}
+
+.launcher-item:hover,
+.launcher-item:focus {
+  background: alpha(@accent, 0.08);
+  border-left: 2px solid @accent;
+}
+
+.launcher-app-name {
+  color: @fg;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.launcher-app-desc {
+  color: @muted;
+  font-size: 10px;
+  font-weight: 400;
+}

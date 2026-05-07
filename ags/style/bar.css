@@ -52,10 +52,6 @@ window.bar {
   color: alpha(@fg, 0.65);
 }
 
-.workspace:hover:not(.active) {
-  color: @fg;
-  background: alpha(@fg, 0.06);
-}
 
 /* ── Window title ───────────────────────── */
 
@@ -79,6 +75,14 @@ window.bar {
   color: alpha(@fg, 0.7);
   font-size: 12px;
   padding: 0 5px;
+  background: transparent;
+  border-radius: 0;
+  transition: 120ms ease;
+}
+
+.volume:hover,
+.network:hover {
+  color: @fg;
 }
 
 .battery.warning {

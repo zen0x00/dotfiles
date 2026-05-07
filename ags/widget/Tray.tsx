@@ -12,8 +12,13 @@ function TrayItem({ item }: { item: InstanceType<typeof Tray.TrayItem> }) {
       usePopover={false}
       menuModel={bind(item, "menuModel")}
       setup={(self) => {
+        bind(item, "actionGroup").subscribe((ag) => {
+          self.insert_action_group("dbusmenu", ag)
+        })
         self.insert_action_group("dbusmenu", item.actionGroup)
-        self.connect("notify::active", () => item.about_to_show())
+        self.connect("notify::active", () => {
+          if (self.active) item.about_to_show()
+        })
       }}
     >
       <image gicon={bind(item, "gicon")} pixelSize={16} />

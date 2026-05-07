@@ -1,4 +1,4 @@
-import { bind, Variable } from "astal"
+import { bind, subprocess, Variable } from "astal"
 import Network from "gi://AstalNetwork?version=0.1"
 
 const WIFI_ICONS = ["󰤯", "󰤟", "󰤢", "󰤥", "󰤨"]
@@ -19,11 +19,13 @@ export default function NetworkIcon() {
   )
 
   return (
-    <label
+    <button
       cssClasses={["network"]}
-      label={icon()}
-      tooltipText={bind(net, "wifi").as((w) => w?.ssid || "")}
+      tooltipText={bind(net, "wifi").as((w) => w?.ssid || "No connection")}
+      onClicked={() => subprocess(["nm-connection-editor"])}
       onDestroy={() => icon.drop()}
-    />
+    >
+      <label label={icon()} />
+    </button>
   )
 }

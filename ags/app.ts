@@ -4,6 +4,7 @@ import Bar from "./widget/Bar"
 import Launcher from "./widget/Launcher"
 import NotificationPopup from "./widget/NotificationPopup"
 import NotificationCenter from "./widget/NotificationCenter"
+import Osd from "./widget/Osd"
 
 const HOME = GLib.get_home_dir()
 
@@ -12,6 +13,7 @@ function loadCss() {
   App.apply_css(`${HOME}/.config/ags/style/bar.css`, false)
   App.apply_css(`${HOME}/.config/ags/style/launcher.css`, false)
   App.apply_css(`${HOME}/.config/ags/style/notifications.css`, false)
+  App.apply_css(`${HOME}/.config/ags/style/osd.css`, false)
 }
 
 App.start({
@@ -39,5 +41,6 @@ App.start({
     monitors.map(Launcher)
     monitors.map(NotificationPopup)
     monitors.map(NotificationCenter)
+    monitors.map(Osd)
   },
 })

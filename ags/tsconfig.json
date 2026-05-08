@@ -7,6 +7,7 @@
     "jsxImportSource": "astal/gtk4",
     "moduleResolution": "bundler",
     "strict": false,
+    "baseUrl": ".",
     "paths": {
       "astal/gtk4": ["/usr/share/astal/gjs/gtk4/index.ts"],
       "astal/gtk4/*": ["/usr/share/astal/gjs/gtk4/*.ts"],

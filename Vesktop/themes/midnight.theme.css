@@ -20,7 +20,7 @@ body {
     font-weight: 400; /* normal text font weight. DOES NOT AFFECT BOLD TEXT */
 
     /* sizes */
-    --gap: 12px; /* spacing between panels */
+    --gap: 0px; /* spacing between panels */
     --divider-thickness: 4px; /* thickness of unread messages divider and highlighted message borders */
     --border-thickness: 1px; /* thickness of borders around main panels. DOES NOT AFFECT OTHER BORDERS */
 
@@ -57,11 +57,11 @@ body {
 
     /* transparency/blur options */
     /* NOTE: TO USE TRANSPARENCY/BLUR, YOU MUST HAVE TRANSPARENT BG COLORS. FOR EXAMPLE: --bg-4: hsla(220, 15%, 10%, 0.7); */
-    --transparency-tweaks: off; /* off: no changes, on: remove some elements for better transparency */
-    --remove-bg-layer: off; /* off: no changes, on: remove the base --bg-3 layer for use with window transparency (WILL OVERRIDE BACKGROUND IMAGE) */
-    --panel-blur: off; /* off: no changes, on: blur the background of panels */
-    --blur-amount: 12px; /* amount of blur */
-    --bg-floating: var(--bg-3); /* set this to a more opaque color if floating panels look too transparent. only applies if panel blur is on  */
+    --transparency-tweaks: on; /* off: no changes, on: remove some elements for better transparency */
+    --remove-bg-layer: on; /* off: no changes, on: remove the base --bg-3 layer for use with window transparency (WILL OVERRIDE BACKGROUND IMAGE) */
+    --panel-blur: on; /* off: no changes, on: blur the background of panels */
+    --blur-amount: 20px; /* amount of blur */
+    --bg-floating: hsla(219, 17%, 8%, 0.92); /* set this to a more opaque color if floating panels look too transparent. only applies if panel blur is on  */
 
     /* chatbar options */
     --custom-chatbar: off; /* off: default chatbar, separated: chatbar separated from chat */
@@ -84,10 +84,10 @@ body {
     --text-5: hsl(220, 12%, 28%); /* muted channels/chats and timestamps */
 
     /* background and dark colors */
-    --bg-1: hsla(220, 21%, 21%, 1); /* dark buttons when clicked — #2a3140 */
-    --bg-2: hsla(220, 22%, 13%, 1); /* dark buttons — #1a1f29 */
-    --bg-3: hsla(220, 18%, 10%, 1); /* spacing, secondary elements — #141820 */
-    --bg-4: hsla(219, 17%, 7%, 1); /* main background color — #0f1115 */
+    --bg-1: hsla(220, 21%, 18%, 0.82); /* dark buttons when clicked */
+    --bg-2: hsla(219, 17%, 10%, 0.72); /* dark buttons */
+    --bg-3: hsla(219, 17%, 7%, 0.62);  /* spacing, secondary panels */
+    --bg-4: hsla(219, 17%, 7%, 0.55);  /* main background — transparent for glass */
     --hover: hsla(220, 20%, 40%, 0.1); /* channels and buttons when hovered */
     --active: hsla(220, 20%, 40%, 0.2); /* channels and buttons when clicked or selected */
     --active-2: hsla(220, 20%, 40%, 0.3); /* extra state for transparent buttons */
@@ -113,10 +113,10 @@ body {
     --offline: var(--text-4); /* change to #82838b for default offline color */
 
     /* border colors */
-    --border-light: var(--hover); /* general light border color */
-    --border: var(--active); /* general normal border color */
-    --border-hover: var(--active); /* border color of panels when hovered */
-    --button-border: hsl(220, 0%, 100%, 0.1); /* neutral border color of buttons */
+    --border-light: rgba(255, 255, 255, 0.07); /* general light border color */
+    --border: rgba(255, 255, 255, 0.11);        /* general normal border color */
+    --border-hover: rgba(255, 255, 255, 0.18);  /* border color of panels when hovered */
+    --button-border: rgba(255, 255, 255, 0.10); /* neutral border color of buttons */
 
     /* base colors — TokyoNight palette */
     --red-1: #ff9e9e;
@@ -148,4 +148,35 @@ body {
     --purple-3: #a07ee0;
     --purple-4: #8564c8;
     --purple-5: #6b4ab0;
+}
+
+/* Discord native bg vars — semi-transparent for glass */
+:root {
+    --background-primary:        rgba(15, 18, 25, 0.55);
+    --background-secondary:      rgba(15, 18, 25, 0.55);
+    --background-secondary-alt:  rgba(15, 18, 25, 0.55);
+    --background-tertiary:       rgba(15, 18, 25, 0.55);
+    --background-accent:         rgba(15, 18, 25, 0.55);
+    --background-mobile-primary:    rgba(15, 18, 25, 0.55);
+    --background-mobile-secondary:  rgba(15, 18, 25, 0.55);
+    --channeltextarea-background:   rgba(21, 24, 33, 0.80);
+    --background-floating:          rgba(15, 18, 25, 0.90);
+    --background-modifier-hover:    rgba(255, 255, 255, 0.04);
+    --background-modifier-active:   rgba(255, 255, 255, 0.08);
+    --background-modifier-selected: rgba(255, 255, 255, 0.06);
+}
+
+/* glass panels */
+[class*="guilds_"],
+[class*="sidebar_"],
+[class*="container_"],
+[class*="panels_"],
+[class*="membersWrap_"],
+[class*="member-list"],
+[class*="privateChannels_"] {
+    background-color: rgba(15, 18, 25, 0.55) !important;
+    backdrop-filter: blur(20px) saturate(1.4) !important;
+    -webkit-backdrop-filter: blur(20px) saturate(1.4) !important;
+    border-color: rgba(255, 255, 255, 0.08) !important;
+    box-shadow: none !important;
 }

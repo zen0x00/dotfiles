@@ -9,12 +9,16 @@ sudo stow --dir="$DOTFILES_DIR" --target=/usr --stow bin
 echo "Stowing zsh → $HOME ..."
 stow --dir="$DOTFILES_DIR" --target="$HOME" --stow zsh
 
-CONFIG_PACKAGES=(fastfetch hypr kitty quickshell rofi swayosd swaync waybar)
+CONFIG_PACKAGES=(fastfetch hypr kitty opencode quickshell rofi swayosd swaync waybar)
 
 for pkg in "${CONFIG_PACKAGES[@]}"; do
     echo "Stowing $pkg → ~/.config/$pkg ..."
     mkdir -p "$HOME/.config/$pkg"
     stow --dir="$DOTFILES_DIR" --target="$HOME/.config/$pkg" --stow "$pkg"
 done
+
+echo "Symlinking nvim/lua/zen0x/colors.lua → ~/.config/nvim/lua/zen0x/colors.lua ..."
+mkdir -p "$HOME/.config/nvim/lua/zen0x"
+ln -sf "$DOTFILES_DIR/nvim/lua/zen0x/colors.lua" "$HOME/.config/nvim/lua/zen0x/colors.lua"
 
 echo "Done."

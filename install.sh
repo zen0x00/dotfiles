@@ -7,8 +7,6 @@ set -euo pipefail
 
 DOTFILES_DIR="${DOTFILES_DIR:-$HOME/dotfiles}"
 DOTFILES_REPO="${DOTFILES_REPO:-https://github.com/zen0x00/dotfiles.git}"
-DEFAULT_THEME="gruvbox"
-
 RED='\033[0;31m'; GREEN='\033[0;32m'; YELLOW='\033[1;33m'; CYAN='\033[0;36m'; NC='\033[0m'
 info()    { printf "${CYAN}:: %s${NC}\n" "$*"; }
 success() { printf "${GREEN}✓  %s${NC}\n" "$*"; }
@@ -126,7 +124,7 @@ for f in .zshrc .zshenv .zprofile; do
 done
 stow --dir="$DOTFILES_DIR" --target="$HOME" --stow zsh
 
-CONFIG_PACKAGES=(fastfetch hypr kitty rofi swayosd swaync waybar)
+CONFIG_PACKAGES=(fastfetch hypr kitty opencode rofi swayosd swaync waybar)
 for pkg in "${CONFIG_PACKAGES[@]}"; do
     if [[ -d "$DOTFILES_DIR/$pkg" ]]; then
         info "$pkg → ~/.config/$pkg"
@@ -135,16 +133,11 @@ for pkg in "${CONFIG_PACKAGES[@]}"; do
     fi
 done
 
-success "Stow done"
+    info "nvim colors → ~/.config/nvim/lua/zen0x/colors.lua"
+    mkdir -p "$HOME/.config/nvim/lua/zen0x"
+    ln -sf "$DOTFILES_DIR/nvim/lua/zen0x/colors.lua" "$HOME/.config/nvim/lua/zen0x/colors.lua"
 
-# ── theme ──────────────────────────────────────────────────────────────────────
-step "Apply default theme ($DEFAULT_THEME)"
-if command -v zen0x-apply-theme >/dev/null 2>&1; then
-    zen0x-apply-theme "$DEFAULT_THEME" || warn "Theme apply failed — run 'zen0x-apply-theme $DEFAULT_THEME' manually"
-    success "Theme applied: $DEFAULT_THEME"
-else
-    warn "zen0x-apply-theme not in PATH yet — run it after logging in."
-fi
+success "Stow done"
 
 # ── default shell ──────────────────────────────────────────────────────────────
 step "Default shell"
@@ -178,5 +171,4 @@ info "Or from TTY: uwsm start hyprland.desktop"
 # ── done ───────────────────────────────────────────────────────────────────────
 printf "\n${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n"
 printf "${GREEN}  Done. Log out and back in (or reboot) to start.${NC}\n"
-printf "${GREEN}  Switch themes: zen0x-theme-menu${NC}\n"
 printf "${GREEN}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${NC}\n\n"

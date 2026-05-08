@@ -15,7 +15,7 @@ configuration {
     spacing:  0;
 
     bg:         rgba(15, 18, 25, 0.25);
-    bg-alt:     rgba(255, 255, 255, 0.05);
+    bg-alt:     transparent;
     surface:    rgba(255, 255, 255, 0.04);
 
     fg:         #e6e9ef;

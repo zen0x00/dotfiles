@@ -17,6 +17,10 @@ for pkg in "${CONFIG_PACKAGES[@]}"; do
     stow --dir="$DOTFILES_DIR" --target="$HOME/.config/$pkg" --stow "$pkg"
 done
 
+echo "Stowing Vesktop → ~/.config/vesktop ..."
+mkdir -p "$HOME/.config/vesktop"
+stow --dir="$DOTFILES_DIR" --target="$HOME/.config/vesktop" --stow Vesktop
+
 echo "Symlinking nvim/lua/zen0x/colors.lua → ~/.config/nvim/lua/zen0x/colors.lua ..."
 mkdir -p "$HOME/.config/nvim/lua/zen0x"
 ln -sf "$DOTFILES_DIR/nvim/lua/zen0x/colors.lua" "$HOME/.config/nvim/lua/zen0x/colors.lua"

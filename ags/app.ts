@@ -9,7 +9,7 @@ import Osd from "./widget/Osd"
 const HOME = GLib.get_home_dir()
 
 function loadCss() {
-  App.apply_css(`${HOME}/.config/ags/colors.css`, true)
+  App.apply_css(`${HOME}/.config/ags/style/colors.css`, true)
   App.apply_css(`${HOME}/.config/ags/style/bar.css`, false)
   App.apply_css(`${HOME}/.config/ags/style/launcher.css`, false)
   App.apply_css(`${HOME}/.config/ags/style/notifications.css`, false)

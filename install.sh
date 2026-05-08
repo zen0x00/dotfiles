@@ -133,9 +133,9 @@ for pkg in "${CONFIG_PACKAGES[@]}"; do
     fi
 done
 
-    info "nvim colors → ~/.config/nvim/lua/zen0x/colors.lua"
-    mkdir -p "$HOME/.config/nvim/lua/zen0x"
-    ln -sf "$DOTFILES_DIR/nvim/lua/zen0x/colors.lua" "$HOME/.config/nvim/lua/zen0x/colors.lua"
+info "nvim colors → ~/.config/nvim/lua/zen0x/colors.lua"
+mkdir -p "$HOME/.config/nvim/lua/zen0x"
+ln -sf "$DOTFILES_DIR/nvim/lua/zen0x/colors.lua" "$HOME/.config/nvim/lua/zen0x/colors.lua"
 
 success "Stow done"
 

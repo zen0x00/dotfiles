@@ -1,5 +1,3 @@
-@import "colors.rasi"
-
 configuration {
     modi:                   "drun";
     show-icons:             false;
@@ -7,7 +5,7 @@ configuration {
     font:                   "JetBrainsMono Nerd Font Mono 12";
     me-select-entry:        "";
     me-accept-entry:        "MousePrimary";
-    prompt:                 " ";
+    prompt:                 "";
 }
 
 * {
@@ -15,16 +13,32 @@ configuration {
     margin:   0;
     padding:  0;
     spacing:  0;
+
+    bg:         rgba(15, 18, 25, 0.25);
+    bg-alt:     rgba(255, 255, 255, 0.05);
+    surface:    rgba(255, 255, 255, 0.04);
+
+    fg:         #e6e9ef;
+    fg-muted:   rgba(170, 177, 191, 0.80);
+
+    primary:    #7aa2f7;
+    secondary:  #9ece6a;
+    accent:     #bb9af7;
+
+    border-col: rgba(255, 255, 255, 0.09);
+    shadow:     rgba(0,0,0,0.45);
+
+    primary-16: rgba(122,162,247,0.14);
+    primary-50: rgba(122,162,247,0.45);
+    fg-muted-40: rgba(170,177,191,0.35);
 }
 
-/* ── Window ─────────────────────────────────────────────── */
-
 window {
-    background-color:   @bg-99;
+    background-color:   @bg;
     border:             1px;
-    border-color:       @accent-50;
-    border-radius:      20px;
-    width:              600px;
+    border-color:       @border-col;
+    border-radius:      16px;
+    width:              620px;
     location:           center;
     anchor:             center;
     x-offset:           0;
@@ -33,17 +47,15 @@ window {
 
 mainbox {
     background-color:   transparent;
-    padding:            20px;
-    spacing:            16px;
+    padding:            18px;
+    spacing:            12px;
     children:           [inputbar, listview, message];
 }
 
-/* ── Search bar ─────────────────────────────────────────── */
-
 inputbar {
-    background-color:   @panel-alt;
+    background-color:   @bg-alt;
     border:             1px;
-    border-color:       @accent-50;
+    border-color:       @border-col;
     border-radius:      12px;
     padding:            14px 18px;
     children:           [prompt, entry];
@@ -53,25 +65,23 @@ inputbar {
 
 prompt {
     background-color:   transparent;
-    color:              @accent;
+    text-color:         @primary;
     vertical-align:     0.5;
-    font:               "JetBrainsMono Nerd Font Propo 12";
+    font:               "JetBrainsMono Nerd Font Propo 13";
 }
 
 entry {
     background-color:   transparent;
-    color:              @fg;
+    text-color:         @fg;
     placeholder:        "Search applications…";
-    placeholder-color:  @muted-50;
+    placeholder-color:  @fg-muted-40;
     vertical-align:     0.5;
     cursor:             text;
 }
 
-/* ── App list ───────────────────────────────────────────── */
-
 listview {
     background-color:   transparent;
-    spacing:            4px;
+    spacing:            3px;
     scrollbar:          false;
     dynamic:            true;
     cycle:              true;
@@ -81,11 +91,11 @@ listview {
 
 element {
     background-color:   transparent;
-    border:             0 0 0 3px;
+    border:             0 0 0 2px;
     border-color:       transparent;
-    border-radius:      12px;
-    padding:            10px 14px;
-    spacing:            14px;
+    border-radius:      10px;
+    padding:            11px 16px;
+    spacing:            0;
     orientation:        horizontal;
     min-height:         0;
     cursor:             pointer;
@@ -102,38 +112,35 @@ element.alternate.normal {
 }
 
 element.selected.normal {
-    background-color:   @accent-16;
-    border-color:       @accent-70;
-    border-radius:      0 12px 12px 0;
+    background-color:   @primary-16;
+    border-color:       @primary-50;
+    border-radius:      0 10px 10px 0;
 }
 
 element.normal.urgent,
 element.alternate.urgent {
-    color:              @danger;
+    text-color:         #f7768e;
 }
 
 element.selected.urgent {
-    background-color:   @accent-16;
-    border-color:       @accent-70;
-    color:              @danger;
+    background-color:   @primary-16;
+    border-color:       @primary-50;
 }
 
 element-text {
     background-color:   transparent;
-    color:              @fg;
+    text-color:         @fg-muted;
     vertical-align:     0.5;
     highlight:          bold;
 }
 
 element-text.selected {
-    color:              @accent;
+    text-color:         @fg;
 }
 
 element-text.alternate {
-    color:              @fg;
+    text-color:         @fg-muted;
 }
-
-/* ── Message / no-matches ───────────────────────────────── */
 
 message {
     background-color:   transparent;
@@ -142,7 +149,7 @@ message {
 
 textbox {
     background-color:   transparent;
-    color:              @muted;
+    text-color:         @fg-muted-40;
     font:               "JetBrainsMono Nerd Font Propo 10";
     horizontal-align:   0.5;
 }

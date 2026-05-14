@@ -1,0 +1,12 @@
+-- See https://wiki.hypr.land/Configuring/Permissions/
+-- Permission changes require a Hyprland restart and are not applied on-the-fly.
+--
+-- hl.config({
+--     ecosystem = {
+--         enforce_permissions = true,
+--     },
+-- })
+--
+-- hl.window_rule({ match = { exe = "^/usr/(bin|local/bin)/grim$" }, screencopy = "allow" })
+-- hl.window_rule({ match = { exe = "^/usr/(lib|libexec|lib64)/xdg-desktop-portal-hyprland$" }, screencopy = "allow" })
+-- hl.window_rule({ match = { exe = "^/usr/(bin|local/bin)/hyprpm$" }, plugin = "allow" })

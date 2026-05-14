@@ -1,0 +1,11 @@
+local home = os.getenv("HOME")
+
+require("modules/00-monitors")
+require("modules/10-autostart")
+require("modules/20-environment")
+require("modules/30-permissions")
+require("modules/40-look-and-feel")
+require("modules/50-layouts")
+require("modules/60-input")
+require("modules/70-binds")
+require("modules/80-rules")

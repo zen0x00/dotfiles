@@ -208,3 +208,7 @@ extract() {
     *)         echo "Cannot extract: $1" ;;
   esac
 }
+
+. "$HOME/.local/share/../bin/env"
+
+
